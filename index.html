@@ -1,5 +1,8 @@
 <!doctype html>
 <html lang="ar" dir="rtl" data-theme="light">
+<script>
+(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+</script>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -364,21 +367,20 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     <!-- ━━━ HERO ━━━ -->
     <section class="hero" id="overview">
       <div>
-        <span class="hero-badge">📊 تقرير الأسبوع</span>
+        <span class="hero-badge">📊 تقرير الأسبوع — 4 إلى 10 أبريل 2026</span>
         <h2>أداء المتجر هذا الأسبوع</h2>
-        <p>أفضل مصدر للشراء الآن هو إعلانات Google. أسرع قرار مفيد: رفع حملة البحث لمنتج 1 لتر مع خفض سناب، وتأجيل التوسع في تيك توك حتى تتحسن صفحة الهبوط.</p>
+        <p>Google هي أفضل قناة حالياً بعائد 2.84 ريال لكل ريال إعلاني. الطلبات تنمو بنسبة 18.7% أسرع من الزيارات — مما يعني أن التحويل يتحسن.</p>
         <div class="hero-btns">
-          <button class="btn btn-white" onclick="document.getElementById('summary').scrollIntoView({behavior:'smooth'})">الخلاصة</button>
+          <button class="btn btn-white" onclick="document.getElementById('reports').scrollIntoView({behavior:'smooth'})">التقارير</button>
           <button class="btn btn-ghost" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">رحلة العميل</button>
         </div>
       </div>
       <div class="hero-side">
-        <h3>القرار الأهم</h3>
+        <h3>أبرز 3 أرقام</h3>
         <ul>
-          <li>رفع Google Search بنسبة 15%.</li>
-          <li>رفع إعادة الاستهداف في Meta بنسبة 10%.</li>
-          <li>خفض سناب بنسبة 20%.</li>
-          <li>اختبار تيك توك قبل أي توسع.</li>
+          <li>المبيعات: <strong>18,940 ر.س</strong> (+17.6%)</li>
+          <li>الطلبات: <strong>286</strong> (+18.7%)</li>
+          <li>معدل التحويل: <strong>2.29%</strong></li>
         </ul>
       </div>
     </section>
@@ -410,12 +412,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 
     <!-- ━━━ KPIs ━━━ -->
     <section class="section">
-      <div class="sec-head"><h3>المؤشرات الرئيسية</h3><p>مقارنة بالأسبوع السابق</p></div>
+      <div class="sec-head"><h3>المؤشرات الرئيسية</h3><p>هذا الأسبوع — 4 أبريل إلى 10 أبريل 2026 | مقارنة بالأسبوع السابق</p></div>
       <div class="grid g4">
-        <div class="metric"><div class="k">الزوار</div><div class="v">12,480</div><div class="s">+14.1%</div></div>
-        <div class="metric"><div class="k">الطلبات</div><div class="v">286</div><div class="s">+18.7%</div></div>
-        <div class="metric"><div class="k">المبيعات</div><div class="v">18,940 ر.س</div><div class="s">+17.6%</div></div>
-        <div class="metric"><div class="k">معدل التحويل</div><div class="v">2.29%</div><div class="s">أفضل من السابق</div></div>
+        <div class="metric"><div class="k">الزوار</div><div class="v">12,480</div><div class="s">+14.1% عن الأسبوع الماضي</div></div>
+        <div class="metric"><div class="k">الطلبات</div><div class="v">286</div><div class="s">+18.7% عن الأسبوع الماضي</div></div>
+        <div class="metric"><div class="k">المبيعات</div><div class="v">18,940 ر.س</div><div class="s">+17.6% عن الأسبوع الماضي</div></div>
+        <div class="metric"><div class="k">معدل التحويل</div><div class="v">2.29%</div><div class="s">أفضل من الأسبوع الماضي</div></div>
       </div>
     </section>
 
@@ -738,259 +740,266 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
       <div class="sec-head">
         <div>
           <h3>رحلة العميل قبل الشراء</h3>
-          <p>كيف وصل العميل للشراء؟ من أي قناة بدأ وأين أكمل؟</p>
+          <p>4 أبريل – 10 أبريل 2026 | كيف وصل العميل للشراء وعبر أي قنوات؟</p>
         </div>
       </div>
 
-      <!-- Journey summary cards -->
-      <div class="grid g4" style="margin-bottom:18px">
-        <div class="metric"><div class="k">أكثر مسار تكراراً</div><div class="v" style="font-size:18px">تيك توك ← Google</div><div class="s">24% من الطلبات</div></div>
-        <div class="metric"><div class="k">رحلات متعددة المنصات</div><div class="v">40%</div><div class="s">من إجمالي المشترين</div></div>
-        <div class="metric"><div class="k">متوسط الرحلة</div><div class="v">3.2 س</div><div class="s">من أول نقرة للشراء</div></div>
-        <div class="metric"><div class="k">Google تُساعد في</div><div class="v">60%</div><div class="s">من جميع الطلبات</div></div>
+      <!-- ملخص أرقام رحلة العميل -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px">
+        <div style="background:linear-gradient(135deg,var(--violet),#9b6de8);color:#fff;border-radius:18px;padding:16px;text-align:center">
+          <div style="font-size:12px;opacity:.85;margin-bottom:6px">أكثر مسار تكراراً</div>
+          <div style="font-size:15px;font-weight:800">تيك توك ← Google</div>
+          <div style="font-size:12px;opacity:.85;margin-top:4px">24% من الطلبات</div>
+        </div>
+        <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:center">
+          <div style="font-size:12px;color:var(--muted);margin-bottom:6px">مروا بأكثر من قناة</div>
+          <div style="font-size:28px;font-weight:800;color:var(--violet)">40%</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">من إجمالي المشترين</div>
+        </div>
+        <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:center">
+          <div style="font-size:12px;color:var(--muted);margin-bottom:6px">متوسط وقت الرحلة</div>
+          <div style="font-size:28px;font-weight:800;color:var(--violet)">3.2 س</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">من أول نقرة للشراء</div>
+        </div>
+        <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:center">
+          <div style="font-size:12px;color:var(--muted);margin-bottom:6px">Google تُساعد في</div>
+          <div style="font-size:28px;font-weight:800;color:var(--brand)">60%</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">من جميع الطلبات</div>
+        </div>
       </div>
 
       <div class="journey-tabs">
-        <button class="jtab active" data-jr="paths">أكثر المسارات تكراراً</button>
-        <button class="jtab" data-jr="firstlast">أول منصة × آخر منصة</button>
-        <button class="jtab" data-jr="overlap">تداخل القنوات</button>
-        <button class="jtab" data-jr="assist">المنصات المساعدة</button>
-        <button class="jtab" data-jr="timing">الفروقات الزمنية</button>
+        <button class="jtab active" data-jr="paths">① المسارات</button>
+        <button class="jtab" data-jr="firstlast">② أول × آخر منصة</button>
+        <button class="jtab" data-jr="overlap">③ تداخل القنوات</button>
+        <button class="jtab" data-jr="assist">④ المنصات المساعدة</button>
+        <button class="jtab" data-jr="timing">⑤ التوقيت</button>
       </div>
 
       <!-- ① PATHS -->
       <div class="jreport active" id="jr-paths">
-        <p style="font-size:13px;color:var(--muted);margin:0 0 14px">التسلسل الذي مر به العميل عبر القنوات قبل إتمام الشراء. هذا أهم تقرير لفهم من يجلب ومن يُغلق البيع.</p>
+        <div style="background:var(--surface-2);border-right:3px solid var(--violet);border-radius:0 10px 10px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;color:var(--muted)">
+          التسلسل الذي سلكه العميل من أول إعلان رآه حتى أكمل الشراء. الأرقام مرتبة من الأكثر تكراراً للأقل.
+        </div>
         <table class="path-table">
           <thead>
-            <tr>
-              <th>المسار</th>
-              <th>عدد الطلبات</th>
-              <th>النسبة</th>
-              <th>التوزيع</th>
-            </tr>
+            <tr><th>#</th><th>المسار</th><th>الطلبات</th><th>النسبة</th><th>التوزيع</th></tr>
           </thead>
           <tbody>
             <tr>
-              <td><div class="path-chain"><span class="pnode tiktok">تيك توك</span><span class="parrow">→</span><span class="pnode google">Google</span></div></td>
-              <td><strong>120</strong></td>
-              <td>24%</td>
-              <td><div class="pbar-wrap"><div class="pbar-fill" style="width:100%"></div></div></td>
-            </tr>
-            <tr>
+              <td style="color:var(--muted);font-size:13px">1</td>
               <td><div class="path-chain"><span class="pnode google">Google</span></div></td>
-              <td><strong>150</strong></td>
-              <td>30%</td>
-              <td><div class="pbar-wrap"><div class="pbar-fill" style="width:100%"></div></div></td>
+              <td><strong>150</strong></td><td>30%</td>
+              <td><div class="pbar-wrap" style="width:100px"><div class="pbar-fill" style="width:100%"></div></div></td>
             </tr>
             <tr>
+              <td style="color:var(--muted);font-size:13px">2</td>
+              <td><div class="path-chain"><span class="pnode tiktok">تيك توك</span><span class="parrow">→</span><span class="pnode google">Google</span></div></td>
+              <td><strong>120</strong></td><td>24%</td>
+              <td><div class="pbar-wrap" style="width:100px"><div class="pbar-fill" style="width:80%"></div></div></td>
+            </tr>
+            <tr>
+              <td style="color:var(--muted);font-size:13px">3</td>
               <td><div class="path-chain"><span class="pnode snap">سناب</span><span class="parrow">→</span><span class="pnode direct">مباشر</span></div></td>
-              <td><strong>80</strong></td>
-              <td>16%</td>
-              <td><div class="pbar-wrap"><div class="pbar-fill" style="width:67%"></div></div></td>
+              <td><strong>80</strong></td><td>16%</td>
+              <td><div class="pbar-wrap" style="width:100px"><div class="pbar-fill" style="width:53%"></div></div></td>
             </tr>
             <tr>
-              <td><div class="path-chain"><span class="pnode tiktok">تيك توك</span><span class="parrow">→</span><span class="pnode snap">سناب</span><span class="parrow">→</span><span class="pnode google">Google</span></div></td>
-              <td><strong>50</strong></td>
-              <td>10%</td>
-              <td><div class="pbar-wrap"><div class="pbar-fill" style="width:42%"></div></div></td>
-            </tr>
-            <tr>
+              <td style="color:var(--muted);font-size:13px">4</td>
               <td><div class="path-chain"><span class="pnode meta">Meta</span><span class="parrow">→</span><span class="pnode google">Google</span></div></td>
-              <td><strong>60</strong></td>
-              <td>12%</td>
-              <td><div class="pbar-wrap"><div class="pbar-fill" style="width:50%"></div></div></td>
+              <td><strong>60</strong></td><td>12%</td>
+              <td><div class="pbar-wrap" style="width:100px"><div class="pbar-fill" style="width:40%"></div></div></td>
             </tr>
             <tr>
+              <td style="color:var(--muted);font-size:13px">5</td>
+              <td><div class="path-chain"><span class="pnode tiktok">تيك توك</span><span class="parrow">→</span><span class="pnode snap">سناب</span><span class="parrow">→</span><span class="pnode google">Google</span></div></td>
+              <td><strong>50</strong></td><td>10%</td>
+              <td><div class="pbar-wrap" style="width:100px"><div class="pbar-fill" style="width:33%"></div></div></td>
+            </tr>
+            <tr>
+              <td style="color:var(--muted);font-size:13px">6</td>
               <td><div class="path-chain"><span class="pnode direct">مباشر</span></div></td>
-              <td><strong>40</strong></td>
-              <td>8%</td>
-              <td><div class="pbar-wrap"><div class="pbar-fill" style="width:33%"></div></div></td>
+              <td><strong>40</strong></td><td>8%</td>
+              <td><div class="pbar-wrap" style="width:100px"><div class="pbar-fill" style="width:27%"></div></div></td>
             </tr>
           </tbody>
         </table>
-        <div class="j-insight">
-          <div class="j-ins-box"><strong>ما تعنيه هذه الأرقام</strong><p>تيك توك يجلب العملاء لكنهم يُكملون الشراء من Google — تيك توك أداة جذب، وGoogle أداة إغلاق.</p></div>
-          <div class="j-ins-box"><strong>القرار المباشر</strong><p>لا تُقيّم تيك توك بمفرده. دوره في بداية الرحلة حقيقي ومهم رغم أن الشراء يتم لاحقًا من Google.</p></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px">
+          <div style="padding:14px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line)">
+            <strong style="display:block;margin-bottom:5px;font-size:14px">الخلاصة</strong>
+            <p style="margin:0;font-size:13px;color:var(--muted);line-height:1.7">تيك توك يجلب العملاء — Google يُغلق البيع. 54% من الطلبات تمر بـ Google في نهاية الرحلة.</p>
+          </div>
+          <div style="padding:14px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line)">
+            <strong style="display:block;margin-bottom:5px;font-size:14px">القرار</strong>
+            <p style="margin:0;font-size:13px;color:var(--muted);line-height:1.7">لا تُقيّم تيك توك بالمبيعات المباشرة فقط — دوره في بداية الرحلة حقيقي ومهم.</p>
+          </div>
         </div>
       </div>
 
       <!-- ② FIRST × LAST -->
       <div class="jreport" id="jr-firstlast">
-        <p style="font-size:13px;color:var(--muted);margin:0 0 14px">من يجلب العميل أولاً؟ ومن يُغلق البيع في النهاية؟</p>
-        <table class="fl-table">
-          <thead>
-            <tr>
-              <th>أول منصة (من جلب)</th>
-              <th>آخر منصة (من أغلق)</th>
-              <th>عدد الطلبات</th>
-              <th>النسبة</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="pnode tiktok">تيك توك</span></td>
-              <td><span class="pnode google">Google</span></td>
-              <td>100</td>
-              <td>20%</td>
-            </tr>
-            <tr>
-              <td><span class="pnode google">Google</span></td>
-              <td><span class="pnode google">Google</span></td>
-              <td>150</td>
-              <td>30%</td>
-            </tr>
-            <tr>
-              <td><span class="pnode snap">سناب</span></td>
-              <td><span class="pnode direct">مباشر</span></td>
-              <td>80</td>
-              <td>16%</td>
-            </tr>
-            <tr>
-              <td><span class="pnode meta">Meta</span></td>
-              <td><span class="pnode google">Google</span></td>
-              <td>60</td>
-              <td>12%</td>
-            </tr>
-            <tr>
-              <td><span class="pnode tiktok">تيك توك</span></td>
-              <td><span class="pnode snap">سناب</span></td>
-              <td>40</td>
-              <td>8%</td>
-            </tr>
-            <tr>
-              <td><span class="pnode direct">مباشر</span></td>
-              <td><span class="pnode direct">مباشر</span></td>
-              <td>70</td>
-              <td>14%</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="j-insight">
-          <div class="j-ins-box"><strong>من يجلب أكثر؟</strong><p>تيك توك هو أكبر جالب للعملاء الجدد (28% من الرحلات تبدأ منه) لكنه نادرًا ما يُغلق البيع.</p></div>
-          <div class="j-ins-box"><strong>من يُغلق أكثر؟</strong><p>Google يُغلق 62% من الطلبات — سواء كان هو البداية أو جاء بعد منصة أخرى.</p></div>
+        <div style="background:var(--surface-2);border-right:3px solid var(--violet);border-radius:0 10px 10px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;color:var(--muted)">
+          من جلب العميل أول مرة؟ ومن كان آخر قناة رآها قبل الشراء؟
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+          <div style="padding:16px;border-radius:16px;background:var(--surface-2);border:1px solid var(--line)">
+            <div style="font-size:12px;color:var(--muted);margin-bottom:10px;font-weight:700">من يجلب أكثر؟ (أول منصة)</div>
+            <div style="display:grid;gap:8px">
+              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode tiktok">تيك توك</span><strong>28%</strong></div>
+              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode google">Google</span><strong>30%</strong></div>
+              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode snap">سناب</span><strong>16%</strong></div>
+              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode meta">Meta</span><strong>12%</strong></div>
+              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode direct">مباشر</span><strong>14%</strong></div>
+            </div>
+          </div>
+          <div style="padding:16px;border-radius:16px;background:var(--surface-2);border:1px solid var(--line)">
+            <div style="font-size:12px;color:var(--muted);margin-bottom:10px;font-weight:700">من يُغلق البيع؟ (آخر منصة)</div>
+            <div style="display:grid;gap:8px">
+              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode google">Google</span><strong>62%</strong></div>
+              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode direct">مباشر</span><strong>22%</strong></div>
+              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode snap">سناب</span><strong>8%</strong></div>
+              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode meta">Meta</span><strong>5%</strong></div>
+              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode tiktok">تيك توك</span><strong>3%</strong></div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:14px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line);font-size:13px;color:var(--muted);line-height:1.7">
+          <strong style="color:var(--text)">الخلاصة:</strong> تيك توك يجلب 28% من العملاء لكنه يُغلق 3% فقط. Google يجلب 30% ويُغلق 62%. هذا يعني أن كلاهما ضروري لكن بدور مختلف.
         </div>
       </div>
 
       <!-- ③ OVERLAP -->
       <div class="jreport" id="jr-overlap">
-        <p style="font-size:13px;color:var(--muted);margin:0 0 14px">كم نسبة العملاء الذين مروا بأكثر من قناة قبل الشراء؟</p>
-        <div class="overlap-grid" style="margin-bottom:16px">
-          <div class="overlap-card">
-            <div class="oc-label">قناة واحدة فقط</div>
-            <div class="oc-num">300</div>
-            <div class="oc-pct">60%</div>
-            <div class="oc-bar"><span style="width:60%"></span></div>
+        <div style="background:var(--surface-2);border-right:3px solid var(--violet);border-radius:0 10px 10px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;color:var(--muted)">
+          كم نسبة العملاء الذين مروا بأكثر من قناة واحدة قبل الشراء؟
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px">
+          <div style="background:var(--surface-2);border:2px solid var(--violet);border-radius:18px;padding:20px;text-align:center">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:8px">قناة واحدة فقط</div>
+            <div style="font-size:36px;font-weight:800;color:var(--text)">300</div>
+            <div style="font-size:20px;font-weight:800;color:var(--violet);margin:4px 0">60%</div>
+            <div style="height:8px;background:var(--surface-3);border-radius:999px;overflow:hidden;margin-top:10px"><span style="display:block;height:100%;width:60%;border-radius:999px;background:linear-gradient(135deg,var(--violet),#9b6de8)"></span></div>
           </div>
-          <div class="overlap-card">
-            <div class="oc-label">قناتان</div>
-            <div class="oc-num">150</div>
-            <div class="oc-pct">30%</div>
-            <div class="oc-bar"><span style="width:30%"></span></div>
+          <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:20px;text-align:center">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:8px">قناتان</div>
+            <div style="font-size:36px;font-weight:800;color:var(--text)">150</div>
+            <div style="font-size:20px;font-weight:800;color:var(--violet);margin:4px 0">30%</div>
+            <div style="height:8px;background:var(--surface-3);border-radius:999px;overflow:hidden;margin-top:10px"><span style="display:block;height:100%;width:30%;border-radius:999px;background:linear-gradient(135deg,var(--violet),#9b6de8)"></span></div>
           </div>
-          <div class="overlap-card">
-            <div class="oc-label">3 قنوات أو أكثر</div>
-            <div class="oc-num">50</div>
-            <div class="oc-pct">10%</div>
-            <div class="oc-bar"><span style="width:10%"></span></div>
+          <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:20px;text-align:center">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:8px">3 قنوات أو أكثر</div>
+            <div style="font-size:36px;font-weight:800;color:var(--text)">50</div>
+            <div style="font-size:20px;font-weight:800;color:var(--violet);margin:4px 0">10%</div>
+            <div style="height:8px;background:var(--surface-3);border-radius:999px;overflow:hidden;margin-top:10px"><span style="display:block;height:100%;width:10%;border-radius:999px;background:linear-gradient(135deg,var(--violet),#9b6de8)"></span></div>
           </div>
         </div>
-        <div class="j-insight">
-          <div class="j-ins-box"><strong>ما يعنيه هذا</strong><p>40% من المشترين تعرضوا لأكثر من قناة قبل الشراء — attribution بقناة واحدة يفقد جزءًا حقيقيًا من الصورة.</p></div>
-          <div class="j-ins-box"><strong>القرار</strong><p>لا تُوقف أي قناة اعتمادًا على Last-click فقط. تيك توك وسناب لهما دور حقيقي في الرحلة حتى لو لم يكونا آخر نقطة.</p></div>
+        <div style="padding:14px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line);font-size:13px;color:var(--muted);line-height:1.7">
+          <strong style="color:var(--text)">القرار:</strong> 40% من المشترين رأوا أكثر من قناة قبل الشراء — لا تُوقف أي قناة اعتماداً على آخر نقرة فقط، لأن دورها قد يكون في بداية الرحلة.
         </div>
       </div>
 
       <!-- ④ ASSIST -->
       <div class="jreport" id="jr-assist">
-        <p style="font-size:13px;color:var(--muted);margin:0 0 14px">المنصات التي ساهمت في الرحلة حتى لو لم تكن آخر لمسة قبل الشراء.</p>
-        <div style="border:1px solid var(--line);border-radius:16px;overflow:hidden;padding:0 14px">
-          <div class="assist-row" style="border-bottom:2px solid var(--line)">
-            <div style="font-size:12px;color:var(--muted);font-weight:700">المنصة</div>
-            <div style="font-size:12px;color:var(--muted);font-weight:700">نسبة المساهمة</div>
-            <div style="font-size:12px;color:var(--muted);font-weight:700">عدد الطلبات</div>
-            <div style="font-size:12px;color:var(--muted);font-weight:700">الدور</div>
+        <div style="background:var(--surface-2);border-right:3px solid var(--violet);border-radius:0 10px 10px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;color:var(--muted)">
+          كم طلباً ساهمت فيه كل منصة — حتى لو لم تكن آخر قناة قبل الشراء؟
+        </div>
+        <div style="border:1px solid var(--line);border-radius:16px;overflow:hidden">
+          <div style="display:grid;grid-template-columns:120px 1fr 80px 100px;gap:12px;padding:10px 14px;background:var(--surface-2);border-bottom:2px solid var(--line);font-size:12px;color:var(--muted);font-weight:700">
+            <div>المنصة</div><div>نسبة المساهمة</div><div>طلبات</div><div>الدور الرئيسي</div>
           </div>
-          <div class="assist-row">
+          <div style="display:grid;grid-template-columns:120px 1fr 80px 100px;gap:12px;padding:13px 14px;border-bottom:1px solid var(--line);align-items:center">
             <div><span class="pnode google">Google</span></div>
-            <div class="assist-bar"><span style="width:60%"></span></div>
-            <div>300</div>
+            <div><div style="height:10px;background:var(--surface-2);border-radius:999px;overflow:hidden"><span style="display:block;height:100%;width:60%;border-radius:999px;background:linear-gradient(135deg,var(--brand),var(--brand2))"></span></div><div style="font-size:11px;color:var(--muted);margin-top:3px">60%</div></div>
+            <div style="font-weight:700">300</div>
             <div style="font-size:12px;color:var(--brand);font-weight:700">مُغلق + مساعد</div>
           </div>
-          <div class="assist-row">
+          <div style="display:grid;grid-template-columns:120px 1fr 80px 100px;gap:12px;padding:13px 14px;border-bottom:1px solid var(--line);align-items:center">
             <div><span class="pnode tiktok">تيك توك</span></div>
-            <div class="assist-bar"><span style="width:40%"></span></div>
-            <div>200</div>
+            <div><div style="height:10px;background:var(--surface-2);border-radius:999px;overflow:hidden"><span style="display:block;height:100%;width:40%;border-radius:999px;background:linear-gradient(135deg,var(--violet),#9b6de8)"></span></div><div style="font-size:11px;color:var(--muted);margin-top:3px">40%</div></div>
+            <div style="font-weight:700">200</div>
             <div style="font-size:12px;color:var(--violet);font-weight:700">جالب رئيسي</div>
           </div>
-          <div class="assist-row">
+          <div style="display:grid;grid-template-columns:120px 1fr 80px 100px;gap:12px;padding:13px 14px;border-bottom:1px solid var(--line);align-items:center">
             <div><span class="pnode snap">سناب</span></div>
-            <div class="assist-bar"><span style="width:30%"></span></div>
-            <div>150</div>
+            <div><div style="height:10px;background:var(--surface-2);border-radius:999px;overflow:hidden"><span style="display:block;height:100%;width:30%;border-radius:999px;background:linear-gradient(135deg,var(--gold),#d4a33e)"></span></div><div style="font-size:11px;color:var(--muted);margin-top:3px">30%</div></div>
+            <div style="font-weight:700">150</div>
             <div style="font-size:12px;color:var(--gold);font-weight:700">مساعد</div>
           </div>
-          <div class="assist-row">
+          <div style="display:grid;grid-template-columns:120px 1fr 80px 100px;gap:12px;padding:13px 14px;border-bottom:1px solid var(--line);align-items:center">
             <div><span class="pnode meta">Meta</span></div>
-            <div class="assist-bar"><span style="width:24%"></span></div>
-            <div>120</div>
+            <div><div style="height:10px;background:var(--surface-2);border-radius:999px;overflow:hidden"><span style="display:block;height:100%;width:24%;border-radius:999px;background:linear-gradient(135deg,var(--violet),#7c6de8)"></span></div><div style="font-size:11px;color:var(--muted);margin-top:3px">24%</div></div>
+            <div style="font-weight:700">120</div>
             <div style="font-size:12px;color:var(--muted);font-weight:700">مساعد</div>
           </div>
-          <div class="assist-row">
+          <div style="display:grid;grid-template-columns:120px 1fr 80px 100px;gap:12px;padding:13px 14px;align-items:center">
             <div><span class="pnode direct">مباشر</span></div>
-            <div class="assist-bar"><span style="width:16%"></span></div>
-            <div>80</div>
+            <div><div style="height:10px;background:var(--surface-2);border-radius:999px;overflow:hidden"><span style="display:block;height:100%;width:16%;border-radius:999px;background:var(--muted)"></span></div><div style="font-size:11px;color:var(--muted);margin-top:3px">16%</div></div>
+            <div style="font-weight:700">80</div>
             <div style="font-size:12px;color:var(--muted);font-weight:700">مُغلق</div>
           </div>
         </div>
-        <div class="j-insight" style="margin-top:14px">
-          <div class="j-ins-box"><strong>تيك توك أكبر مما تظهره الأرقام</strong><p>40% من الطلبات مرّت عبر تيك توك في مرحلة ما — حتى لو أُتمّ الشراء من Google.</p></div>
-          <div class="j-ins-box"><strong>سناب ليس صفراً</strong><p>30% من الطلبات ساهم فيها سناب كقناة مساعدة — خفضه الكلي قد يُقلل من هذا الدور.</p></div>
+        <div style="padding:14px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line);font-size:13px;color:var(--muted);line-height:1.7;margin-top:12px">
+          <strong style="color:var(--text)">تيك توك وسناب:</strong> رغم أن مبيعاتهما المباشرة أقل، إلا أنهما يساهمان في 40% و30% من الطلبات كقنوات جذب — خفضهما الكلي قد يؤثر سلباً.
         </div>
       </div>
 
       <!-- ⑤ TIMING -->
       <div class="jreport" id="jr-timing">
-        <p style="font-size:13px;color:var(--muted);margin:0 0 14px">كم وقتًا يستغرق العميل من أول نقرة حتى إتمام الشراء؟</p>
-        <div class="time-grid">
-          <div class="time-card">
-            <div class="tc-label">من أول نقرة لآخر نقرة</div>
-            <div class="tc-val">1.8 ساعة</div>
-            <div class="tc-sub">متوسط الرحلات المتعددة</div>
+        <div style="background:var(--surface-2);border-right:3px solid var(--violet);border-radius:0 10px 10px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;color:var(--muted)">
+          كم وقتاً يستغرق العميل من أول إعلان رآه حتى أكمل الشراء؟
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
+          <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:18px;text-align:center">
+            <div style="font-size:12px;color:var(--muted);margin-bottom:8px">من أول نقرة لآخر نقرة</div>
+            <div style="font-size:32px;font-weight:800;color:var(--violet)">1.8 س</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:4px">للعملاء متعددي القنوات</div>
           </div>
-          <div class="time-card">
-            <div class="tc-label">من أول نقرة للشراء</div>
-            <div class="tc-val">3.2 ساعة</div>
-            <div class="tc-sub">متوسط جميع الطلبات</div>
+          <div style="background:linear-gradient(135deg,var(--violet),#9b6de8);border-radius:18px;padding:18px;text-align:center;color:#fff">
+            <div style="font-size:12px;opacity:.85;margin-bottom:8px">من أول نقرة للشراء</div>
+            <div style="font-size:32px;font-weight:800">3.2 س</div>
+            <div style="font-size:12px;opacity:.85;margin-top:4px">متوسط جميع الطلبات</div>
           </div>
-          <div class="time-card">
-            <div class="tc-label">من آخر نقرة للشراء</div>
-            <div class="tc-val">8 دقائق</div>
-            <div class="tc-sub">القرار سريع عند الإغلاق</div>
+          <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:18px;text-align:center">
+            <div style="font-size:12px;color:var(--muted);margin-bottom:8px">من آخر نقرة للشراء</div>
+            <div style="font-size:32px;font-weight:800;color:var(--brand)">8 د</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:4px">القرار سريع عند الإغلاق</div>
           </div>
         </div>
 
-        <!-- Timeline visualization -->
-        <div style="margin-top:16px;margin-bottom:12px;font-size:13px;font-weight:700">مثال على رحلة نموذجية</div>
-        <div class="timeline">
-          <div class="tl-node">
-            <div class="tl-circle c1" style="font-size:10px">تيك<br>توك</div>
-            <div class="tl-label">أول نقرة</div>
-          </div>
-          <div class="tl-line"><span>1.8 ساعة</span></div>
-          <div class="tl-node">
-            <div class="tl-circle c2" style="font-size:10px">Google</div>
-            <div class="tl-label">آخر نقرة</div>
-          </div>
-          <div class="tl-line"><span>8 دقائق</span></div>
-          <div class="tl-node">
-            <div class="tl-circle c3" style="font-size:18px">✓</div>
-            <div class="tl-label">الشراء</div>
+        <!-- Timeline -->
+        <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:12px">
+          <div style="font-size:13px;font-weight:700;margin-bottom:16px;color:var(--muted)">رحلة نموذجية</div>
+          <div style="display:flex;align-items:center">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+              <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--violet),#9b6de8);display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:800;text-align:center">تيك<br>توك</div>
+              <div style="font-size:11px;color:var(--muted)">أول نقرة</div>
+            </div>
+            <div style="flex:1;height:2px;background:var(--line);position:relative;margin-bottom:18px">
+              <div style="position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--violet);font-weight:700;white-space:nowrap;background:var(--surface-2);padding:2px 8px;border-radius:6px">1.8 ساعة</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+              <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:800">Google</div>
+              <div style="font-size:11px;color:var(--muted)">آخر نقرة</div>
+            </div>
+            <div style="flex:1;height:2px;background:var(--line);position:relative;margin-bottom:18px">
+              <div style="position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--brand);font-weight:700;white-space:nowrap;background:var(--surface-2);padding:2px 8px;border-radius:6px">8 دقائق</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+              <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--pink),#b03060);display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;font-weight:800">✓</div>
+              <div style="font-size:11px;color:var(--muted)">الشراء</div>
+            </div>
           </div>
         </div>
 
-        <div class="j-insight" style="margin-top:14px">
-          <div class="j-ins-box"><strong>العميل لا يشتري فوراً</strong><p>3.2 ساعة في المتوسط بين أول تعرض وإتمام الشراء — الإعلانات التي تبدو بلا أثر فوري قد تكون تزرع القرار.</p></div>
-          <div class="j-ins-box"><strong>القرار سريع عند الإغلاق</strong><p>8 دقائق فقط بين آخر نقرة والشراء — ما يعني أن صفحة المنتج والدفع هي نقطة الحسم الحقيقية.</p></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="padding:14px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line)">
+            <strong style="display:block;margin-bottom:5px;font-size:14px">العميل لا يشتري فوراً</strong>
+            <p style="margin:0;font-size:13px;color:var(--muted);line-height:1.7">3.2 ساعة في المتوسط — الإعلانات التي تبدو بلا أثر فوري قد تكون تزرع قرار الشراء.</p>
+          </div>
+          <div style="padding:14px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line)">
+            <strong style="display:block;margin-bottom:5px;font-size:14px">الحسم يكون عند الدفع</strong>
+            <p style="margin:0;font-size:13px;color:var(--muted);line-height:1.7">8 دقائق من آخر نقرة للشراء — صفحة المنتج وعملية الدفع هي نقطة الحسم الحقيقية.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -1017,7 +1026,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 // theme toggle
 function toggleTheme(){
   const r=document.documentElement;
-  r.setAttribute('data-theme',r.getAttribute('data-theme')==='dark'?'light':'dark');
+  const next=r.getAttribute('data-theme')==='dark'?'light':'dark';
+  r.setAttribute('data-theme',next);
+  localStorage.setItem('theme',next);
 }
 document.getElementById('themeToggle').addEventListener('click',toggleTheme);
 const m=document.getElementById('themeToggleMobile');
