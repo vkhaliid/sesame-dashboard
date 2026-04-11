@@ -1,468 +1,334 @@
 <!doctype html>
-<html lang="ar" dir="rtl" data-theme="light">
-<script>
-(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
-</script>
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>لوحة أداء معصرة الجنوب</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>معصرة الجنوب — نموذج</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#f6f4ee;--surface:#fcfbf8;--surface-2:#f0ece3;--surface-3:#e8e3d8;--line:#ddd8cd;
-  --text:#201d18;--muted:#6f6a61;--muted2:#9e9890;
-  --brand:#0a6860;--brand2:#165e75;--brand-soft:#dceeed;
-  --ok:#e8f6ee;--ok-line:#bfdcc8;--warn:#fff4e7;--warn-line:#f0d0ac;
-  --bad:#faeded;--bad-line:#e6c1c1;
-  --gold:#c58b1c;--violet:#6c4fd6;--pink:#d04a6e;--orange:#c96820;
-  --shadow:0 12px 36px rgba(28,25,20,.08);--shadow-sm:0 4px 16px rgba(28,25,20,.05)
-}
-[data-theme="dark"]{
-  --bg:#141311;--surface:#1c1a17;--surface-2:#232019;--surface-3:#2a2720;--line:#35312a;
-  --text:#ece7de;--muted:#a09890;--muted2:#6b6560;
-  --brand:#3d9490;--brand2:#3a7a96;--brand-soft:#1c2f2e;
-  --ok:#1b2d22;--ok-line:#2e4a38;--warn:#2e2318;--warn-line:#56412d;
-  --bad:#2e1f1f;--bad-line:#563636;
-  --gold:#c9962e;--violet:#8b77e8;--pink:#e06a8a;--orange:#d47e3c;
-  --shadow:0 14px 40px rgba(0,0,0,.32);--shadow-sm:0 6px 20px rgba(0,0,0,.2)
-}
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font-family:'Tajawal',Arial,sans-serif;font-size:15px;line-height:1.6}
-a{text-decoration:none;color:inherit}
-button{font-family:inherit;cursor:pointer;border:none;background:none}
+body{background:#0d1117;color:#e6edf3;font-family:'Tajawal',sans-serif;font-size:15px;line-height:1.6;min-height:100vh}
 
 /* ━━━ LAYOUT ━━━ */
-.shell{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
-.sidebar{position:sticky;top:0;height:100vh;overflow-y:auto;padding:20px 16px;border-left:1px solid var(--line);background:var(--surface);display:flex;flex-direction:column;gap:14px}
-.main{padding:22px;overflow:hidden}
+.shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
 
 /* ━━━ SIDEBAR ━━━ */
-.brand{display:flex;gap:12px;align-items:center;padding-bottom:4px}
-.logo{width:46px;height:46px;border-radius:16px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;color:#fff;box-shadow:var(--shadow-sm);flex-shrink:0}
-.logo svg{width:26px;height:26px}
-.brand-text h1{margin:0;font-size:18px;font-weight:800}
-.brand-text p{margin:0;color:var(--muted);font-size:12px}
+.sidebar{background:#161b22;border-left:1px solid #30363d;padding:20px 16px;display:flex;flex-direction:column;gap:12px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.brand{display:flex;align-items:center;gap:10px;padding:8px 0 16px;border-bottom:1px solid #30363d}
+.brand-icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#00d4aa,#0096ff);display:grid;place-items:center;flex-shrink:0}
+.brand-icon svg{width:22px;height:22px;fill:#fff}
+.brand h1{font-size:16px;font-weight:800;color:#e6edf3}
+.brand p{font-size:11px;color:#7d8590}
+.nav-label{font-size:11px;font-weight:700;color:#7d8590;text-transform:uppercase;letter-spacing:.06em;padding:12px 8px 6px}
+.nav a{display:block;padding:9px 12px;border-radius:10px;font-size:14px;font-weight:600;color:#7d8590;text-decoration:none;transition:all .15s;margin-bottom:2px}
+.nav a:hover,.nav a.active{background:#21262d;color:#e6edf3}
+.nav a.active{border-right:3px solid #00d4aa;color:#00d4aa}
+.side-kpis{background:#21262d;border:1px solid #30363d;border-radius:14px;padding:14px;margin-top:4px}
+.side-kpi{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #30363d;font-size:13px}
+.side-kpi:last-child{border-bottom:none}
+.side-kpi span{color:#7d8590}
+.side-kpi strong{color:#e6edf3}
 
-.side-section{background:var(--surface-2);border:1px solid var(--line);border-radius:16px;padding:14px}
-.side-label{font-size:11px;font-weight:800;color:var(--muted2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
-.nav{display:flex;flex-direction:column;gap:4px}
-.nav a{padding:10px 12px;border-radius:11px;font-weight:700;font-size:14px;color:var(--muted);transition:all .15s}
-.nav a:hover{background:var(--surface-3);color:var(--text)}
-.nav a.active{background:var(--brand-soft);color:var(--brand)}
-.side-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
-.side-list li{font-size:13px;padding:8px 10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;line-height:1.5}
+/* ━━━ MAIN ━━━ */
+.main{padding:24px;overflow:hidden}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid #30363d}
+.topbar h2{font-size:20px;font-weight:800;color:#e6edf3}
+.topbar p{font-size:13px;color:#7d8590;margin-top:2px}
+.date-chip{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:#21262d;border:1px solid #30363d;font-size:12px;font-weight:700;color:#7d8590}
+.date-chip span{color:#00d4aa}
 
-/* ━━━ TOPBAR (mobile) ━━━ */
-.mobile-bar{display:none;align-items:center;justify-content:space-between;margin-bottom:16px}
-
-/* ━━━ COMMON ━━━ */
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow-sm)}
-.section{margin-top:20px}
-.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}
-.sec-head h3{margin:0;font-size:22px;font-weight:800}
-.sec-head p{margin:0;font-size:13px;color:var(--muted)}
-.grid{display:grid;gap:14px}
+/* ━━━ GRID ━━━ */
+.grid{display:grid;gap:16px}
 .g4{grid-template-columns:repeat(4,1fr)}
 .g3{grid-template-columns:repeat(3,1fr)}
 .g2{grid-template-columns:repeat(2,1fr)}
-.muted{color:var(--muted)}
 
-/* ━━━ HERO ━━━ */
-.hero{background:linear-gradient(135deg,var(--brand) 0%,var(--brand2) 100%);color:#fff;border-radius:26px;padding:26px;display:grid;grid-template-columns:1.2fr .8fr;gap:18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
-.hero::after{content:'';position:absolute;left:-60px;bottom:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.07)}
-.hero::before{content:'';position:absolute;right:200px;top:-80px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.05)}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);font-size:12px;font-weight:700}
-.hero h2{margin:10px 0 8px;font-size:32px;font-weight:800;line-height:1.2}
-.hero p{margin:0;line-height:1.85;color:rgba(255,255,255,.9);font-size:14px}
-.hero-side{padding:16px;border-radius:18px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:#fff;backdrop-filter:blur(8px)}
-.hero-side h3{margin:0 0 10px;font-size:18px}
-.hero-side ul{margin:0;padding-right:18px;padding-left:0}
-.hero-side li{margin:7px 0;font-size:14px;line-height:1.7}
-.hero-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-.btn{padding:11px 16px;border-radius:14px;font-weight:700;font-size:14px;cursor:pointer}
-.btn-white{background:#fff;color:#111}
-.btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)}
+/* ━━━ METRIC CARDS ━━━ */
+.metric{background:#161b22;border:1px solid #30363d;border-radius:18px;padding:18px;position:relative;overflow:hidden}
+.metric::before{content:'';position:absolute;top:0;right:0;width:60px;height:60px;border-radius:50%;background:var(--accent,#00d4aa);opacity:.06;transform:translate(10px,-10px)}
+.metric .k{font-size:12px;color:#7d8590;font-weight:600;margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em}
+.metric .v{font-size:30px;font-weight:800;color:#e6edf3;line-height:1}
+.metric .s{margin-top:10px;font-size:13px;font-weight:700}
+.metric .s.up{color:#00d4aa}
+.metric .s.neutral{color:#7d8590}
+.metric-accent-1{--accent:#00d4aa;border-top:2px solid #00d4aa}
+.metric-accent-2{--accent:#0096ff;border-top:2px solid #0096ff}
+.metric-accent-3{--accent:#a371f7;border-top:2px solid #a371f7}
+.metric-accent-4{--accent:#f78166;border-top:2px solid #f78166}
 
-/* ━━━ SUMMARY ━━━ */
-.summary-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
-.summary-card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow-sm)}
-.summary-card h4{margin:0 0 12px;font-size:20px;font-weight:800}
-.s-list{list-style:none;margin:0;padding:0}
-.s-list li{padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.6}
-.s-list li:last-child{border-bottom:none}
-.action-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px}
-.action-pill{padding:13px;border-radius:16px;background:var(--surface-2);border:1px solid var(--line);text-align:center}
-.action-pill strong{display:block;margin-bottom:4px;font-size:13px}
-.action-pill span{font-size:13px;color:var(--muted)}
+/* ━━━ PANEL ━━━ */
+.panel{background:#161b22;border:1px solid #30363d;border-radius:18px;padding:20px}
+.panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.panel-head h3{font-size:16px;font-weight:800;color:#e6edf3}
+.panel-head p{font-size:12px;color:#7d8590}
+.chip{display:inline-block;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;background:#21262d;border:1px solid #30363d;color:#7d8590}
 
-/* ━━━ METRICS ━━━ */
-.metric{background:linear-gradient(160deg,var(--surface),var(--surface-2));border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow-sm)}
-.metric .k{font-size:13px;color:var(--muted);margin-bottom:8px;font-weight:500}
-.metric .v{font-size:28px;font-weight:800}
-.metric .s{margin-top:8px;font-size:13px;font-weight:700;color:var(--brand)}
+/* ━━━ BARS ━━━ */
+.bar-list{display:grid;gap:14px}
+.bar-row{display:grid;grid-template-columns:100px 1fr 60px;gap:10px;align-items:center;font-size:13px;color:#7d8590}
+.bar-track{height:10px;background:#21262d;border-radius:999px;overflow:hidden}
+.bar-fill{height:100%;border-radius:999px}
+.bar-val{font-weight:700;color:#e6edf3;text-align:left}
 
-/* ━━━ REPORTS ━━━ */
-.report-shell{padding:20px}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.tab{padding:10px 16px;border-radius:999px;font-weight:700;font-size:14px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted);transition:all .15s}
-.tab:hover{color:var(--text)}
-.tab.active{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border-color:transparent}
-.report{display:none}
-.report.active{display:block}
-.r-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-.r-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);font-size:12px;font-weight:700;color:var(--muted)}
-.report-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
-.r-panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
-.r-panel h4{margin:0 0 12px;font-size:17px;font-weight:800}
+/* ━━━ CHART (SVG sparkline) ━━━ */
+.chart-wrap{position:relative;height:120px;margin-top:8px}
+.spark-bars{display:flex;align-items:flex-end;gap:6px;height:100%}
+.spark-bar{flex:1;border-radius:6px 6px 2px 2px;min-width:20px;position:relative;cursor:pointer;transition:opacity .15s}
+.spark-bar:hover{opacity:.8}
+.spark-bar em{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-style:normal;font-size:10px;color:#7d8590;white-space:nowrap}
 
-/* mini indicators */
-.mini-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
-.mini{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:12px}
-.mini .t{font-size:12px;color:var(--muted)}
-.mini .n{font-size:22px;font-weight:800;margin-top:6px}
-.mini .x{font-size:12px;color:var(--brand);margin-top:4px;font-weight:600}
-
-/* table */
-.tbl{width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:16px;overflow:hidden}
-.tbl th,.tbl td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:right;font-size:14px;vertical-align:top}
-.tbl th{background:var(--surface-2);color:var(--muted);font-weight:700}
+/* ━━━ TABLE ━━━ */
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{padding:10px 12px;text-align:right;font-size:12px;color:#7d8590;font-weight:700;border-bottom:1px solid #30363d;text-transform:uppercase;letter-spacing:.04em}
+.tbl td{padding:12px 12px;text-align:right;font-size:14px;border-bottom:1px solid #21262d;color:#e6edf3}
 .tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:#21262d}
 
-/* decision boxes */
-.kbox{padding:12px 14px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line);margin-bottom:10px}
-.kbox:last-child{margin-bottom:0}
-.kbox strong{display:block;margin-bottom:5px;font-size:14px}
-.kbox p{margin:0;font-size:13px;color:var(--muted);line-height:1.6}
+/* ━━━ BADGES ━━━ */
+.badge{display:inline-block;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700}
+.b-up{background:rgba(0,212,170,.15);color:#00d4aa;border:1px solid rgba(0,212,170,.2)}
+.b-down{background:rgba(247,129,102,.15);color:#f78166;border:1px solid rgba(247,129,102,.2)}
+.b-test{background:rgba(163,113,247,.15);color:#a371f7;border:1px solid rgba(163,113,247,.2)}
 
-/* monthly charts */
-.mo-charts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
-.mo-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
-.mo-card h4{margin:0 0 12px;font-size:16px;font-weight:800}
-.mbar-list{display:grid;gap:11px}
-.mbar-row{display:grid;grid-template-columns:80px 1fr 86px;gap:10px;align-items:center;font-size:13px}
-.mtrack{height:11px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;overflow:hidden}
-.mtrack span{display:block;height:100%;border-radius:999px;background:linear-gradient(135deg,var(--brand),var(--brand2))}
-.line-svg{width:100%;display:block}
-.line-cap{display:flex;justify-content:space-between;margin-top:6px;font-size:12px;color:var(--muted)}
+/* ━━━ PNODES ━━━ */
+.pnode{display:inline-block;padding:3px 10px;border-radius:8px;font-size:12px;font-weight:700}
+.pnode.google{background:rgba(0,150,255,.15);color:#4da6ff;border:1px solid rgba(0,150,255,.2)}
+.pnode.tiktok{background:rgba(247,129,102,.15);color:#f78166;border:1px solid rgba(247,129,102,.2)}
+.pnode.meta{background:rgba(163,113,247,.15);color:#a371f7;border:1px solid rgba(163,113,247,.2)}
+.pnode.snap{background:rgba(255,210,0,.1);color:#ffd200;border:1px solid rgba(255,210,0,.15)}
+.pnode.direct{background:#21262d;color:#7d8590;border:1px solid #30363d}
+.parrow{color:#30363d;font-size:12px;margin:0 2px}
 
-/* ━━━ VISUALS ━━━ */
-.vis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.vis-card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow-sm)}
-.vis-card h4{margin:0 0 12px;font-size:17px;font-weight:800}
+/* ━━━ DECISION CARDS ━━━ */
+.decision{background:#21262d;border:1px solid #30363d;border-radius:16px;padding:16px}
+.decision h4{font-size:15px;font-weight:800;color:#e6edf3;margin-bottom:6px}
+.decision p{font-size:13px;color:#7d8590;line-height:1.6;margin-bottom:10px}
+.decision ul{padding-right:16px;font-size:13px;color:#7d8590}
+.decision li{margin:4px 0}
 
-/* donut */
+/* ━━━ DONUT ━━━ */
 .donut-wrap{display:flex;align-items:center;gap:16px}
-.donut{width:108px;height:108px;border-radius:50%;position:relative;flex-shrink:0}
-.donut::after{content:attr(data-center);position:absolute;inset:16px;border-radius:50%;background:var(--surface);display:grid;place-items:center;font-size:17px;font-weight:800;line-height:1.25;text-align:center;padding:8px}
+.donut{width:100px;height:100px;border-radius:50%;position:relative;flex-shrink:0}
+.donut::after{content:attr(data-center);position:absolute;inset:14px;border-radius:50%;background:#161b22;display:grid;place-items:center;font-size:14px;font-weight:800;line-height:1.3;text-align:center;color:#e6edf3}
 .legend{display:grid;gap:7px;font-size:13px}
-.legend span{display:flex;align-items:center;gap:8px}
-.dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.legend span{display:flex;align-items:center;gap:8px;color:#7d8590}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 
-/* funnel */
+/* ━━━ FUNNEL ━━━ */
 .funnel{display:grid;gap:8px}
-.fstep{padding:11px 14px;border-radius:14px;color:#fff;font-weight:700;text-align:center;font-size:14px}
-.f1{width:100%;background:linear-gradient(135deg,var(--brand),var(--brand2))}
-.f2{width:82%;background:linear-gradient(135deg,#2a8e82,#2f7490)}
-.f3{width:62%;background:linear-gradient(135deg,#4a7fc0,var(--violet))}
-.f4{width:48%;background:linear-gradient(135deg,var(--pink),#b03060)}
+.fstep{padding:11px 14px;border-radius:12px;color:#fff;font-weight:700;text-align:center;font-size:14px}
 
-/* sparkline */
-.spark{height:90px;display:flex;align-items:flex-end;gap:7px;padding-top:10px}
-.spark span{flex:1;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,var(--brand),var(--brand2));min-width:16px;position:relative}
-.spark span em{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-style:normal;font-size:11px;color:var(--muted)}
-.spark-note{margin:28px 0 0;font-size:13px;color:var(--muted)}
+/* ━━━ SECTION ━━━ */
+.section{margin-top:20px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}
+.sec-head h3{font-size:19px;font-weight:800;color:#e6edf3}
+.sec-head p{font-size:12px;color:#7d8590}
 
-/* ━━━ CHANNELS ━━━ */
-.channels-panel{padding:18px}
-.bar-list{display:grid;gap:13px}
-.bar-row{display:grid;grid-template-columns:130px 1fr 82px;gap:10px;align-items:center;font-size:14px}
-.bar{height:12px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;overflow:hidden}
-.bar span{display:block;height:100%;border-radius:999px}
-.bar-note{margin:14px 0 0;font-size:12px;color:var(--muted)}
+/* ━━━ TABS ━━━ */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tab{padding:9px 16px;border-radius:999px;font-weight:700;font-size:13px;background:#21262d;border:1px solid #30363d;color:#7d8590;cursor:pointer;transition:all .15s}
+.tab.active{background:linear-gradient(135deg,#00d4aa,#0096ff);color:#fff;border-color:transparent}
+.report{display:none}.report.active{display:block}
 
-/* ━━━ DECISIONS ━━━ */
-.decision-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.decision{background:linear-gradient(160deg,var(--surface),var(--surface-2));border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow-sm)}
-.decision h4{margin:0 0 6px;font-size:17px;font-weight:800}
-.decision p{margin:0 0 10px;font-size:13px;color:var(--muted);line-height:1.7}
-.badge{display:inline-block;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800}
-.b-up{background:#dcfce7;color:#166534}
-.b-down{background:#fee2e2;color:#991b1b}
-.b-test{background:#fef3c7;color:#92400e}
-.dlist{margin:8px 0 0;padding-right:16px;padding-left:0;font-size:13px;color:var(--muted)}
-.dlist li{margin:5px 0}
+/* mini */
+.mini-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.mini{background:#21262d;border:1px solid #30363d;border-radius:12px;padding:12px}
+.mini .t{font-size:11px;color:#7d8590;text-transform:uppercase;letter-spacing:.04em}
+.mini .n{font-size:22px;font-weight:800;color:#e6edf3;margin-top:6px}
+.mini .x{font-size:12px;color:#00d4aa;margin-top:4px;font-weight:600}
 
-/* ━━━ NOTES ━━━ */
-.notes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.note{padding:18px;border-radius:20px}
-.note h4{margin:0 0 10px;font-size:19px;font-weight:800}
-.note ul{margin:0;padding-right:18px;padding-left:0}
-.note li{margin:7px 0;font-size:14px;line-height:1.7}
-.note-warn{background:var(--warn);border:1px solid var(--warn-line)}
-.note-ok{background:var(--ok);border:1px solid var(--ok-line)}
+/* kbox */
+.kbox{padding:12px 14px;border-radius:12px;background:#21262d;border:1px solid #30363d;margin-bottom:10px}
+.kbox:last-child{margin-bottom:0}
+.kbox strong{display:block;margin-bottom:4px;font-size:13px;color:#e6edf3}
+.kbox p{margin:0;font-size:13px;color:#7d8590;line-height:1.6}
 
-/* ━━━ JOURNEY ━━━ */
-.journey-shell{padding:20px}
-.journey-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.jtab{padding:10px 16px;border-radius:999px;font-weight:700;font-size:14px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted);cursor:pointer;transition:all .15s}
-.jtab:hover{color:var(--text)}
-.jtab.active{background:linear-gradient(135deg,var(--violet),#9b6de8);color:#fff;border-color:transparent}
-.jreport{display:none}
-.jreport.active{display:block}
+/* report grid */
+.report-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
+.r-panel{background:#21262d;border:1px solid #30363d;border-radius:16px;padding:16px}
+.r-panel h4{margin:0 0 12px;font-size:16px;font-weight:800;color:#e6edf3}
+.tbl2{width:100%;border-collapse:collapse}
+.tbl2 th{padding:9px 10px;text-align:right;font-size:12px;color:#7d8590;font-weight:700;border-bottom:1px solid #30363d}
+.tbl2 td{padding:10px 10px;text-align:right;font-size:13px;border-bottom:1px solid #30363d;color:#e6edf3}
+.tbl2 tr:last-child td{border-bottom:none}
 
-/* path table */
-.path-table{width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:16px;overflow:hidden}
-.path-table th,.path-table td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:right;font-size:14px}
-.path-table th{background:var(--surface-2);color:var(--muted);font-weight:700}
-.path-table tr:last-child td{border-bottom:none}
-.path-chain{display:inline-flex;align-items:center;gap:4px;flex-wrap:wrap}
-.pnode{background:var(--surface-3);border:1px solid var(--line);border-radius:8px;padding:3px 9px;font-size:12px;font-weight:700}
-.pnode.tiktok{background:#ffe4ed;color:#c0194c;border-color:#f4b8c8}
-.pnode.google{background:#e8f3ff;color:#1a56b0;border-color:#bfd8f8}
-.pnode.meta{background:#e8eeff;color:#3b4fd4;border-color:#bbc8f8}
-.pnode.snap{background:#fffbe6;color:#b88000;border-color:#f0dc8a}
-.pnode.direct{background:var(--surface-3);color:var(--muted)}
-.parrow{color:var(--muted);font-size:11px}
-.pbar-wrap{height:6px;background:var(--surface-2);border-radius:999px;overflow:hidden;display:inline-block;width:80px;margin-right:6px;vertical-align:middle}
-.pbar-fill{height:100%;border-radius:999px;background:linear-gradient(135deg,var(--violet),#9b6de8)}
+/* note */
+.note{padding:16px;border-radius:16px}
+.note-warn{background:rgba(255,163,0,.08);border:1px solid rgba(255,163,0,.2)}
+.note-ok{background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.2)}
+.note h4{margin:0 0 10px;font-size:17px;font-weight:800;color:#e6edf3}
+.note ul{margin:0;padding-right:16px;font-size:13px;color:#7d8590}
+.note li{margin:6px 0;line-height:1.6}
 
-/* overlap cards */
-.overlap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.overlap-card{background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:center}
-.overlap-card .oc-num{font-size:32px;font-weight:800;margin:8px 0}
-.overlap-card .oc-label{font-size:13px;color:var(--muted)}
-.overlap-card .oc-pct{font-size:18px;font-weight:800;color:var(--violet);margin-top:4px}
-.oc-bar{height:8px;background:var(--surface-3);border-radius:999px;overflow:hidden;margin-top:10px}
-.oc-bar span{display:block;height:100%;border-radius:999px;background:linear-gradient(135deg,var(--violet),#9b6de8)}
+/* journey */
+.jtab{padding:9px 16px;border-radius:999px;font-weight:700;font-size:13px;background:#21262d;border:1px solid #30363d;color:#7d8590;cursor:pointer;transition:all .15s;margin-bottom:4px}
+.jtab.active{background:linear-gradient(135deg,#a371f7,#6e40c9);color:#fff;border-color:transparent}
+.jreport{display:none}.jreport.active{display:block}
 
-/* assist */
-.assist-row{display:grid;grid-template-columns:110px 1fr 90px 90px;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
-.assist-row:last-child{border-bottom:none}
-.assist-bar{height:10px;background:var(--surface-2);border-radius:999px;overflow:hidden}
-.assist-bar span{display:block;height:100%;border-radius:999px;background:linear-gradient(135deg,var(--violet),#9b6de8)}
-
-/* time cards */
-.time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.time-card{background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:center}
-.time-card .tc-val{font-size:28px;font-weight:800;margin:8px 0 4px}
-.time-card .tc-label{font-size:12px;color:var(--muted)}
-.time-card .tc-sub{font-size:12px;color:var(--violet);font-weight:700;margin-top:4px}
-
-/* timeline viz */
-.timeline{display:flex;align-items:center;gap:0;margin-top:16px;padding:16px;background:var(--surface-2);border:1px solid var(--line);border-radius:16px}
-.tl-node{display:flex;flex-direction:column;align-items:center;gap:6px}
-.tl-circle{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff}
-.tl-circle.c1{background:linear-gradient(135deg,var(--violet),#9b6de8)}
-.tl-circle.c2{background:linear-gradient(135deg,var(--brand),var(--brand2))}
-.tl-circle.c3{background:linear-gradient(135deg,var(--pink),#b03060)}
-.tl-label{font-size:12px;color:var(--muted);text-align:center;max-width:70px}
-.tl-line{flex:1;height:2px;background:var(--line);position:relative;margin-top:-26px}
-.tl-line span{position:absolute;top:-24px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--violet);font-weight:700;white-space:nowrap;background:var(--surface-2);padding:2px 6px;border-radius:6px}
-
-/* first × last table */
-.fl-table{width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:16px;overflow:hidden}
-.fl-table th,.fl-table td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:right;font-size:14px}
-.fl-table th{background:var(--surface-2);color:var(--muted);font-weight:700}
-.fl-table tr:last-child td{border-bottom:none}
-
-/* journey insight */
-.j-insight{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
-.j-ins-box{padding:14px;border-radius:16px;background:var(--surface-2);border:1px solid var(--line)}
-.j-ins-box strong{display:block;margin-bottom:5px;font-size:14px}
-.j-ins-box p{margin:0;font-size:13px;color:var(--muted);line-height:1.6}
-
-/* ━━━ TERMS ━━━ */
-.terms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.term{background:var(--surface-2);border:1px solid var(--line);border-radius:16px;padding:14px}
-.term strong{display:block;margin-bottom:5px;font-size:14px}
-.term p{margin:0;font-size:13px;color:var(--muted);line-height:1.6}
-
-/* ━━━ FOOTER ━━━ */
-.footer{padding:18px 0 6px;font-size:12px;color:var(--muted2)}
-
-/* ━━━ RESPONSIVE ━━━ */
+/* responsive */
 @media(max-width:1100px){
   .shell{grid-template-columns:1fr}
   .sidebar{display:none}
-  .mobile-bar{display:flex}
-  .hero,.summary-grid,.g4,.g3,.g2,.action-row,.vis-grid,.report-grid,.mo-charts,.decision-grid,.notes-grid,.mini-row,.overlap-grid,.time-grid,.j-insight,.terms-grid{grid-template-columns:1fr}
-  .bar-row{grid-template-columns:100px 1fr 70px}
-  .assist-row{grid-template-columns:90px 1fr 80px 80px}
-  .mbar-row{grid-template-columns:70px 1fr 80px}
-  .hero h2{font-size:26px}
-  .main{padding:16px}
+  .main{padding:14px}
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .g3,.g2,.report-grid{grid-template-columns:1fr}
+  .mini-row{grid-template-columns:repeat(2,1fr)}
+  .bar-row{grid-template-columns:80px 1fr 50px}
+  .topbar{flex-direction:column;align-items:flex-start;gap:10px}
+  .tbl th,.tbl td{padding:8px 6px;font-size:12px}
+  .tbl2 th,.tbl2 td{padding:8px 6px;font-size:12px}
 }
 @media(max-width:640px){
   .main{padding:12px}
-  .hero{padding:18px}
-  .hero h2{font-size:22px}
+  .g4{grid-template-columns:1fr 1fr}
   .metric .v{font-size:24px}
-  .fl-table th,.fl-table td{padding:9px 8px;font-size:13px}
+  .mini .n{font-size:18px}
+  /* جداول الجوال — نخفي عمود التوزيع */
+  .tbl th:last-child,.tbl td:last-child{display:none}
+  /* مسارات الرحلة على الجوال */
+  .path-chain{flex-wrap:wrap;gap:3px}
+  /* assist على الجوال */
+  [style*="grid-template-columns:110px"]{grid-template-columns:90px 1fr 60px!important}
+  [style*="grid-template-columns:110px"] div:last-child{display:none}
 }
 </style>
 </head>
 <body>
 <div class="shell">
 
-  <!-- ━━━ SIDEBAR ━━━ -->
+  <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="brand">
-      <div class="logo" aria-label="شعار معصرة الجنوب">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 3c3 3 6 5.5 6 9a6 6 0 1 1-12 0c0-3.5 3-6 6-9Z" fill="currentColor"/>
-          <path d="M12 6c1.5 1.7 3.2 3.3 3.2 5.8A3.2 3.2 0 0 1 12 15a3.2 3.2 0 0 1-3.2-3.2C8.8 9.3 10.5 7.7 12 6Z" fill="rgba(255,255,255,.85)"/>
-        </svg>
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 3c3 3 6 5.5 6 9a6 6 0 1 1-12 0c0-3.5 3-6 6-9Z"/></svg>
       </div>
-      <div class="brand-text">
+      <div>
         <h1>معصرة الجنوب</h1>
-        <p>لوحة أداء المتجر</p>
+        <p>لوحة الأداء</p>
       </div>
     </div>
-
-    <div class="side-section">
-      <div class="side-label">التنقل</div>
-      <nav class="nav">
-        <a href="#overview" class="active">الملخص</a>
-        <a href="#summary">الخلاصة التنفيذية</a>
-        <a href="#visuals">التحليل البصري</a>
-        <a href="#reports">التقارير</a>
-        <a href="#channels">أداء القنوات</a>
-        <a href="#decisions">القرارات</a>
-        <a href="#journey">رحلة العميل</a>
-        <a href="#terms">المصطلحات</a>
-      </nav>
-    </div>
-
-    <div class="side-section">
-      <div class="side-label">قرارات فورية</div>
-      <ul class="side-list">
-        <li>↑ رفع Google Search +15%</li>
-        <li>↑ رفع إعادة الاستهداف +10%</li>
-        <li>↓ خفض سناب العام -20%</li>
-        <li>🧪 اختبار تيك توك قبل التوسع</li>
-      </ul>
-    </div>
-
-    <div style="margin-top:auto;padding-top:8px">
-      <button class="btn btn-ghost" id="themeToggle" style="width:100%;background:var(--surface-2);color:var(--text);border:1px solid var(--line);border-radius:14px;padding:10px;font-weight:700;font-size:13px">الوضع الليلي</button>
+    <div class="nav-label">التنقل</div>
+    <nav class="nav">
+      <a href="#overview" class="active">الملخص</a>
+      <a href="#reports">التقارير</a>
+      <a href="#channels">القنوات</a>
+      <a href="#decisions">القرارات</a>
+      <a href="#journey">رحلة العميل</a>
+    </nav>
+    <div class="nav-label">ملخص سريع</div>
+    <div class="side-kpis">
+      <div class="side-kpi"><span>أفضل قناة</span><strong style="color:#00d4aa">Google</strong></div>
+      <div class="side-kpi"><span>أكبر هدر</span><strong style="color:#f78166">سناب</strong></div>
+      <div class="side-kpi"><span>التحويل</span><strong>2.29%</strong></div>
+      <div class="side-kpi"><span>المبيعات</span><strong>18,940 ر.س</strong></div>
     </div>
   </aside>
 
-  <!-- ━━━ MAIN ━━━ -->
+  <!-- MAIN -->
   <main class="main">
 
-    <!-- mobile top bar -->
-    <div class="mobile-bar">
-      <div style="font-weight:800;font-size:17px">معصرة الجنوب</div>
-      <div style="display:flex;gap:8px">
-        <span style="font-size:12px;color:var(--muted);align-self:center">10 أبريل 2026</span>
-        <button class="btn" id="themeToggleMobile" style="background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13px;font-weight:700">🌓</button>
+    <!-- mobile topbar -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid #30363d">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#00d4aa,#0096ff);display:grid;place-items:center">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 3c3 3 6 5.5 6 9a6 6 0 1 1-12 0c0-3.5 3-6 6-9Z"/></svg>
+        </div>
+        <div>
+          <div style="font-size:15px;font-weight:800;color:#e6edf3">معصرة الجنوب</div>
+          <div style="font-size:11px;color:#7d8590">لوحة الأداء</div>
+        </div>
       </div>
+      <span style="font-size:11px;color:#7d8590;background:#21262d;border:1px solid #30363d;padding:5px 10px;border-radius:999px">10 أبريل 2026</span>
     </div>
 
-    <!-- ━━━ HERO ━━━ -->
-    <section class="hero" id="overview">
+    <!-- TOPBAR -->
+    <div class="topbar">
       <div>
-        <span class="hero-badge">📊 تقرير الأسبوع — 4 إلى 10 أبريل 2026</span>
-        <h2>أداء المتجر هذا الأسبوع</h2>
-        <p>Google هي أفضل قناة حالياً بعائد 2.84 ريال لكل ريال إعلاني. الطلبات تنمو بنسبة 18.7% أسرع من الزيارات — مما يعني أن التحويل يتحسن.</p>
-        <div class="hero-btns">
-          <button class="btn btn-white" onclick="document.getElementById('reports').scrollIntoView({behavior:'smooth'})">التقارير</button>
-          <button class="btn btn-ghost" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">رحلة العميل</button>
-        </div>
+        <h2>لوحة أداء المتجر</h2>
+        <p>آخر تحديث: 10 أبريل 2026</p>
       </div>
-      <div class="hero-side">
-        <h3>أبرز 3 أرقام</h3>
-        <ul>
-          <li>المبيعات: <strong>18,940 ر.س</strong> (+17.6%)</li>
-          <li>الطلبات: <strong>286</strong> (+18.7%)</li>
-          <li>معدل التحويل: <strong>2.29%</strong></li>
-        </ul>
-      </div>
-    </section>
+      <div class="date-chip">الأسبوع الحالي <span>4 – 10 أبريل 2026</span></div>
+    </div>
 
-    <!-- ━━━ SUMMARY ━━━ -->
-    <section class="section" id="summary">
-      <div class="sec-head"><h3>الخلاصة التنفيذية</h3><p>أبرز ما في هذا الأسبوع</p></div>
-      <div class="summary-grid">
-        <div class="summary-card">
-          <h4>الموقف الحالي</h4>
-          <ul class="s-list">
-            <li><strong>أفضل قناة:</strong> إعلانات Google — أوضح عائد وأعلى نية شراء.</li>
-            <li><strong>أكبر فرصة:</strong> رفع حملة البحث لمنتج زيت السمسم 1 لتر.</li>
-            <li><strong>أكبر هدر:</strong> حملة سناب العامة — زيارات دون تحويل كافٍ.</li>
-            <li><strong>أهم تحسين داخلي:</strong> رفع نسبة إتمام الدفع.</li>
-            <li><strong>قرار التوسع:</strong> تيك توك يحتاج تحسين الصفحة قبل أي زيادة.</li>
-          </ul>
-        </div>
-        <div class="summary-card">
-          <h4>نفّذ اليوم</h4>
-          <div class="action-row">
-            <div class="action-pill"><strong>↑ ارفع</strong><span>Google Search +15%</span></div>
-            <div class="action-pill"><strong>↑ ارفع</strong><span>إعادة الاستهداف +10%</span></div>
-            <div class="action-pill"><strong>↓ خفّض</strong><span>سناب العام -20%</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ━━━ KPIs ━━━ -->
-    <section class="section">
-      <div class="sec-head"><h3>المؤشرات الرئيسية</h3><p>هذا الأسبوع — 4 أبريل إلى 10 أبريل 2026 | مقارنة بالأسبوع السابق</p></div>
+    <!-- KPIs -->
+    <section id="overview">
       <div class="grid g4">
-        <div class="metric"><div class="k">الزوار</div><div class="v">12,480</div><div class="s">+14.1% عن الأسبوع الماضي</div></div>
-        <div class="metric"><div class="k">الطلبات</div><div class="v">286</div><div class="s">+18.7% عن الأسبوع الماضي</div></div>
-        <div class="metric"><div class="k">المبيعات</div><div class="v">18,940 ر.س</div><div class="s">+17.6% عن الأسبوع الماضي</div></div>
-        <div class="metric"><div class="k">معدل التحويل</div><div class="v">2.29%</div><div class="s">أفضل من الأسبوع الماضي</div></div>
+        <div class="metric metric-accent-1">
+          <div class="k">المبيعات</div>
+          <div class="v">18,940</div>
+          <div style="font-size:12px;color:#7d8590;margin-top:4px">ريال سعودي</div>
+          <div class="s up">↑ +17.6% عن الأسبوع الماضي</div>
+        </div>
+        <div class="metric metric-accent-2">
+          <div class="k">الطلبات</div>
+          <div class="v">286</div>
+          <div style="font-size:12px;color:#7d8590;margin-top:4px">طلب هذا الأسبوع</div>
+          <div class="s up">↑ +18.7% عن الأسبوع الماضي</div>
+        </div>
+        <div class="metric metric-accent-3">
+          <div class="k">الزوار</div>
+          <div class="v">12,480</div>
+          <div style="font-size:12px;color:#7d8590;margin-top:4px">زيارة هذا الأسبوع</div>
+          <div class="s up">↑ +14.1% عن الأسبوع الماضي</div>
+        </div>
+        <div class="metric metric-accent-4">
+          <div class="k">معدل التحويل</div>
+          <div class="v">2.29%</div>
+          <div style="font-size:12px;color:#7d8590;margin-top:4px">من الزوار للمشترين</div>
+          <div class="s up">↑ أفضل من الأسبوع الماضي</div>
+        </div>
       </div>
     </section>
 
-    <!-- ━━━ VISUALS ━━━ -->
-    <section class="section" id="visuals">
-      <div class="sec-head"><h3>التحليل البصري</h3><p>أرقام ورسومات فقط</p></div>
-      <div class="vis-grid">
-        <div class="vis-card">
-          <h4>توزيع الزيارات</h4>
-          <div class="donut-wrap">
-            <div class="donut" data-center="118&#10;زائر" style="background:conic-gradient(var(--brand) 0 46%, var(--gold) 46% 70%, var(--violet) 70% 100%)"></div>
+    <!-- CHARTS + FUNNEL -->
+    <section class="section">
+      <div class="grid g3">
+        <!-- Spark bars -->
+        <div class="panel">
+          <div class="panel-head"><h3>اتجاه 7 أيام</h3><span class="chip">المبيعات اليومية</span></div>
+          <div class="chart-wrap">
+            <div class="spark-bars">
+              <div class="spark-bar" style="height:48%;background:linear-gradient(180deg,#00d4aa,#00967a)"><em>س</em></div>
+              <div class="spark-bar" style="height:54%;background:linear-gradient(180deg,#00d4aa,#00967a)"><em>ح</em></div>
+              <div class="spark-bar" style="height:60%;background:linear-gradient(180deg,#00d4aa,#00967a)"><em>ن</em></div>
+              <div class="spark-bar" style="height:74%;background:linear-gradient(180deg,#00d4aa,#00967a)"><em>ث</em></div>
+              <div class="spark-bar" style="height:66%;background:linear-gradient(180deg,#00d4aa,#00967a)"><em>ر</em></div>
+              <div class="spark-bar" style="height:83%;background:linear-gradient(180deg,#00d4aa,#00967a)"><em>خ</em></div>
+              <div class="spark-bar" style="height:93%;background:linear-gradient(180deg,#00d4aa,#00967a)"><em>ج</em></div>
+            </div>
+          </div>
+          <p style="margin-top:28px;font-size:12px;color:#7d8590">الاتجاه العام صاعد — أفضل يوم: الجمعة</p>
+        </div>
+
+        <!-- Donut -->
+        <div class="panel">
+          <div class="panel-head"><h3>توزيع الزيارات</h3><span class="chip">الآن</span></div>
+          <div class="donut-wrap" style="margin-top:8px">
+            <div class="donut" data-center="118&#10;زائر" style="background:conic-gradient(#00d4aa 0 46%,#0096ff 46% 70%,#a371f7 70% 100%)"></div>
             <div class="legend">
-              <span><i class="dot" style="background:var(--brand)"></i> Google Ads — 46%</span>
-              <span><i class="dot" style="background:var(--gold)"></i> Meta — 24%</span>
-              <span><i class="dot" style="background:var(--violet)"></i> مباشر + مجاني — 30%</span>
+              <span><i class="dot" style="background:#00d4aa"></i> Google — 46%</span>
+              <span><i class="dot" style="background:#0096ff"></i> Meta — 24%</span>
+              <span><i class="dot" style="background:#a371f7"></i> مباشر — 30%</span>
             </div>
           </div>
         </div>
-        <div class="vis-card">
-          <h4>مسار الشراء</h4>
-          <div class="funnel">
-            <div class="fstep f1">زوار — 100%</div>
-            <div class="fstep f2">سلات نشطة — 19.5%</div>
-            <div class="fstep f3">بدؤوا الدفع — 11%</div>
-            <div class="fstep f4">أكملوا الدفع — 61%</div>
+
+        <!-- Funnel -->
+        <div class="panel">
+          <div class="panel-head"><h3>مسار الشراء</h3><span class="chip">هذا الأسبوع</span></div>
+          <div class="funnel" style="margin-top:4px">
+            <div class="fstep" style="width:100%;background:linear-gradient(135deg,#00d4aa,#00967a)">زوار — 100%</div>
+            <div class="fstep" style="width:82%;background:linear-gradient(135deg,#0096ff,#0070cc)">سلات — 19.5%</div>
+            <div class="fstep" style="width:62%;background:linear-gradient(135deg,#a371f7,#6e40c9)">بدأوا الدفع — 11%</div>
+            <div class="fstep" style="width:46%;background:linear-gradient(135deg,#f78166,#c94a30)">أكملوا — 61%</div>
           </div>
-        </div>
-        <div class="vis-card">
-          <h4>اتجاه 7 أيام</h4>
-          <div class="spark">
-            <span style="height:48%"><em>س</em></span>
-            <span style="height:54%"><em>ح</em></span>
-            <span style="height:60%"><em>ن</em></span>
-            <span style="height:74%"><em>ث</em></span>
-            <span style="height:66%"><em>ر</em></span>
-            <span style="height:83%"><em>خ</em></span>
-            <span style="height:93%"><em>ج</em></span>
-          </div>
-          <p class="spark-note">الاتجاه العام صاعد.</p>
         </div>
       </div>
     </section>
 
-    <!-- ━━━ REPORTS ━━━ -->
-    <section class="section panel report-shell" id="reports">
+    <!-- REPORTS -->
+    <section class="section panel" id="reports">
       <div class="sec-head"><h3>التقارير</h3><p>فوري · يومي · أسبوعي · شهري</p></div>
       <div class="tabs">
         <button class="tab active" data-report="live">فوري</button>
@@ -471,45 +337,43 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
         <button class="tab" data-report="monthly">شهري</button>
       </div>
 
-      <!-- LIVE -->
       <div class="report active" id="live">
-        <div class="r-meta">
-          <span class="r-chip">10 أبريل 2026 | 11:00 ص – 12:00 م</span>
-          <span class="r-chip">مقارنة: الساعة السابقة</span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+          <span class="chip">10 أبريل 2026 | 11:00 – 12:00 ص</span>
+          <span class="chip">مقارنة: الساعة السابقة</span>
         </div>
         <div class="report-grid">
           <div class="r-panel">
             <h4>المؤشرات الفورية</h4>
             <div class="mini-row">
               <div class="mini"><div class="t">الزيارات</div><div class="n">118</div><div class="x">آخر 60 دقيقة</div></div>
-              <div class="mini"><div class="t">السلات النشطة</div><div class="n">23</div><div class="x">19.5%</div></div>
+              <div class="mini"><div class="t">السلات</div><div class="n">23</div><div class="x">19.5%</div></div>
               <div class="mini"><div class="t">إتمام الدفع</div><div class="n">61%</div><div class="x">قابل للتحسين</div></div>
               <div class="mini"><div class="t">أقوى مصدر</div><div class="n">Google</div><div class="x">46%</div></div>
             </div>
-            <table class="tbl">
-              <thead><tr><th>المؤشر</th><th>الحالي</th><th>الساعة السابقة</th><th>القراءة</th></tr></thead>
+            <table class="tbl2">
+              <thead><tr><th>المؤشر</th><th>الحالي</th><th>السابق</th><th>القراءة</th></tr></thead>
               <tbody>
-                <tr><td>الزيارات</td><td>118</td><td>102</td><td>تحسن لحظي</td></tr>
-                <tr><td>السلات النشطة</td><td>23</td><td>19</td><td>اهتمام أفضل</td></tr>
-                <tr><td>إتمام الدفع</td><td>61%</td><td>58%</td><td>تحسن بسيط</td></tr>
-                <tr><td>أكبر مصدر</td><td>Google Ads</td><td>Google Ads</td><td>ثابت كأفضل قناة</td></tr>
+                <tr><td>الزيارات</td><td>118</td><td>102</td><td><span class="badge b-up">↑ تحسن</span></td></tr>
+                <tr><td>السلات</td><td>23</td><td>19</td><td><span class="badge b-up">↑ أفضل</span></td></tr>
+                <tr><td>إتمام الدفع</td><td>61%</td><td>58%</td><td><span class="badge b-up">↑ تحسن</span></td></tr>
+                <tr><td>أكبر مصدر</td><td>Google Ads</td><td>Google Ads</td><td><span class="badge b-test">ثابت</span></td></tr>
               </tbody>
             </table>
           </div>
           <div class="r-panel">
             <h4>القرار الفوري</h4>
-            <div class="kbox"><strong>ما الذي يُرفع الآن؟</strong><p>حملة البحث في Google — الأقوى حاليًا.</p></div>
-            <div class="kbox"><strong>ما الذي يُراقَب؟</strong><p>إتمام الدفع — التسرب قبل الإكمال ما زال مرتفعًا.</p></div>
-            <div class="kbox"><strong>ما الذي لا يُتوسع فيه؟</strong><p>تيك توك قبل تحسين صفحة الهبوط.</p></div>
+            <div class="kbox"><strong>↑ ارفع الآن</strong><p>حملة Google Search — الأقوى حالياً.</p></div>
+            <div class="kbox"><strong>👁 راقب</strong><p>إتمام الدفع — التسرب ما زال مرتفعاً.</p></div>
+            <div class="kbox"><strong>⏸ لا توسع</strong><p>تيك توك قبل تحسين صفحة الهبوط.</p></div>
           </div>
         </div>
       </div>
 
-      <!-- DAILY -->
       <div class="report" id="daily">
-        <div class="r-meta">
-          <span class="r-chip">10 أبريل 2026 | يوم كامل</span>
-          <span class="r-chip">مقارنة: 9 أبريل 2026</span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+          <span class="chip">10 أبريل 2026 | يوم كامل</span>
+          <span class="chip">مقارنة: أمس</span>
         </div>
         <div class="report-grid">
           <div class="r-panel">
@@ -517,16 +381,16 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
             <div class="mini-row">
               <div class="mini"><div class="t">المبيعات</div><div class="n">3,920</div><div class="x">ر.س</div></div>
               <div class="mini"><div class="t">الطلبات</div><div class="n">47</div><div class="x">اليوم</div></div>
-              <div class="mini"><div class="t">أفضل قناة</div><div class="n">Google</div><div class="x">الأعلى عائدًا</div></div>
-              <div class="mini"><div class="t">أفضل منتج</div><div class="n">1 لتر</div><div class="x">الأكثر طلبًا</div></div>
+              <div class="mini"><div class="t">أفضل قناة</div><div class="n">Google</div><div class="x">الأعلى</div></div>
+              <div class="mini"><div class="t">أفضل منتج</div><div class="n">1 لتر</div><div class="x">الأكثر طلباً</div></div>
             </div>
-            <table class="tbl">
+            <table class="tbl2">
               <thead><tr><th>المؤشر</th><th>اليوم</th><th>أمس</th><th>القراءة</th></tr></thead>
               <tbody>
-                <tr><td>المبيعات</td><td>3,920 ر.س</td><td>3,480 ر.س</td><td>ارتفاع يومي جيد</td></tr>
-                <tr><td>الطلبات</td><td>47</td><td>41</td><td>استجابة صحية</td></tr>
-                <tr><td>معدل التحويل</td><td>2.34%</td><td>2.18%</td><td>أفضل من أمس</td></tr>
-                <tr><td>أفضل قناة</td><td>Google Ads</td><td>Google Ads</td><td>ثابتة كأفضل قناة</td></tr>
+                <tr><td>المبيعات</td><td>3,920 ر.س</td><td>3,480 ر.س</td><td><span class="badge b-up">↑ جيد</span></td></tr>
+                <tr><td>الطلبات</td><td>47</td><td>41</td><td><span class="badge b-up">↑ صحي</span></td></tr>
+                <tr><td>التحويل</td><td>2.34%</td><td>2.18%</td><td><span class="badge b-up">↑ أفضل</span></td></tr>
+                <tr><td>أفضل قناة</td><td>Google Ads</td><td>Google Ads</td><td><span class="badge b-test">ثابت</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -539,11 +403,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
         </div>
       </div>
 
-      <!-- WEEKLY -->
       <div class="report" id="weekly">
-        <div class="r-meta">
-          <span class="r-chip">4 أبريل – 10 أبريل 2026</span>
-          <span class="r-chip">مقارنة: 28 مارس – 3 أبريل 2026</span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+          <span class="chip">4 – 10 أبريل 2026</span>
+          <span class="chip">مقارنة: الأسبوع السابق</span>
         </div>
         <div class="report-grid">
           <div class="r-panel">
@@ -552,174 +415,264 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
               <div class="mini"><div class="t">الزوار</div><div class="n">12,480</div><div class="x">+14.1%</div></div>
               <div class="mini"><div class="t">الطلبات</div><div class="n">286</div><div class="x">+18.7%</div></div>
               <div class="mini"><div class="t">المبيعات</div><div class="n">18,940</div><div class="x">ر.س</div></div>
-              <div class="mini"><div class="t">التحويل</div><div class="n">2.29%</div><div class="x">أفضل من السابق</div></div>
+              <div class="mini"><div class="t">التحويل</div><div class="n">2.29%</div><div class="x">أفضل</div></div>
             </div>
-            <table class="tbl">
-              <thead><tr><th>المؤشر</th><th>هذا الأسبوع</th><th>الأسبوع السابق</th><th>الفرق</th></tr></thead>
+            <table class="tbl2">
+              <thead><tr><th>المؤشر</th><th>هذا الأسبوع</th><th>السابق</th><th>الفرق</th></tr></thead>
               <tbody>
-                <tr><td>الزوار</td><td>12,480</td><td>10,940</td><td>+14.1%</td></tr>
-                <tr><td>الطلبات</td><td>286</td><td>241</td><td>+18.7%</td></tr>
-                <tr><td>المبيعات</td><td>18,940 ر.س</td><td>16,110 ر.س</td><td>+17.6%</td></tr>
-                <tr><td>معدل التحويل</td><td>2.29%</td><td>2.20%</td><td>+0.09</td></tr>
+                <tr><td>الزوار</td><td>12,480</td><td>10,940</td><td><span class="badge b-up">+14.1%</span></td></tr>
+                <tr><td>الطلبات</td><td>286</td><td>241</td><td><span class="badge b-up">+18.7%</span></td></tr>
+                <tr><td>المبيعات</td><td>18,940 ر.س</td><td>16,110 ر.س</td><td><span class="badge b-up">+17.6%</span></td></tr>
+                <tr><td>التحويل</td><td>2.29%</td><td>2.20%</td><td><span class="badge b-up">+0.09</span></td></tr>
               </tbody>
             </table>
           </div>
           <div class="r-panel">
             <h4>خلاصة الأسبوع</h4>
             <div class="kbox"><strong>أفضل نتيجة</strong><p>الطلبات تنمو أسرع من الزيارات — التحويل يتحسن.</p></div>
-            <div class="kbox"><strong>القرار</strong><p>تعزيز Google وإعادة الاستهداف، وخفض القنوات الأضعف.</p></div>
-            <div class="kbox"><strong>الفرصة</strong><p>إعادة توزيع الميزانية من سناب إلى Google أفضل من رفع الإجمالي.</p></div>
+            <div class="kbox"><strong>القرار</strong><p>تعزيز Google وإعادة الاستهداف وخفض سناب.</p></div>
+            <div class="kbox"><strong>الفرصة</strong><p>إعادة توزيع الميزانية أفضل من رفع الإجمالي.</p></div>
           </div>
         </div>
       </div>
 
-      <!-- MONTHLY -->
       <div class="report" id="monthly">
-        <div class="r-meta">
-          <span class="r-chip">1 أبريل – 10 أبريل 2026</span>
-          <span class="r-chip">مقارنة: 1 – 10 مارس 2026</span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+          <span class="chip">1 – 10 أبريل 2026</span>
+          <span class="chip">مقارنة: 1 – 10 مارس 2026</span>
         </div>
         <div class="report-grid">
           <div class="r-panel">
             <h4>مؤشرات الشهر</h4>
             <div class="mini-row">
-              <div class="mini"><div class="t">الزوار</div><div class="n">51,340</div><div class="x">الشهر الحالي</div></div>
-              <div class="mini"><div class="t">الطلبات</div><div class="n">1,102</div><div class="x">هذا الشهر</div></div>
+              <div class="mini"><div class="t">الزوار</div><div class="n">51,340</div><div class="x">الشهر</div></div>
+              <div class="mini"><div class="t">الطلبات</div><div class="n">1,102</div><div class="x">الشهر</div></div>
               <div class="mini"><div class="t">المبيعات</div><div class="n">74,800</div><div class="x">ر.س</div></div>
-              <div class="mini"><div class="t">العملاء المتكررون</div><div class="n">31%</div><div class="x">فرصة قوية</div></div>
+              <div class="mini"><div class="t">متكررون</div><div class="n">31%</div><div class="x">فرصة</div></div>
             </div>
-            <table class="tbl">
-              <thead><tr><th>المؤشر</th><th>الفترة الحالية</th><th>الفترة السابقة</th><th>القراءة</th></tr></thead>
+            <table class="tbl2">
+              <thead><tr><th>المؤشر</th><th>الحالي</th><th>السابق</th><th>القراءة</th></tr></thead>
               <tbody>
-                <tr><td>الزوار</td><td>51,340</td><td>47,900</td><td>نمو شهري جيد</td></tr>
-                <tr><td>الطلبات</td><td>1,102</td><td>988</td><td>تحسن في الطلب</td></tr>
-                <tr><td>المبيعات</td><td>74,800 ر.س</td><td>68,200 ر.س</td><td>ارتفاع ملحوظ</td></tr>
-                <tr><td>العملاء المتكررون</td><td>31%</td><td>27%</td><td>تحسن في إعادة الشراء</td></tr>
+                <tr><td>الزوار</td><td>51,340</td><td>47,900</td><td><span class="badge b-up">↑ نمو</span></td></tr>
+                <tr><td>الطلبات</td><td>1,102</td><td>988</td><td><span class="badge b-up">↑ تحسن</span></td></tr>
+                <tr><td>المبيعات</td><td>74,800 ر.س</td><td>68,200 ر.س</td><td><span class="badge b-up">↑ ارتفاع</span></td></tr>
+                <tr><td>المتكررون</td><td>31%</td><td>27%</td><td><span class="badge b-up">↑ أفضل</span></td></tr>
               </tbody>
             </table>
           </div>
           <div class="r-panel">
             <h4>خلاصة الشهر</h4>
-            <div class="kbox"><strong>أهم نقطة</strong><p>المبيعات جيدة لكن ما زالت قابلة للرفع من نفس الزيارات.</p></div>
-            <div class="kbox"><strong>أفضل فرصة</strong><p>زيادة الاعتماد على القنوات الأعلى عائدًا بدل التوسع العام.</p></div>
-            <div class="kbox"><strong>قرار الشهر القادم</strong><p>رفع Google وإعادة الاستهداف، وتحسين إتمام الدفع.</p></div>
-          </div>
-        </div>
-        <div class="mo-charts">
-          <div class="mo-card">
-            <h4>اتجاه المبيعات — 4 أشهر</h4>
-            <svg class="line-svg" viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg" aria-label="رسم بياني لاتجاه المبيعات">
-              <defs>
-                <linearGradient id="lg1" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0%" stop-color="#0a6860" stop-opacity=".25"/>
-                  <stop offset="100%" stop-color="#0a6860" stop-opacity=".02"/>
-                </linearGradient>
-              </defs>
-              <line x1="50" y1="170" x2="490" y2="170" stroke="var(--line)" stroke-width="1"/>
-              <line x1="50" y1="30" x2="50" y2="170" stroke="var(--line)" stroke-width="1"/>
-              <polyline fill="url(#lg1)" stroke="none" points="80,148 210,132 340,96 470,52 470,170 80,170"/>
-              <polyline fill="none" stroke="var(--brand)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" points="80,148 210,132 340,96 470,52"/>
-              <circle cx="80" cy="148" r="5" fill="var(--brand)"/>
-              <circle cx="210" cy="132" r="5" fill="var(--brand)"/>
-              <circle cx="340" cy="96" r="5" fill="var(--brand)"/>
-              <circle cx="470" cy="52" r="5" fill="var(--brand)"/>
-              <text x="80" y="192" text-anchor="middle" font-size="12" fill="var(--muted)" font-family="Tajawal,sans-serif">يناير</text>
-              <text x="210" y="192" text-anchor="middle" font-size="12" fill="var(--muted)" font-family="Tajawal,sans-serif">فبراير</text>
-              <text x="340" y="192" text-anchor="middle" font-size="12" fill="var(--muted)" font-family="Tajawal,sans-serif">مارس</text>
-              <text x="470" y="192" text-anchor="middle" font-size="12" fill="var(--muted)" font-family="Tajawal,sans-serif">أبريل</text>
-              <text x="80" y="136" text-anchor="middle" font-size="11" fill="var(--text)" font-family="Tajawal,sans-serif">58.4k</text>
-              <text x="210" y="120" text-anchor="middle" font-size="11" fill="var(--text)" font-family="Tajawal,sans-serif">61.9k</text>
-              <text x="340" y="84" text-anchor="middle" font-size="11" fill="var(--text)" font-family="Tajawal,sans-serif">68.2k</text>
-              <text x="470" y="40" text-anchor="middle" font-size="11" fill="var(--text)" font-family="Tajawal,sans-serif">74.8k</text>
-            </svg>
-            <div class="line-cap"><span>الاتجاه</span><span style="color:var(--brand);font-weight:700">صاعد</span></div>
-          </div>
-          <div class="mo-card">
-            <h4>مقارنة المبيعات الشهرية</h4>
-            <div class="mbar-list">
-              <div class="mbar-row"><div>يناير</div><div class="mtrack"><span style="width:78%"></span></div><div>58,400 ر.س</div></div>
-              <div class="mbar-row"><div>فبراير</div><div class="mtrack"><span style="width:83%"></span></div><div>61,900 ر.س</div></div>
-              <div class="mbar-row"><div>مارس</div><div class="mtrack"><span style="width:91%;background:linear-gradient(135deg,var(--gold),#d4a83e)"></span></div><div>68,200 ر.س</div></div>
-              <div class="mbar-row"><div>أبريل</div><div class="mtrack"><span style="width:100%"></span></div><div>74,800 ر.س</div></div>
-            </div>
+            <div class="kbox"><strong>أهم نقطة</strong><p>المبيعات قابلة للرفع من نفس الزيارات الحالية.</p></div>
+            <div class="kbox"><strong>أفضل فرصة</strong><p>زيادة الاعتماد على القنوات الأعلى عائداً.</p></div>
+            <div class="kbox"><strong>القرار</strong><p>رفع Google وإعادة الاستهداف وتحسين الدفع.</p></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ━━━ CHANNELS ━━━ -->
+    <!-- CHANNELS -->
     <section class="section grid g2" id="channels">
-      <div class="panel channels-panel">
-        <div class="sec-head"><h3>أداء القنوات</h3><p>عائد كل ريال إعلاني</p></div>
+      <div class="panel">
+        <div class="panel-head"><h3>أداء القنوات</h3><p>عائد كل ريال إعلاني</p></div>
         <div class="bar-list">
-          <div class="bar-row"><div>Google</div><div class="bar"><span style="width:86%;background:linear-gradient(135deg,var(--brand),var(--brand2))"></span></div><div>2.84</div></div>
-          <div class="bar-row"><div>Meta</div><div class="bar"><span style="width:77%;background:linear-gradient(135deg,var(--gold),#d4a33e)"></span></div><div>2.57</div></div>
-          <div class="bar-row"><div>سناب</div><div class="bar"><span style="width:42%;background:linear-gradient(135deg,var(--orange),#d07830)"></span></div><div>1.41</div></div>
-          <div class="bar-row"><div>تيك توك</div><div class="bar"><span style="width:33%;background:linear-gradient(135deg,var(--pink),#b03060)"></span></div><div>1.08</div></div>
+          <div class="bar-row"><div>Google</div><div class="bar-track"><div class="bar-fill" style="width:86%;background:linear-gradient(135deg,#00d4aa,#00967a)"></div></div><div class="bar-val">2.84</div></div>
+          <div class="bar-row"><div>Meta</div><div class="bar-track"><div class="bar-fill" style="width:77%;background:linear-gradient(135deg,#0096ff,#0070cc)"></div></div><div class="bar-val">2.57</div></div>
+          <div class="bar-row"><div>سناب</div><div class="bar-track"><div class="bar-fill" style="width:42%;background:linear-gradient(135deg,#ffd200,#cc9900)"></div></div><div class="bar-val">1.41</div></div>
+          <div class="bar-row"><div>تيك توك</div><div class="bar-track"><div class="bar-fill" style="width:33%;background:linear-gradient(135deg,#f78166,#c94a30)"></div></div><div class="bar-val">1.08</div></div>
         </div>
-        <p class="bar-note">الرقم = ريالات مبيعات مقابل كل ريال إعلاني.</p>
+        <p style="margin-top:14px;font-size:12px;color:#7d8590">الرقم = ريالات مبيعات لكل ريال إعلاني</p>
       </div>
-      <div class="panel channels-panel">
-        <div class="sec-head"><h3>قراءة سريعة</h3><p>ملخص القنوات</p></div>
+      <div class="panel">
+        <div class="panel-head"><h3>القرارات الفورية</h3><p>جاهزة للتنفيذ</p></div>
         <div style="display:grid;gap:10px">
-          <div class="kbox"><strong>الأفضل أداءً</strong><p>Google Ads — أوضح عائد وأعلى نية شراء.</p></div>
-          <div class="kbox"><strong>إعادة الاستهداف</strong><p>Meta — جمهور أقرب للإكمال وعائد جيد.</p></div>
-          <div class="kbox"><strong>الأضعف</strong><p>تيك توك البارد — تفاعل بدون شراء كافٍ.</p></div>
+          <div class="kbox"><strong style="color:#00d4aa">↑ رفع Google Search +15%</strong><p>أفضل عائد وأوضح نية شراء.</p></div>
+          <div class="kbox"><strong style="color:#00d4aa">↑ رفع Meta Retargeting +10%</strong><p>جمهور أقرب للإكمال.</p></div>
+          <div class="kbox"><strong style="color:#f78166">↓ خفض سناب العام -20%</strong><p>زيارات بدون تحويل كافٍ.</p></div>
+          <div class="kbox"><strong style="color:#a371f7">🧪 تيك توك — اختبار فقط</strong><p>لا توسع قبل تحسين الصفحة.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- ━━━ DECISIONS ━━━ -->
-    <section class="section panel" style="padding:20px" id="decisions">
+    <!-- DECISIONS -->
+    <section class="section" id="decisions">
       <div class="sec-head"><h3>القرارات التنفيذية</h3><p>بناءً على الأداء الحالي</p></div>
-      <div class="decision-grid">
+      <div class="grid g2">
         <div class="decision">
           <h4>Google Search | منتج 1 لتر</h4>
           <p>أفضل عائد وأوضح نية شراء في الوقت الحالي.</p>
           <span class="badge b-up">↑ رفع 15%</span>
-          <ul class="dlist">
-            <li>رفع تدريجي خلال يومين.</li>
-            <li>مراقبة تكلفة الطلب بعد الرفع.</li>
-          </ul>
+          <ul style="margin-top:10px"><li>رفع تدريجي خلال يومين.</li><li>مراقبة تكلفة الطلب بعد الرفع.</li></ul>
         </div>
         <div class="decision">
           <h4>Meta Retargeting</h4>
-          <p>جمهور أقرب للشراء وإكمال الطلب أعلى من الزيارات الباردة.</p>
+          <p>جمهور أقرب للشراء وإكمال الطلب أعلى.</p>
           <span class="badge b-up">↑ رفع 10%</span>
-          <ul class="dlist">
-            <li>توسيع الميزانية فقط.</li>
-            <li>مقارنة 7 أيام و14 يومًا.</li>
-          </ul>
+          <ul style="margin-top:10px"><li>توسيع الميزانية فقط.</li><li>مقارنة 7 و14 يوماً.</li></ul>
         </div>
         <div class="decision">
           <h4>سناب — حملة عامة</h4>
-          <p>زيارات موجودة لكن العائد أقل من المطلوب مقارنة بالقنوات الأخرى.</p>
+          <p>زيارات موجودة لكن العائد أقل من المطلوب.</p>
           <span class="badge b-down">↓ خفض 20%</span>
-          <ul class="dlist">
-            <li>نقل جزء من الميزانية إلى Google.</li>
-            <li>متابعة النتيجة 3 أيام.</li>
-          </ul>
+          <ul style="margin-top:10px"><li>نقل الميزانية لـ Google.</li><li>متابعة 3 أيام.</li></ul>
         </div>
         <div class="decision">
           <h4>تيك توك — فيديو بارد</h4>
-          <p>التفاعل جيد لكن الشراء ضعيف — يحتاج تحسين الصفحة أولاً.</p>
+          <p>تفاعل جيد لكن الشراء ضعيف.</p>
           <span class="badge b-test">🧪 اختبار فقط</span>
-          <ul class="dlist">
-            <li>تغيير صفحة الهبوط أو الرسالة.</li>
-            <li>لا توسع قبل تحسن العائد.</li>
-          </ul>
+          <ul style="margin-top:10px"><li>تغيير صفحة الهبوط.</li><li>لا توسع قبل تحسن العائد.</li></ul>
         </div>
       </div>
     </section>
 
-    <!-- ━━━ NOTES ━━━ -->
-    <section class="section notes-grid">
+    <!-- JOURNEY -->
+    <section class="section panel" style="padding:20px" id="journey">
+      <div class="sec-head"><h3>رحلة العميل قبل الشراء</h3><p>4 – 10 أبريل 2026</p></div>
+      <div class="grid g4" style="margin-bottom:18px">
+        <div class="metric" style="border-top:2px solid #a371f7"><div class="k">أكثر مسار</div><div class="v" style="font-size:16px">تيك توك←Google</div><div class="s up">24% من الطلبات</div></div>
+        <div class="metric" style="border-top:2px solid #a371f7"><div class="k">متعددو المنصات</div><div class="v">40%</div><div class="s neutral">من المشترين</div></div>
+        <div class="metric" style="border-top:2px solid #a371f7"><div class="k">متوسط وقت الرحلة</div><div class="v">3.2 س</div><div class="s neutral">من أول نقرة</div></div>
+        <div class="metric" style="border-top:2px solid #a371f7"><div class="k">Google تُساعد في</div><div class="v">60%</div><div class="s up">من الطلبات</div></div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+        <button class="jtab active" data-jr="paths">① المسارات</button>
+        <button class="jtab" data-jr="firstlast">② أول × آخر</button>
+        <button class="jtab" data-jr="overlap">③ التداخل</button>
+        <button class="jtab" data-jr="assist">④ المساعدة</button>
+        <button class="jtab" data-jr="timing">⑤ التوقيت</button>
+      </div>
+
+      <div class="jreport active" id="jr-paths">
+        <table class="tbl">
+          <thead><tr><th>#</th><th>المسار</th><th>الطلبات</th><th>النسبة</th></tr></thead>
+          <tbody>
+            <tr><td style="color:#7d8590">1</td><td><span class="pnode google">Google</span></td><td>150</td><td><span class="badge b-up">30%</span></td></tr>
+            <tr><td style="color:#7d8590">2</td><td><div style="display:inline-flex;align-items:center;gap:4px"><span class="pnode tiktok">تيك توك</span><span class="parrow">→</span><span class="pnode google">Google</span></div></td><td>120</td><td><span class="badge b-up">24%</span></td></tr>
+            <tr><td style="color:#7d8590">3</td><td><div style="display:inline-flex;align-items:center;gap:4px"><span class="pnode snap">سناب</span><span class="parrow">→</span><span class="pnode direct">مباشر</span></div></td><td>80</td><td><span class="badge b-test">16%</span></td></tr>
+            <tr><td style="color:#7d8590">4</td><td><div style="display:inline-flex;align-items:center;gap:4px"><span class="pnode meta">Meta</span><span class="parrow">→</span><span class="pnode google">Google</span></div></td><td>60</td><td><span class="badge b-test">12%</span></td></tr>
+            <tr><td style="color:#7d8590">5</td><td><div style="display:inline-flex;align-items:center;gap:4px"><span class="pnode tiktok">تيك توك</span><span class="parrow">→</span><span class="pnode snap">سناب</span><span class="parrow">→</span><span class="pnode google">Google</span></div></td><td>50</td><td><span class="badge b-test">10%</span></td></tr>
+            <tr><td style="color:#7d8590">6</td><td><span class="pnode direct">مباشر</span></td><td>40</td><td><span class="badge b-down">8%</span></td></tr>
+          </tbody>
+        </table>
+        <div class="grid g2" style="margin-top:14px">
+          <div class="kbox"><strong>الخلاصة</strong><p>تيك توك يجلب — Google يُغلق. 54% من الطلبات تمر بـ Google في نهاية الرحلة.</p></div>
+          <div class="kbox"><strong>القرار</strong><p>لا تُقيّم تيك توك بالمبيعات المباشرة فقط — دوره في بداية الرحلة حقيقي.</p></div>
+        </div>
+      </div>
+
+      <div class="jreport" id="jr-firstlast">
+        <div class="grid g2">
+          <div style="background:#21262d;border:1px solid #30363d;border-radius:14px;padding:16px">
+            <div style="font-size:12px;color:#7d8590;margin-bottom:12px;font-weight:700;text-transform:uppercase">من يجلب أكثر؟</div>
+            <div style="display:grid;gap:10px">
+              <div style="display:flex;justify-content:space-between"><span class="pnode tiktok">تيك توك</span><strong>28%</strong></div>
+              <div style="display:flex;justify-content:space-between"><span class="pnode google">Google</span><strong>30%</strong></div>
+              <div style="display:flex;justify-content:space-between"><span class="pnode snap">سناب</span><strong>16%</strong></div>
+              <div style="display:flex;justify-content:space-between"><span class="pnode meta">Meta</span><strong>12%</strong></div>
+              <div style="display:flex;justify-content:space-between"><span class="pnode direct">مباشر</span><strong>14%</strong></div>
+            </div>
+          </div>
+          <div style="background:#21262d;border:1px solid #30363d;border-radius:14px;padding:16px">
+            <div style="font-size:12px;color:#7d8590;margin-bottom:12px;font-weight:700;text-transform:uppercase">من يُغلق البيع؟</div>
+            <div style="display:grid;gap:10px">
+              <div style="display:flex;justify-content:space-between"><span class="pnode google">Google</span><strong style="color:#00d4aa">62%</strong></div>
+              <div style="display:flex;justify-content:space-between"><span class="pnode direct">مباشر</span><strong>22%</strong></div>
+              <div style="display:flex;justify-content:space-between"><span class="pnode snap">سناب</span><strong>8%</strong></div>
+              <div style="display:flex;justify-content:space-between"><span class="pnode meta">Meta</span><strong>5%</strong></div>
+              <div style="display:flex;justify-content:space-between"><span class="pnode tiktok">تيك توك</span><strong style="color:#f78166">3%</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="jreport" id="jr-overlap">
+        <div class="grid g3" style="margin-bottom:14px">
+          <div style="background:#21262d;border:2px solid #a371f7;border-radius:16px;padding:20px;text-align:center">
+            <div style="font-size:12px;color:#7d8590;margin-bottom:8px">قناة واحدة</div>
+            <div style="font-size:36px;font-weight:800;color:#e6edf3">300</div>
+            <div style="font-size:20px;font-weight:800;color:#a371f7;margin:4px 0">60%</div>
+            <div style="height:6px;background:#30363d;border-radius:999px;overflow:hidden;margin-top:10px"><div style="width:60%;height:100%;background:linear-gradient(135deg,#a371f7,#6e40c9);border-radius:999px"></div></div>
+          </div>
+          <div style="background:#21262d;border:1px solid #30363d;border-radius:16px;padding:20px;text-align:center">
+            <div style="font-size:12px;color:#7d8590;margin-bottom:8px">قناتان</div>
+            <div style="font-size:36px;font-weight:800;color:#e6edf3">150</div>
+            <div style="font-size:20px;font-weight:800;color:#a371f7;margin:4px 0">30%</div>
+            <div style="height:6px;background:#30363d;border-radius:999px;overflow:hidden;margin-top:10px"><div style="width:30%;height:100%;background:linear-gradient(135deg,#a371f7,#6e40c9);border-radius:999px"></div></div>
+          </div>
+          <div style="background:#21262d;border:1px solid #30363d;border-radius:16px;padding:20px;text-align:center">
+            <div style="font-size:12px;color:#7d8590;margin-bottom:8px">3+ قنوات</div>
+            <div style="font-size:36px;font-weight:800;color:#e6edf3">50</div>
+            <div style="font-size:20px;font-weight:800;color:#a371f7;margin:4px 0">10%</div>
+            <div style="height:6px;background:#30363d;border-radius:999px;overflow:hidden;margin-top:10px"><div style="width:10%;height:100%;background:linear-gradient(135deg,#a371f7,#6e40c9);border-radius:999px"></div></div>
+          </div>
+        </div>
+        <div class="kbox"><strong>القرار</strong><p>40% من المشترين مروا بأكثر من قناة — لا تُوقف أي قناة اعتماداً على Last-click فقط.</p></div>
+      </div>
+
+      <div class="jreport" id="jr-assist">
+        <div style="border:1px solid #30363d;border-radius:14px;overflow:hidden">
+          <div style="display:grid;grid-template-columns:110px 1fr 80px 100px;gap:12px;padding:10px 14px;background:#21262d;border-bottom:2px solid #30363d;font-size:12px;color:#7d8590;font-weight:700">
+            <div>المنصة</div><div>المساهمة</div><div>طلبات</div><div>الدور</div>
+          </div>
+          <div style="display:grid;grid-template-columns:110px 1fr 80px 100px;gap:12px;padding:13px 14px;border-bottom:1px solid #21262d;align-items:center">
+            <div><span class="pnode google">Google</span></div>
+            <div><div style="height:8px;background:#21262d;border-radius:999px;overflow:hidden"><div style="width:60%;height:100%;background:linear-gradient(135deg,#00d4aa,#00967a);border-radius:999px"></div></div><div style="font-size:11px;color:#7d8590;margin-top:3px">60%</div></div>
+            <div style="font-weight:700;color:#e6edf3">300</div>
+            <div style="font-size:12px;color:#00d4aa;font-weight:700">مُغلق + مساعد</div>
+          </div>
+          <div style="display:grid;grid-template-columns:110px 1fr 80px 100px;gap:12px;padding:13px 14px;border-bottom:1px solid #21262d;align-items:center">
+            <div><span class="pnode tiktok">تيك توك</span></div>
+            <div><div style="height:8px;background:#21262d;border-radius:999px;overflow:hidden"><div style="width:40%;height:100%;background:linear-gradient(135deg,#a371f7,#6e40c9);border-radius:999px"></div></div><div style="font-size:11px;color:#7d8590;margin-top:3px">40%</div></div>
+            <div style="font-weight:700;color:#e6edf3">200</div>
+            <div style="font-size:12px;color:#a371f7;font-weight:700">جالب رئيسي</div>
+          </div>
+          <div style="display:grid;grid-template-columns:110px 1fr 80px 100px;gap:12px;padding:13px 14px;border-bottom:1px solid #21262d;align-items:center">
+            <div><span class="pnode snap">سناب</span></div>
+            <div><div style="height:8px;background:#21262d;border-radius:999px;overflow:hidden"><div style="width:30%;height:100%;background:linear-gradient(135deg,#ffd200,#cc9900);border-radius:999px"></div></div><div style="font-size:11px;color:#7d8590;margin-top:3px">30%</div></div>
+            <div style="font-weight:700;color:#e6edf3">150</div>
+            <div style="font-size:12px;color:#ffd200;font-weight:700">مساعد</div>
+          </div>
+          <div style="display:grid;grid-template-columns:110px 1fr 80px 100px;gap:12px;padding:13px 14px;align-items:center">
+            <div><span class="pnode meta">Meta</span></div>
+            <div><div style="height:8px;background:#21262d;border-radius:999px;overflow:hidden"><div style="width:24%;height:100%;background:linear-gradient(135deg,#0096ff,#0070cc);border-radius:999px"></div></div><div style="font-size:11px;color:#7d8590;margin-top:3px">24%</div></div>
+            <div style="font-weight:700;color:#e6edf3">120</div>
+            <div style="font-size:12px;color:#7d8590;font-weight:700">مساعد</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="jreport" id="jr-timing">
+        <div class="grid g3" style="margin-bottom:16px">
+          <div style="background:#21262d;border:1px solid #30363d;border-radius:16px;padding:18px;text-align:center">
+            <div style="font-size:12px;color:#7d8590;margin-bottom:8px">أول نقرة → آخر نقرة</div>
+            <div style="font-size:32px;font-weight:800;color:#a371f7">1.8 س</div>
+            <div style="font-size:12px;color:#7d8590;margin-top:4px">للرحلات المتعددة</div>
+          </div>
+          <div style="background:linear-gradient(135deg,#a371f7,#6e40c9);border-radius:16px;padding:18px;text-align:center">
+            <div style="font-size:12px;color:rgba(255,255,255,.8);margin-bottom:8px">أول نقرة → الشراء</div>
+            <div style="font-size:32px;font-weight:800;color:#fff">3.2 س</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.8);margin-top:4px">متوسط جميع الطلبات</div>
+          </div>
+          <div style="background:#21262d;border:1px solid #30363d;border-radius:16px;padding:18px;text-align:center">
+            <div style="font-size:12px;color:#7d8590;margin-bottom:8px">آخر نقرة → الشراء</div>
+            <div style="font-size:32px;font-weight:800;color:#00d4aa">8 د</div>
+            <div style="font-size:12px;color:#7d8590;margin-top:4px">القرار سريع عند الإغلاق</div>
+          </div>
+        </div>
+        <div class="grid g2">
+          <div class="kbox"><strong>العميل لا يشتري فوراً</strong><p>3.2 ساعة في المتوسط — الإعلانات التي تبدو بلا أثر قد تكون تزرع القرار.</p></div>
+          <div class="kbox"><strong>الحسم عند الدفع</strong><p>8 دقائق من آخر نقرة للشراء — صفحة المنتج والدفع هي نقطة الحسم.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTES -->
+    <section class="section grid g2">
       <div class="note note-warn">
         <h4>فرصة التحسين</h4>
         <ul>
-          <li>رفع إتمام الدفع يزيد المبيعات من نفس عدد الزوار.</li>
+          <li>رفع إتمام الدفع يزيد المبيعات من نفس الزوار.</li>
           <li>منتج 1 لتر هو أفضل نقطة دفع للحملات.</li>
-          <li>إعادة توزيع الميزانية أفضل من رفع الإجمالي الآن.</li>
+          <li>إعادة توزيع الميزانية أفضل من رفع الإجمالي.</li>
         </ul>
       </div>
       <div class="note note-ok">
@@ -733,307 +686,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
       </div>
     </section>
 
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!-- ━━━ JOURNEY TRACKING (NEW) ━━━ -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <section class="section panel journey-shell" id="journey">
-      <div class="sec-head">
-        <div>
-          <h3>رحلة العميل قبل الشراء</h3>
-          <p>4 أبريل – 10 أبريل 2026 | كيف وصل العميل للشراء وعبر أي قنوات؟</p>
-        </div>
-      </div>
-
-      <!-- ملخص أرقام رحلة العميل -->
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px">
-        <div style="background:linear-gradient(135deg,var(--violet),#9b6de8);color:#fff;border-radius:18px;padding:16px;text-align:center">
-          <div style="font-size:12px;opacity:.85;margin-bottom:6px">أكثر مسار تكراراً</div>
-          <div style="font-size:15px;font-weight:800">تيك توك ← Google</div>
-          <div style="font-size:12px;opacity:.85;margin-top:4px">24% من الطلبات</div>
-        </div>
-        <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:center">
-          <div style="font-size:12px;color:var(--muted);margin-bottom:6px">مروا بأكثر من قناة</div>
-          <div style="font-size:28px;font-weight:800;color:var(--violet)">40%</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:4px">من إجمالي المشترين</div>
-        </div>
-        <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:center">
-          <div style="font-size:12px;color:var(--muted);margin-bottom:6px">متوسط وقت الرحلة</div>
-          <div style="font-size:28px;font-weight:800;color:var(--violet)">3.2 س</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:4px">من أول نقرة للشراء</div>
-        </div>
-        <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:center">
-          <div style="font-size:12px;color:var(--muted);margin-bottom:6px">Google تُساعد في</div>
-          <div style="font-size:28px;font-weight:800;color:var(--brand)">60%</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:4px">من جميع الطلبات</div>
-        </div>
-      </div>
-
-      <div class="journey-tabs">
-        <button class="jtab active" data-jr="paths">① المسارات</button>
-        <button class="jtab" data-jr="firstlast">② أول × آخر منصة</button>
-        <button class="jtab" data-jr="overlap">③ تداخل القنوات</button>
-        <button class="jtab" data-jr="assist">④ المنصات المساعدة</button>
-        <button class="jtab" data-jr="timing">⑤ التوقيت</button>
-      </div>
-
-      <!-- ① PATHS -->
-      <div class="jreport active" id="jr-paths">
-        <div style="background:var(--surface-2);border-right:3px solid var(--violet);border-radius:0 10px 10px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;color:var(--muted)">
-          التسلسل الذي سلكه العميل من أول إعلان رآه حتى أكمل الشراء. الأرقام مرتبة من الأكثر تكراراً للأقل.
-        </div>
-        <table class="path-table">
-          <thead>
-            <tr><th>#</th><th>المسار</th><th>الطلبات</th><th>النسبة</th><th>التوزيع</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="color:var(--muted);font-size:13px">1</td>
-              <td><div class="path-chain"><span class="pnode google">Google</span></div></td>
-              <td><strong>150</strong></td><td>30%</td>
-              <td><div class="pbar-wrap" style="width:100px"><div class="pbar-fill" style="width:100%"></div></div></td>
-            </tr>
-            <tr>
-              <td style="color:var(--muted);font-size:13px">2</td>
-              <td><div class="path-chain"><span class="pnode tiktok">تيك توك</span><span class="parrow">→</span><span class="pnode google">Google</span></div></td>
-              <td><strong>120</strong></td><td>24%</td>
-              <td><div class="pbar-wrap" style="width:100px"><div class="pbar-fill" style="width:80%"></div></div></td>
-            </tr>
-            <tr>
-              <td style="color:var(--muted);font-size:13px">3</td>
-              <td><div class="path-chain"><span class="pnode snap">سناب</span><span class="parrow">→</span><span class="pnode direct">مباشر</span></div></td>
-              <td><strong>80</strong></td><td>16%</td>
-              <td><div class="pbar-wrap" style="width:100px"><div class="pbar-fill" style="width:53%"></div></div></td>
-            </tr>
-            <tr>
-              <td style="color:var(--muted);font-size:13px">4</td>
-              <td><div class="path-chain"><span class="pnode meta">Meta</span><span class="parrow">→</span><span class="pnode google">Google</span></div></td>
-              <td><strong>60</strong></td><td>12%</td>
-              <td><div class="pbar-wrap" style="width:100px"><div class="pbar-fill" style="width:40%"></div></div></td>
-            </tr>
-            <tr>
-              <td style="color:var(--muted);font-size:13px">5</td>
-              <td><div class="path-chain"><span class="pnode tiktok">تيك توك</span><span class="parrow">→</span><span class="pnode snap">سناب</span><span class="parrow">→</span><span class="pnode google">Google</span></div></td>
-              <td><strong>50</strong></td><td>10%</td>
-              <td><div class="pbar-wrap" style="width:100px"><div class="pbar-fill" style="width:33%"></div></div></td>
-            </tr>
-            <tr>
-              <td style="color:var(--muted);font-size:13px">6</td>
-              <td><div class="path-chain"><span class="pnode direct">مباشر</span></div></td>
-              <td><strong>40</strong></td><td>8%</td>
-              <td><div class="pbar-wrap" style="width:100px"><div class="pbar-fill" style="width:27%"></div></div></td>
-            </tr>
-          </tbody>
-        </table>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px">
-          <div style="padding:14px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line)">
-            <strong style="display:block;margin-bottom:5px;font-size:14px">الخلاصة</strong>
-            <p style="margin:0;font-size:13px;color:var(--muted);line-height:1.7">تيك توك يجلب العملاء — Google يُغلق البيع. 54% من الطلبات تمر بـ Google في نهاية الرحلة.</p>
-          </div>
-          <div style="padding:14px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line)">
-            <strong style="display:block;margin-bottom:5px;font-size:14px">القرار</strong>
-            <p style="margin:0;font-size:13px;color:var(--muted);line-height:1.7">لا تُقيّم تيك توك بالمبيعات المباشرة فقط — دوره في بداية الرحلة حقيقي ومهم.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ② FIRST × LAST -->
-      <div class="jreport" id="jr-firstlast">
-        <div style="background:var(--surface-2);border-right:3px solid var(--violet);border-radius:0 10px 10px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;color:var(--muted)">
-          من جلب العميل أول مرة؟ ومن كان آخر قناة رآها قبل الشراء؟
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
-          <div style="padding:16px;border-radius:16px;background:var(--surface-2);border:1px solid var(--line)">
-            <div style="font-size:12px;color:var(--muted);margin-bottom:10px;font-weight:700">من يجلب أكثر؟ (أول منصة)</div>
-            <div style="display:grid;gap:8px">
-              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode tiktok">تيك توك</span><strong>28%</strong></div>
-              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode google">Google</span><strong>30%</strong></div>
-              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode snap">سناب</span><strong>16%</strong></div>
-              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode meta">Meta</span><strong>12%</strong></div>
-              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode direct">مباشر</span><strong>14%</strong></div>
-            </div>
-          </div>
-          <div style="padding:16px;border-radius:16px;background:var(--surface-2);border:1px solid var(--line)">
-            <div style="font-size:12px;color:var(--muted);margin-bottom:10px;font-weight:700">من يُغلق البيع؟ (آخر منصة)</div>
-            <div style="display:grid;gap:8px">
-              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode google">Google</span><strong>62%</strong></div>
-              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode direct">مباشر</span><strong>22%</strong></div>
-              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode snap">سناب</span><strong>8%</strong></div>
-              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode meta">Meta</span><strong>5%</strong></div>
-              <div style="display:flex;align-items:center;justify-content:space-between"><span class="pnode tiktok">تيك توك</span><strong>3%</strong></div>
-            </div>
-          </div>
-        </div>
-        <div style="padding:14px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line);font-size:13px;color:var(--muted);line-height:1.7">
-          <strong style="color:var(--text)">الخلاصة:</strong> تيك توك يجلب 28% من العملاء لكنه يُغلق 3% فقط. Google يجلب 30% ويُغلق 62%. هذا يعني أن كلاهما ضروري لكن بدور مختلف.
-        </div>
-      </div>
-
-      <!-- ③ OVERLAP -->
-      <div class="jreport" id="jr-overlap">
-        <div style="background:var(--surface-2);border-right:3px solid var(--violet);border-radius:0 10px 10px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;color:var(--muted)">
-          كم نسبة العملاء الذين مروا بأكثر من قناة واحدة قبل الشراء؟
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px">
-          <div style="background:var(--surface-2);border:2px solid var(--violet);border-radius:18px;padding:20px;text-align:center">
-            <div style="font-size:13px;color:var(--muted);margin-bottom:8px">قناة واحدة فقط</div>
-            <div style="font-size:36px;font-weight:800;color:var(--text)">300</div>
-            <div style="font-size:20px;font-weight:800;color:var(--violet);margin:4px 0">60%</div>
-            <div style="height:8px;background:var(--surface-3);border-radius:999px;overflow:hidden;margin-top:10px"><span style="display:block;height:100%;width:60%;border-radius:999px;background:linear-gradient(135deg,var(--violet),#9b6de8)"></span></div>
-          </div>
-          <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:20px;text-align:center">
-            <div style="font-size:13px;color:var(--muted);margin-bottom:8px">قناتان</div>
-            <div style="font-size:36px;font-weight:800;color:var(--text)">150</div>
-            <div style="font-size:20px;font-weight:800;color:var(--violet);margin:4px 0">30%</div>
-            <div style="height:8px;background:var(--surface-3);border-radius:999px;overflow:hidden;margin-top:10px"><span style="display:block;height:100%;width:30%;border-radius:999px;background:linear-gradient(135deg,var(--violet),#9b6de8)"></span></div>
-          </div>
-          <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:20px;text-align:center">
-            <div style="font-size:13px;color:var(--muted);margin-bottom:8px">3 قنوات أو أكثر</div>
-            <div style="font-size:36px;font-weight:800;color:var(--text)">50</div>
-            <div style="font-size:20px;font-weight:800;color:var(--violet);margin:4px 0">10%</div>
-            <div style="height:8px;background:var(--surface-3);border-radius:999px;overflow:hidden;margin-top:10px"><span style="display:block;height:100%;width:10%;border-radius:999px;background:linear-gradient(135deg,var(--violet),#9b6de8)"></span></div>
-          </div>
-        </div>
-        <div style="padding:14px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line);font-size:13px;color:var(--muted);line-height:1.7">
-          <strong style="color:var(--text)">القرار:</strong> 40% من المشترين رأوا أكثر من قناة قبل الشراء — لا تُوقف أي قناة اعتماداً على آخر نقرة فقط، لأن دورها قد يكون في بداية الرحلة.
-        </div>
-      </div>
-
-      <!-- ④ ASSIST -->
-      <div class="jreport" id="jr-assist">
-        <div style="background:var(--surface-2);border-right:3px solid var(--violet);border-radius:0 10px 10px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;color:var(--muted)">
-          كم طلباً ساهمت فيه كل منصة — حتى لو لم تكن آخر قناة قبل الشراء؟
-        </div>
-        <div style="border:1px solid var(--line);border-radius:16px;overflow:hidden">
-          <div style="display:grid;grid-template-columns:120px 1fr 80px 100px;gap:12px;padding:10px 14px;background:var(--surface-2);border-bottom:2px solid var(--line);font-size:12px;color:var(--muted);font-weight:700">
-            <div>المنصة</div><div>نسبة المساهمة</div><div>طلبات</div><div>الدور الرئيسي</div>
-          </div>
-          <div style="display:grid;grid-template-columns:120px 1fr 80px 100px;gap:12px;padding:13px 14px;border-bottom:1px solid var(--line);align-items:center">
-            <div><span class="pnode google">Google</span></div>
-            <div><div style="height:10px;background:var(--surface-2);border-radius:999px;overflow:hidden"><span style="display:block;height:100%;width:60%;border-radius:999px;background:linear-gradient(135deg,var(--brand),var(--brand2))"></span></div><div style="font-size:11px;color:var(--muted);margin-top:3px">60%</div></div>
-            <div style="font-weight:700">300</div>
-            <div style="font-size:12px;color:var(--brand);font-weight:700">مُغلق + مساعد</div>
-          </div>
-          <div style="display:grid;grid-template-columns:120px 1fr 80px 100px;gap:12px;padding:13px 14px;border-bottom:1px solid var(--line);align-items:center">
-            <div><span class="pnode tiktok">تيك توك</span></div>
-            <div><div style="height:10px;background:var(--surface-2);border-radius:999px;overflow:hidden"><span style="display:block;height:100%;width:40%;border-radius:999px;background:linear-gradient(135deg,var(--violet),#9b6de8)"></span></div><div style="font-size:11px;color:var(--muted);margin-top:3px">40%</div></div>
-            <div style="font-weight:700">200</div>
-            <div style="font-size:12px;color:var(--violet);font-weight:700">جالب رئيسي</div>
-          </div>
-          <div style="display:grid;grid-template-columns:120px 1fr 80px 100px;gap:12px;padding:13px 14px;border-bottom:1px solid var(--line);align-items:center">
-            <div><span class="pnode snap">سناب</span></div>
-            <div><div style="height:10px;background:var(--surface-2);border-radius:999px;overflow:hidden"><span style="display:block;height:100%;width:30%;border-radius:999px;background:linear-gradient(135deg,var(--gold),#d4a33e)"></span></div><div style="font-size:11px;color:var(--muted);margin-top:3px">30%</div></div>
-            <div style="font-weight:700">150</div>
-            <div style="font-size:12px;color:var(--gold);font-weight:700">مساعد</div>
-          </div>
-          <div style="display:grid;grid-template-columns:120px 1fr 80px 100px;gap:12px;padding:13px 14px;border-bottom:1px solid var(--line);align-items:center">
-            <div><span class="pnode meta">Meta</span></div>
-            <div><div style="height:10px;background:var(--surface-2);border-radius:999px;overflow:hidden"><span style="display:block;height:100%;width:24%;border-radius:999px;background:linear-gradient(135deg,var(--violet),#7c6de8)"></span></div><div style="font-size:11px;color:var(--muted);margin-top:3px">24%</div></div>
-            <div style="font-weight:700">120</div>
-            <div style="font-size:12px;color:var(--muted);font-weight:700">مساعد</div>
-          </div>
-          <div style="display:grid;grid-template-columns:120px 1fr 80px 100px;gap:12px;padding:13px 14px;align-items:center">
-            <div><span class="pnode direct">مباشر</span></div>
-            <div><div style="height:10px;background:var(--surface-2);border-radius:999px;overflow:hidden"><span style="display:block;height:100%;width:16%;border-radius:999px;background:var(--muted)"></span></div><div style="font-size:11px;color:var(--muted);margin-top:3px">16%</div></div>
-            <div style="font-weight:700">80</div>
-            <div style="font-size:12px;color:var(--muted);font-weight:700">مُغلق</div>
-          </div>
-        </div>
-        <div style="padding:14px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line);font-size:13px;color:var(--muted);line-height:1.7;margin-top:12px">
-          <strong style="color:var(--text)">تيك توك وسناب:</strong> رغم أن مبيعاتهما المباشرة أقل، إلا أنهما يساهمان في 40% و30% من الطلبات كقنوات جذب — خفضهما الكلي قد يؤثر سلباً.
-        </div>
-      </div>
-
-      <!-- ⑤ TIMING -->
-      <div class="jreport" id="jr-timing">
-        <div style="background:var(--surface-2);border-right:3px solid var(--violet);border-radius:0 10px 10px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;color:var(--muted)">
-          كم وقتاً يستغرق العميل من أول إعلان رآه حتى أكمل الشراء؟
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
-          <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:18px;text-align:center">
-            <div style="font-size:12px;color:var(--muted);margin-bottom:8px">من أول نقرة لآخر نقرة</div>
-            <div style="font-size:32px;font-weight:800;color:var(--violet)">1.8 س</div>
-            <div style="font-size:12px;color:var(--muted);margin-top:4px">للعملاء متعددي القنوات</div>
-          </div>
-          <div style="background:linear-gradient(135deg,var(--violet),#9b6de8);border-radius:18px;padding:18px;text-align:center;color:#fff">
-            <div style="font-size:12px;opacity:.85;margin-bottom:8px">من أول نقرة للشراء</div>
-            <div style="font-size:32px;font-weight:800">3.2 س</div>
-            <div style="font-size:12px;opacity:.85;margin-top:4px">متوسط جميع الطلبات</div>
-          </div>
-          <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:18px;text-align:center">
-            <div style="font-size:12px;color:var(--muted);margin-bottom:8px">من آخر نقرة للشراء</div>
-            <div style="font-size:32px;font-weight:800;color:var(--brand)">8 د</div>
-            <div style="font-size:12px;color:var(--muted);margin-top:4px">القرار سريع عند الإغلاق</div>
-          </div>
-        </div>
-
-        <!-- Timeline -->
-        <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:12px">
-          <div style="font-size:13px;font-weight:700;margin-bottom:16px;color:var(--muted)">رحلة نموذجية</div>
-          <div style="display:flex;align-items:center">
-            <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
-              <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--violet),#9b6de8);display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:800;text-align:center">تيك<br>توك</div>
-              <div style="font-size:11px;color:var(--muted)">أول نقرة</div>
-            </div>
-            <div style="flex:1;height:2px;background:var(--line);position:relative;margin-bottom:18px">
-              <div style="position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--violet);font-weight:700;white-space:nowrap;background:var(--surface-2);padding:2px 8px;border-radius:6px">1.8 ساعة</div>
-            </div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
-              <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:800">Google</div>
-              <div style="font-size:11px;color:var(--muted)">آخر نقرة</div>
-            </div>
-            <div style="flex:1;height:2px;background:var(--line);position:relative;margin-bottom:18px">
-              <div style="position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--brand);font-weight:700;white-space:nowrap;background:var(--surface-2);padding:2px 8px;border-radius:6px">8 دقائق</div>
-            </div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
-              <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--pink),#b03060);display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;font-weight:800">✓</div>
-              <div style="font-size:11px;color:var(--muted)">الشراء</div>
-            </div>
-          </div>
-        </div>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <div style="padding:14px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line)">
-            <strong style="display:block;margin-bottom:5px;font-size:14px">العميل لا يشتري فوراً</strong>
-            <p style="margin:0;font-size:13px;color:var(--muted);line-height:1.7">3.2 ساعة في المتوسط — الإعلانات التي تبدو بلا أثر فوري قد تكون تزرع قرار الشراء.</p>
-          </div>
-          <div style="padding:14px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line)">
-            <strong style="display:block;margin-bottom:5px;font-size:14px">الحسم يكون عند الدفع</strong>
-            <p style="margin:0;font-size:13px;color:var(--muted);line-height:1.7">8 دقائق من آخر نقرة للشراء — صفحة المنتج وعملية الدفع هي نقطة الحسم الحقيقية.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ━━━ TERMS ━━━ -->
-    <section class="section" id="terms">
-      <div class="sec-head"><h3>المصطلحات</h3><p>شرح مبسط</p></div>
-      <div class="terms-grid">
-        <div class="term"><strong>معدل التحويل</strong><p>نسبة الزوار الذين أكملوا الشراء من إجمالي الزوار.</p></div>
-        <div class="term"><strong>عائد الإنفاق الإعلاني</strong><p>كم ريال مبيعات مقابل كل ريال إعلاني.</p></div>
-        <div class="term"><strong>تكلفة الطلب</strong><p>كم يكلف الإعلان حتى يصل لطلب واحد.</p></div>
-        <div class="term"><strong>القناة الجالبة</strong><p>أول قناة دخل منها العميل في رحلته.</p></div>
-        <div class="term"><strong>القناة المُغلِقة</strong><p>آخر قناة قبل إتمام الشراء.</p></div>
-        <div class="term"><strong>القناة المساعدة</strong><p>أي قناة ظهرت في الرحلة لكنها لم تكن آخر نقطة.</p></div>
-      </div>
-    </section>
-
-    <div class="footer">آخر تحديث: 10 أبريل 2026</div>
-
+    <div style="padding:16px 0 4px;font-size:12px;color:#7d8590">آخر تحديث: 10 أبريل 2026 — معصرة الجنوب</div>
   </main>
 </div>
 
 <script>
-// theme toggle
-function toggleTheme(){
-  const r=document.documentElement;
-  const next=r.getAttribute('data-theme')==='dark'?'light':'dark';
-  r.setAttribute('data-theme',next);
-  localStorage.setItem('theme',next);
-}
-document.getElementById('themeToggle').addEventListener('click',toggleTheme);
-const m=document.getElementById('themeToggleMobile');
-if(m) m.addEventListener('click',toggleTheme);
-
 // report tabs
 document.querySelectorAll('.tab').forEach(btn=>{
   btn.addEventListener('click',()=>{
@@ -1043,7 +700,6 @@ document.querySelectorAll('.tab').forEach(btn=>{
     document.getElementById(btn.dataset.report).classList.add('active');
   });
 });
-
 // journey tabs
 document.querySelectorAll('.jtab').forEach(btn=>{
   btn.addEventListener('click',()=>{
@@ -1053,20 +709,17 @@ document.querySelectorAll('.jtab').forEach(btn=>{
     document.getElementById('jr-'+btn.dataset.jr).classList.add('active');
   });
 });
-
-// nav highlight on scroll
-const sections=document.querySelectorAll('section[id],div[id]');
-const navLinks=document.querySelectorAll('.nav a');
+// nav highlight
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
-      navLinks.forEach(a=>{
+      document.querySelectorAll('.nav a').forEach(a=>{
         a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id);
       });
     }
   });
 },{threshold:.3});
-sections.forEach(s=>obs.observe(s));
+document.querySelectorAll('section[id]').forEach(s=>obs.observe(s));
 </script>
 </body>
 </html>
