@@ -1,615 +1,1061 @@
 <!doctype html>
-
 <html lang="ar" dir="rtl" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>تقرير الأداء — معصرة الجنوب</title>
+<title>لوحة أداء معصرة الجنوب</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  --p0:#ffffff;--p1:#f9f7f3;--p2:#f2efe8;--p3:#e9e4d9;--p4:#ddd8cc;
-  --rule:rgba(100,90,72,.13);--rule2:rgba(100,90,72,.07);
-  --i0:#111009;--i1:#2c2820;--i2:#524d44;--i3:#847d73;--i4:#b0a99e;
-  --g0:#064e48;--g1:#0a6860;--g2:#0e5468;--g3:#0d8880;--g-rgb:10,104,96;
-  --a0:#8a6200;--a1:#b07c10;--a2:#d4a030;--a3:#f0c870;--a-rgb:176,124,16;
-  --up:#0a6048;--dn:#8a1828;--up-bg:#e8f5ee;--dn-bg:#fce8ec;--nt-bg:#f0ede6;
-  --e1:0 1px 3px rgba(10,8,4,.05),0 4px 12px rgba(10,8,4,.04);
-  --e2:0 2px 8px rgba(10,8,4,.06),0 10px 28px rgba(10,8,4,.05);
-  --e3:0 4px 16px rgba(10,8,4,.08),0 20px 50px rgba(10,8,4,.06);
-  --e4:0 8px 32px rgba(10,8,4,.10),0 32px 80px rgba(10,8,4,.08);
-  --rad:18px;--rad-sm:12px;--rad-xs:8px;
-  --ease:cubic-bezier(.22,.8,.28,1);
+:root{
+  --bg:#f6f4ee;--surface:#fcfbf8;--surface-2:#f0ece3;--surface-3:#e8e3d8;--line:#ddd8cd;
+  --text:#201d18;--muted:#6f6a61;--muted2:#9e9890;
+  --brand:#0a6860;--brand2:#165e75;--brand-soft:#dceeed;
+  --ok:#e8f6ee;--ok-line:#bfdcc8;--warn:#fff4e7;--warn-line:#f0d0ac;
+  --bad:#faeded;--bad-line:#e6c1c1;
+  --gold:#c58b1c;--violet:#6c4fd6;--pink:#d04a6e;--orange:#c96820;
+  --shadow:0 12px 36px rgba(28,25,20,.08);--shadow-sm:0 4px 16px rgba(28,25,20,.05)
 }
-[data-theme="dark"] {
-  --p0:#0e0d0b;--p1:#161412;--p2:#1d1b18;--p3:#252320;--p4:#2e2b27;
-  --rule:rgba(200,190,168,.10);--rule2:rgba(200,190,168,.05);
-  --i0:#ede8dc;--i1:#ccc5b4;--i2:#9c9488;--i3:#6a635a;--i4:#3e3a34;
-  --g0:#1e8880;--g1:#28a098;--g2:#207890;--g3:#50c8c0;--g-rgb:40,160,152;
-  --a0:#c89028;--a1:#e0b040;--a2:#f0c860;--a3:#f8dc98;--a-rgb:224,176,64;
-  --up:#28a870;--dn:#e84868;--up-bg:#0e2a1e;--dn-bg:#2a1020;--nt-bg:#201e1a;
-  --e1:0 1px 3px rgba(0,0,0,.2),0 4px 12px rgba(0,0,0,.18);
-  --e2:0 2px 8px rgba(0,0,0,.24),0 10px 28px rgba(0,0,0,.20);
-  --e3:0 4px 16px rgba(0,0,0,.30),0 20px 50px rgba(0,0,0,.24);
-  --e4:0 8px 32px rgba(0,0,0,.38),0 32px 80px rgba(0,0,0,.30);
+[data-theme="dark"]{
+  --bg:#141311;--surface:#1c1a17;--surface-2:#232019;--surface-3:#2a2720;--line:#35312a;
+  --text:#ece7de;--muted:#a09890;--muted2:#6b6560;
+  --brand:#3d9490;--brand2:#3a7a96;--brand-soft:#1c2f2e;
+  --ok:#1b2d22;--ok-line:#2e4a38;--warn:#2e2318;--warn-line:#56412d;
+  --bad:#2e1f1f;--bad-line:#563636;
+  --gold:#c9962e;--violet:#8b77e8;--pink:#e06a8a;--orange:#d47e3c;
+  --shadow:0 14px 40px rgba(0,0,0,.32);--shadow-sm:0 6px 20px rgba(0,0,0,.2)
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{font-family:'Tajawal',sans-serif;background:var(--p1);color:var(--i0);line-height:1.55;overflow-x:hidden}
-a{text-decoration:none;color:inherit}button{font:inherit;border:none;cursor:pointer;background:none}ul{list-style:none}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Tajawal',Arial,sans-serif;font-size:15px;line-height:1.6}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
 
-/* TOPBAR */
-.bar{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(–p1) 90%,transparent);backdrop-filter:blur(20px) saturate(1.6);border-bottom:1px solid var(–rule)}
-.bar-in{max-width:1380px;margin:auto;padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:13px}
-.mark{width:40px;height:40px;flex:0 0 40px;border-radius:12px;background:linear-gradient(140deg,var(–g0),var(–g2));display:grid;place-items:center;color:#fff;box-shadow:var(–e2),0 0 0 1px rgba(255,255,255,.06) inset;position:relative;overflow:hidden}
-.mark::after{content:’’;position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.12) 0%,transparent 60%)}
-.mark svg{width:20px;height:20px;position:relative;z-index:1}
-.brand-txt h1{font-size:15px;font-weight:900;letter-spacing:-.2px}
-.brand-txt p{font-size:11px;color:var(–i3);margin-top:1px}
-.bar-end{display:flex;align-items:center;gap:8px}
-.pill{padding:5px 12px;border-radius:999px;background:var(–p2);border:1px solid var(–rule);font-size:11px;font-weight:700;color:var(–i3)}
-.mode-btn{padding:7px 14px;border-radius:10px;background:var(–p2);border:1px solid var(–rule);font-size:11px;font-weight:800;color:var(–i1);transition:background .18s,transform .18s var(–ease)}
-.mode-btn:hover{background:var(–p3);transform:translateY(-1px)}
+/* ━━━ LAYOUT ━━━ */
+.shell{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;overflow-y:auto;padding:20px 16px;border-left:1px solid var(--line);background:var(--surface);display:flex;flex-direction:column;gap:14px}
+.main{padding:22px;overflow:hidden}
 
-/* LAYOUT */
-.page{max-width:1380px;margin:auto;padding:28px 28px 72px;display:flex;flex-direction:column;gap:18px;width:100%}
-.s-label{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:14px}
-.s-title{font-size:17px;font-weight:900;letter-spacing:-.3px}
-.s-note{font-size:11px;color:var(–i3);letter-spacing:.2px}
+/* ━━━ SIDEBAR ━━━ */
+.brand{display:flex;gap:12px;align-items:center;padding-bottom:4px}
+.logo{width:46px;height:46px;border-radius:16px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;color:#fff;box-shadow:var(--shadow-sm);flex-shrink:0}
+.logo svg{width:26px;height:26px}
+.brand-text h1{margin:0;font-size:18px;font-weight:800}
+.brand-text p{margin:0;color:var(--muted);font-size:12px}
 
-/* HERO */
-.hero{border-radius:var(–rad);overflow:hidden;display:grid;grid-template-columns:2fr 1fr;box-shadow:var(–e4)}
-.h-story{grid-column:1;padding:40px 44px;background:radial-gradient(ellipse 70% 90% at 110% 50%,rgba(14,84,104,.45),transparent),linear-gradient(150deg,#053c36 0%,#065048 45%,#093d58 100%);color:#fff;position:relative;overflow:hidden}
-.h-story::before{content:’’;position:absolute;width:600px;height:600px;border-radius:50%;border:1px solid rgba(255,255,255,.04);bottom:-320px;right:-120px;pointer-events:none}
-.h-story::after{content:’’;position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid rgba(255,255,255,.05);top:-120px;right:300px;pointer-events:none}
-.h-inner{position:relative;z-index:1}
-.h-tag{display:inline-flex;align-items:center;gap:8px;padding:4px 11px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);font-size:10px;font-weight:800;letter-spacing:.7px;color:rgba(255,255,255,.65);text-transform:uppercase;margin-bottom:20px}
-.h-pulse{width:6px;height:6px;border-radius:50%;background:var(–g3);flex:0 0 6px;box-shadow:0 0 0 0 rgba(var(–g-rgb),.5);animation:hbeat 2.2s ease-in-out infinite}
-@keyframes hbeat{0%,100%{box-shadow:0 0 0 0 rgba(80,200,192,.5)}50%{box-shadow:0 0 0 7px rgba(80,200,192,0)}}
-.h-lbl{font-size:12px;color:rgba(255,255,255,.5);font-weight:500;margin-bottom:6px}
-.h-big{font-size:56px;font-weight:900;line-height:1;letter-spacing:-2.5px;margin-bottom:22px;background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,.65));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.h-desc{font-size:13px;line-height:2;color:rgba(255,255,255,.65);max-width:540px}
-.h-rule{margin:20px 0 0;width:100px;height:1px;background:linear-gradient(90deg,rgba(var(–a-rgb),.7),transparent)}
-.h-facts{display:flex;flex-direction:column;background:linear-gradient(180deg,#042a26,#053040);border-right:1px solid rgba(255,255,255,.04)}
-.h-fact{flex:1;padding:22px 24px;border-bottom:1px solid rgba(255,255,255,.05);transition:background .2s;cursor:default}
-.h-fact:last-child{border-bottom:none}
-.h-fact:hover{background:rgba(255,255,255,.03)}
-.hf-k{font-size:9px;font-weight:800;letter-spacing:.7px;color:rgba(255,255,255,.38);text-transform:uppercase;margin-bottom:6px}
-.hf-v{font-size:14px;font-weight:800;color:rgba(255,255,255,.88)}
-.hf-bar{margin-top:9px;height:2px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden}
-.hf-bar span{display:block;height:100%;border-radius:2px}
-.c-teal{background:linear-gradient(90deg,var(–g3),rgba(var(–g-rgb),.4))}
-.c-gold{background:linear-gradient(90deg,var(–a2),rgba(var(–a-rgb),.4))}
-.c-muted{background:linear-gradient(90deg,rgba(255,255,255,.3),transparent)}
+.side-section{background:var(--surface-2);border:1px solid var(--line);border-radius:16px;padding:14px}
+.side-label{font-size:11px;font-weight:800;color:var(--muted2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+.nav{display:flex;flex-direction:column;gap:4px}
+.nav a{padding:10px 12px;border-radius:11px;font-weight:700;font-size:14px;color:var(--muted);transition:all .15s}
+.nav a:hover{background:var(--surface-3);color:var(--text)}
+.nav a.active{background:var(--brand-soft);color:var(--brand)}
+.side-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.side-list li{font-size:13px;padding:8px 10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;line-height:1.5}
 
-/* KPI */
-.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.kpi{padding:20px 20px 18px;border-radius:var(–rad-sm);background:var(–p0);border:1px solid var(–rule);box-shadow:var(–e1);position:relative;overflow:hidden;transition:transform .2s var(–ease),box-shadow .2s var(–ease);cursor:default}
-.kpi:hover{transform:translateY(-3px);box-shadow:var(–e3)}
-.kpi::before{content:’’;position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(–g1),var(–g2))}
-.kpi::after{content:’’;position:absolute;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,rgba(var(–g-rgb),.06),transparent 68%);bottom:-28px;left:-20px;pointer-events:none}
-.kpi-k{font-size:10px;font-weight:800;color:var(–i3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
-.kpi-v{font-size:30px;font-weight:900;line-height:1;letter-spacing:-1.2px;position:relative;z-index:1}
-.kpi-s{margin-top:10px;font-size:11px;font-weight:700;color:var(–g1);position:relative;z-index:1}
+/* ━━━ TOPBAR (mobile) ━━━ */
+.mobile-bar{display:none;align-items:center;justify-content:space-between;margin-bottom:16px}
 
-/* SURFACE */
-.surface{background:var(–p0);border:1px solid var(–rule);border-radius:var(–rad);box-shadow:var(–e1);padding:22px 24px}
+/* ━━━ COMMON ━━━ */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow-sm)}
+.section{margin-top:20px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}
+.sec-head h3{margin:0;font-size:22px;font-weight:800}
+.sec-head p{margin:0;font-size:13px;color:var(--muted)}
+.grid{display:grid;gap:14px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.muted{color:var(--muted)}
 
-/* REPORTS */
-.tabs{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:var(–p2);border:1px solid var(–rule);margin-bottom:20px}
-.tab{padding:8px 22px;border-radius:999px;font-size:12px;font-weight:800;color:var(–i2);transition:all .2s var(–ease)}
-.tab:hover:not(.active){color:var(–i0);background:var(–p3)}
-.tab.active{background:linear-gradient(135deg,var(–g1),var(–g2));color:#fff;box-shadow:0 3px 12px rgba(var(–g-rgb),.22)}
+/* ━━━ HERO ━━━ */
+.hero{background:linear-gradient(135deg,var(--brand) 0%,var(--brand2) 100%);color:#fff;border-radius:26px;padding:26px;display:grid;grid-template-columns:1.2fr .8fr;gap:18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;left:-60px;bottom:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.07)}
+.hero::before{content:'';position:absolute;right:200px;top:-80px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.05)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);font-size:12px;font-weight:700}
+.hero h2{margin:10px 0 8px;font-size:32px;font-weight:800;line-height:1.2}
+.hero p{margin:0;line-height:1.85;color:rgba(255,255,255,.9);font-size:14px}
+.hero-side{padding:16px;border-radius:18px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:#fff;backdrop-filter:blur(8px)}
+.hero-side h3{margin:0 0 10px;font-size:18px}
+.hero-side ul{margin:0;padding-right:18px;padding-left:0}
+.hero-side li{margin:7px 0;font-size:14px;line-height:1.7}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.btn{padding:11px 16px;border-radius:14px;font-weight:700;font-size:14px;cursor:pointer}
+.btn-white{background:#fff;color:#111}
+.btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)}
+
+/* ━━━ SUMMARY ━━━ */
+.summary-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
+.summary-card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow-sm)}
+.summary-card h4{margin:0 0 12px;font-size:20px;font-weight:800}
+.s-list{list-style:none;margin:0;padding:0}
+.s-list li{padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.6}
+.s-list li:last-child{border-bottom:none}
+.action-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px}
+.action-pill{padding:13px;border-radius:16px;background:var(--surface-2);border:1px solid var(--line);text-align:center}
+.action-pill strong{display:block;margin-bottom:4px;font-size:13px}
+.action-pill span{font-size:13px;color:var(--muted)}
+
+/* ━━━ METRICS ━━━ */
+.metric{background:linear-gradient(160deg,var(--surface),var(--surface-2));border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow-sm)}
+.metric .k{font-size:13px;color:var(--muted);margin-bottom:8px;font-weight:500}
+.metric .v{font-size:28px;font-weight:800}
+.metric .s{margin-top:8px;font-size:13px;font-weight:700;color:var(--brand)}
+
+/* ━━━ REPORTS ━━━ */
+.report-shell{padding:20px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tab{padding:10px 16px;border-radius:999px;font-weight:700;font-size:14px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted);transition:all .15s}
+.tab:hover{color:var(--text)}
+.tab.active{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border-color:transparent}
 .report{display:none}
-.report.active{display:block;animation:up .24s var(–ease)}
-@keyframes up{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-.rng-row{display:flex;gap:6px;margin-bottom:16px}
-.rng{padding:4px 11px;border-radius:999px;font-size:10px;font-weight:700;color:var(–i3);background:var(–p2);border:1px solid var(–rule);letter-spacing:.2px}
-.rg{display:grid;grid-template-columns:1.1fr .9fr;gap:12px}
-.rg-l,.rg-r{padding:16px;border-radius:var(–rad-sm);background:var(–p1);border:1px solid var(–rule)}
-.m4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
-.mn{padding:11px 12px;border-radius:var(–rad-xs);background:var(–p2);border:1px solid var(–rule);transition:transform .18s var(–ease)}
-.mn:hover{transform:translateY(-2px)}
-.mn-t{font-size:10px;font-weight:700;color:var(–i3);letter-spacing:.3px}
-.mn-n{font-size:19px;font-weight:900;margin-top:4px;line-height:1;letter-spacing:-.5px}
-.mn-x{font-size:10px;color:var(–g1);margin-top:4px;font-weight:700}
-.tbl-wrap{overflow-x:auto;border-radius:var(–rad-xs)}.tbl{width:100%;border-collapse:collapse;font-size:12px;min-width:380px}
-.tbl thead tr{background:var(–p2)}
-.tbl th{padding:9px 10px;text-align:right;font-size:9px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(–i3);border-bottom:1px solid var(–rule)}
-.tbl td{padding:10px 10px;text-align:right;border-bottom:1px solid var(–rule2);color:var(–i1);vertical-align:middle}
+.report.active{display:block}
+.r-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.r-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);font-size:12px;font-weight:700;color:var(--muted)}
+.report-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
+.r-panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
+.r-panel h4{margin:0 0 12px;font-size:17px;font-weight:800}
+
+/* mini indicators */
+.mini-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.mini{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:12px}
+.mini .t{font-size:12px;color:var(--muted)}
+.mini .n{font-size:22px;font-weight:800;margin-top:6px}
+.mini .x{font-size:12px;color:var(--brand);margin-top:4px;font-weight:600}
+
+/* table */
+.tbl{width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.tbl th,.tbl td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:right;font-size:14px;vertical-align:top}
+.tbl th{background:var(--surface-2);color:var(--muted);font-weight:700}
 .tbl tr:last-child td{border-bottom:none}
-.tbl tbody tr{transition:background .12s}
-.tbl tbody tr:hover{background:var(–p2)}
-.up{color:var(–up);font-weight:800}.down{color:var(–dn);font-weight:800}.flat{color:var(–i3);font-weight:600}
-.d-stack{display:flex;flex-direction:column;gap:8px}
-.d-box{padding:12px 15px;border-radius:var(–rad-xs);background:var(–p2);border:1px solid var(–rule);border-right:2px solid var(–g1);transition:all .18s var(–ease)}
-.d-box:hover{background:var(–p3);transform:translateX(-2px)}
-.d-k{font-size:9px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;color:var(–g1);margin-bottom:3px}
-.d-v{font-size:12px;color:var(–i2);line-height:1.7}
-.mch{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-.mch-card{padding:16px;border-radius:var(–rad-sm);background:var(–p1);border:1px solid var(–rule)}
-.mch-t{font-size:12px;font-weight:800;color:var(–i2);margin-bottom:14px}
-.mch-note{display:flex;justify-content:space-between;font-size:10px;color:var(–i3);margin-top:8px}
-.brs{display:flex;flex-direction:column;gap:10px}
-.br-row{display:grid;grid-template-columns:60px 1fr 88px;gap:8px;align-items:center;font-size:11px;color:var(–i2);font-weight:600}
-.br-t{height:8px;background:var(–p3);border-radius:999px;overflow:hidden}
-.br-t span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(–g1),var(–g2))}
-.mch-leg{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;font-size:10px;color:var(–i3)}
-.mch-leg span{display:flex;align-items:center;gap:5px}
-.dot{width:7px;height:7px;border-radius:50%;flex:0 0 7px;display:inline-block}
 
-/* VISUALS */
-.vis-row{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:12px}
-.vcard{padding:20px;border-radius:var(–rad-sm);background:var(–p0);border:1px solid var(–rule);box-shadow:var(–e1);transition:transform .2s var(–ease),box-shadow .2s var(–ease)}
-.vcard:hover{transform:translateY(-3px);box-shadow:var(–e3)}
-.vc-t{font-size:10px;font-weight:800;color:var(–i3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:16px}
-.donut-row{display:flex;align-items:center;gap:18px}
-.donut{width:108px;height:108px;border-radius:50%;flex:0 0 108px;position:relative;box-shadow:0 0 0 1px var(–rule)}
-.donut::after{content:attr(data-c);position:absolute;inset:14px;border-radius:50%;background:var(–p0);display:grid;place-items:center;text-align:center;font-weight:900;font-size:12px;line-height:1.35;padding:6px}
-.leg{display:flex;flex-direction:column;gap:8px}
-.leg-r{display:flex;align-items:center;gap:8px;font-size:11px;color:var(–i2);font-weight:600}
-.funnel{display:flex;flex-direction:column;gap:7px}
-.f-s{border-radius:9px;padding:10px 14px;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:space-between;box-shadow:0 3px 10px rgba(0,0,0,.15);transition:transform .15s var(–ease)}
-.f-s:hover{transform:translateX(-3px)}
-.f-pct{font-size:13px;font-weight:900}
-.f1{width:100%;background:linear-gradient(135deg,var(–g0),var(–g1))}
-.f2{width:86%;background:linear-gradient(135deg,#166e68,#14607a)}
-.f3{width:68%;background:linear-gradient(135deg,#1850a0,#4840b8)}
-.f4{width:52%;background:linear-gradient(135deg,#8a1830,#bc2848)}
-.spark{height:80px;display:flex;align-items:flex-end;gap:5px;padding:0 2px}
-.sp{flex:1;min-width:10px;border-radius:4px 4px 2px 2px;background:linear-gradient(180deg,var(–g1),var(–g2));position:relative;cursor:default;transition:opacity .15s,transform .15s var(–ease)}
-.sp:hover{opacity:.7;transform:scaleY(1.06);transform-origin:bottom}
-.sp em{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-style:normal;font-size:9px;color:var(–i3);white-space:nowrap}
-.sp-meta{display:flex;justify-content:space-between;margin-top:23px;font-size:10px;color:var(–i3)}
+/* decision boxes */
+.kbox{padding:12px 14px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line);margin-bottom:10px}
+.kbox:last-child{margin-bottom:0}
+.kbox strong{display:block;margin-bottom:5px;font-size:14px}
+.kbox p{margin:0;font-size:13px;color:var(--muted);line-height:1.6}
 
-/* 2-COL */
-.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+/* monthly charts */
+.mo-charts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.mo-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
+.mo-card h4{margin:0 0 12px;font-size:16px;font-weight:800}
+.mbar-list{display:grid;gap:11px}
+.mbar-row{display:grid;grid-template-columns:80px 1fr 86px;gap:10px;align-items:center;font-size:13px}
+.mtrack{height:11px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.mtrack span{display:block;height:100%;border-radius:999px;background:linear-gradient(135deg,var(--brand),var(--brand2))}
+.line-svg{width:100%;display:block}
+.line-cap{display:flex;justify-content:space-between;margin-top:6px;font-size:12px;color:var(--muted)}
 
-/* CHANNELS */
-.ch-list{display:flex;flex-direction:column;gap:13px}
-.ch-row{display:grid;grid-template-columns:148px 1fr 58px;gap:10px;align-items:center}
-.ch-nm{font-size:12px;font-weight:700;color:var(–i1)}
-.ch-trk{height:8px;background:var(–p3);border-radius:999px;overflow:hidden}
-.ch-trk span{display:block;height:100%;border-radius:999px}
-.ch-val{font-size:14px;font-weight:900;text-align:left}
-.ch-foot{margin-top:14px;font-size:10px;color:var(–i3);padding-top:12px;border-top:1px solid var(–rule)}
+/* ━━━ VISUALS ━━━ */
+.vis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.vis-card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow-sm)}
+.vis-card h4{margin:0 0 12px;font-size:17px;font-weight:800}
 
-/* DECISIONS */
-.dec-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.dec{padding:18px 20px;border-radius:var(–rad-sm);background:var(–p1);border:1px solid var(–rule);transition:transform .2s var(–ease),box-shadow .2s var(–ease);position:relative;overflow:hidden}
-.dec:hover{transform:translateY(-3px);box-shadow:var(–e2)}
-.dec::after{content:’’;position:absolute;bottom:0;left:0;width:64px;height:64px;border-radius:50%;background:radial-gradient(circle,rgba(var(–g-rgb),.07),transparent 68%);pointer-events:none}
-.dec h4{font-size:13px;font-weight:900;margin-bottom:5px;letter-spacing:-.1px}
-.dec p{font-size:11px;color:var(–i3);line-height:1.8;margin-bottom:11px}
-.badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.1px}
-.b-up{background:var(–up-bg);color:var(–up);border:1px solid rgba(10,96,72,.25)}
-.b-dn{background:var(–dn-bg);color:var(–dn);border:1px solid rgba(138,24,40,.25)}
-.b-nt{background:var(–nt-bg);color:var(–i2);border:1px solid var(–rule)}
+/* donut */
+.donut-wrap{display:flex;align-items:center;gap:16px}
+.donut{width:108px;height:108px;border-radius:50%;position:relative;flex-shrink:0}
+.donut::after{content:attr(data-center);position:absolute;inset:16px;border-radius:50%;background:var(--surface);display:grid;place-items:center;font-size:17px;font-weight:800;line-height:1.25;text-align:center;padding:8px}
+.legend{display:grid;gap:7px;font-size:13px}
+.legend span{display:flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 
-/* NOTES */
-.note{padding:18px 20px;border-radius:var(–rad-sm)}
-.note h4{font-size:13px;font-weight:900;margin-bottom:11px}
-.note li{font-size:12px;line-height:1.95;padding-right:15px;position:relative;color:var(–i1)}
-.note li::before{content:’—’;position:absolute;right:0;color:var(–g1);font-weight:900}
-.n-warn{background:#fdf8ec;border:1px solid #e8d898}
-.n-ok{background:#edf7f2;border:1px solid #a0d4b4}
-[data-theme=“dark”] .n-warn{background:#221e0c;border-color:#4a4010}
-[data-theme=“dark”] .n-ok{background:#0c201a;border-color:#1e4030}
+/* funnel */
+.funnel{display:grid;gap:8px}
+.fstep{padding:11px 14px;border-radius:14px;color:#fff;font-weight:700;text-align:center;font-size:14px}
+.f1{width:100%;background:linear-gradient(135deg,var(--brand),var(--brand2))}
+.f2{width:82%;background:linear-gradient(135deg,#2a8e82,#2f7490)}
+.f3{width:62%;background:linear-gradient(135deg,#4a7fc0,var(--violet))}
+.f4{width:48%;background:linear-gradient(135deg,var(--pink),#b03060)}
 
-/* ANIMATION */
-.blk{animation:blkup .36s var(–ease) both}
-.blk:nth-child(1){animation-delay:.00s}.blk:nth-child(2){animation-delay:.06s}.blk:nth-child(3){animation-delay:.11s}
-.blk:nth-child(4){animation-delay:.16s}.blk:nth-child(5){animation-delay:.21s}.blk:nth-child(6){animation-delay:.26s}
-.blk:nth-child(7){animation-delay:.30s}.blk:nth-child(8){animation-delay:.34s}
-@keyframes blkup{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+/* sparkline */
+.spark{height:90px;display:flex;align-items:flex-end;gap:7px;padding-top:10px}
+.spark span{flex:1;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,var(--brand),var(--brand2));min-width:16px;position:relative}
+.spark span em{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-style:normal;font-size:11px;color:var(--muted)}
+.spark-note{margin:28px 0 0;font-size:13px;color:var(--muted)}
 
-/* RESPONSIVE */
-/* TABLET */
-@media (max-width:1100px){
-.hero{grid-template-columns:1fr}
-.h-story{padding:32px 28px}
-.h-facts{flex-direction:row;flex-wrap:wrap;border-right:none;border-top:1px solid rgba(255,255,255,.05)}
-.h-fact{flex:1;min-width:120px;border-bottom:none;border-left:1px solid rgba(255,255,255,.05)}
-.h-big{font-size:42px}
-.kpi-row{grid-template-columns:repeat(2,1fr)}
-.rg{grid-template-columns:1fr}
-.m4{grid-template-columns:repeat(4,1fr)}
-.vis-row{grid-template-columns:1fr 1fr}
-.dec-grid{grid-template-columns:1fr 1fr}
-.two{grid-template-columns:1fr 1fr}
-.mch{grid-template-columns:1fr 1fr}
-.ch-row{grid-template-columns:120px 1fr 48px}
+/* ━━━ CHANNELS ━━━ */
+.channels-panel{padding:18px}
+.bar-list{display:grid;gap:13px}
+.bar-row{display:grid;grid-template-columns:130px 1fr 82px;gap:10px;align-items:center;font-size:14px}
+.bar{height:12px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.bar span{display:block;height:100%;border-radius:999px}
+.bar-note{margin:14px 0 0;font-size:12px;color:var(--muted)}
+
+/* ━━━ DECISIONS ━━━ */
+.decision-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.decision{background:linear-gradient(160deg,var(--surface),var(--surface-2));border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow-sm)}
+.decision h4{margin:0 0 6px;font-size:17px;font-weight:800}
+.decision p{margin:0 0 10px;font-size:13px;color:var(--muted);line-height:1.7}
+.badge{display:inline-block;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800}
+.b-up{background:#dcfce7;color:#166534}
+.b-down{background:#fee2e2;color:#991b1b}
+.b-test{background:#fef3c7;color:#92400e}
+.dlist{margin:8px 0 0;padding-right:16px;padding-left:0;font-size:13px;color:var(--muted)}
+.dlist li{margin:5px 0}
+
+/* ━━━ NOTES ━━━ */
+.notes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.note{padding:18px;border-radius:20px}
+.note h4{margin:0 0 10px;font-size:19px;font-weight:800}
+.note ul{margin:0;padding-right:18px;padding-left:0}
+.note li{margin:7px 0;font-size:14px;line-height:1.7}
+.note-warn{background:var(--warn);border:1px solid var(--warn-line)}
+.note-ok{background:var(--ok);border:1px solid var(--ok-line)}
+
+/* ━━━ JOURNEY ━━━ */
+.journey-shell{padding:20px}
+.journey-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.jtab{padding:10px 16px;border-radius:999px;font-weight:700;font-size:14px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted);cursor:pointer;transition:all .15s}
+.jtab:hover{color:var(--text)}
+.jtab.active{background:linear-gradient(135deg,var(--violet),#9b6de8);color:#fff;border-color:transparent}
+.jreport{display:none}
+.jreport.active{display:block}
+
+/* path table */
+.path-table{width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.path-table th,.path-table td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:right;font-size:14px}
+.path-table th{background:var(--surface-2);color:var(--muted);font-weight:700}
+.path-table tr:last-child td{border-bottom:none}
+.path-chain{display:inline-flex;align-items:center;gap:4px;flex-wrap:wrap}
+.pnode{background:var(--surface-3);border:1px solid var(--line);border-radius:8px;padding:3px 9px;font-size:12px;font-weight:700}
+.pnode.tiktok{background:#ffe4ed;color:#c0194c;border-color:#f4b8c8}
+.pnode.google{background:#e8f3ff;color:#1a56b0;border-color:#bfd8f8}
+.pnode.meta{background:#e8eeff;color:#3b4fd4;border-color:#bbc8f8}
+.pnode.snap{background:#fffbe6;color:#b88000;border-color:#f0dc8a}
+.pnode.direct{background:var(--surface-3);color:var(--muted)}
+.parrow{color:var(--muted);font-size:11px}
+.pbar-wrap{height:6px;background:var(--surface-2);border-radius:999px;overflow:hidden;display:inline-block;width:80px;margin-right:6px;vertical-align:middle}
+.pbar-fill{height:100%;border-radius:999px;background:linear-gradient(135deg,var(--violet),#9b6de8)}
+
+/* overlap cards */
+.overlap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.overlap-card{background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:center}
+.overlap-card .oc-num{font-size:32px;font-weight:800;margin:8px 0}
+.overlap-card .oc-label{font-size:13px;color:var(--muted)}
+.overlap-card .oc-pct{font-size:18px;font-weight:800;color:var(--violet);margin-top:4px}
+.oc-bar{height:8px;background:var(--surface-3);border-radius:999px;overflow:hidden;margin-top:10px}
+.oc-bar span{display:block;height:100%;border-radius:999px;background:linear-gradient(135deg,var(--violet),#9b6de8)}
+
+/* assist */
+.assist-row{display:grid;grid-template-columns:110px 1fr 90px 90px;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.assist-row:last-child{border-bottom:none}
+.assist-bar{height:10px;background:var(--surface-2);border-radius:999px;overflow:hidden}
+.assist-bar span{display:block;height:100%;border-radius:999px;background:linear-gradient(135deg,var(--violet),#9b6de8)}
+
+/* time cards */
+.time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.time-card{background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:center}
+.time-card .tc-val{font-size:28px;font-weight:800;margin:8px 0 4px}
+.time-card .tc-label{font-size:12px;color:var(--muted)}
+.time-card .tc-sub{font-size:12px;color:var(--violet);font-weight:700;margin-top:4px}
+
+/* timeline viz */
+.timeline{display:flex;align-items:center;gap:0;margin-top:16px;padding:16px;background:var(--surface-2);border:1px solid var(--line);border-radius:16px}
+.tl-node{display:flex;flex-direction:column;align-items:center;gap:6px}
+.tl-circle{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff}
+.tl-circle.c1{background:linear-gradient(135deg,var(--violet),#9b6de8)}
+.tl-circle.c2{background:linear-gradient(135deg,var(--brand),var(--brand2))}
+.tl-circle.c3{background:linear-gradient(135deg,var(--pink),#b03060)}
+.tl-label{font-size:12px;color:var(--muted);text-align:center;max-width:70px}
+.tl-line{flex:1;height:2px;background:var(--line);position:relative;margin-top:-26px}
+.tl-line span{position:absolute;top:-24px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--violet);font-weight:700;white-space:nowrap;background:var(--surface-2);padding:2px 6px;border-radius:6px}
+
+/* first × last table */
+.fl-table{width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.fl-table th,.fl-table td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:right;font-size:14px}
+.fl-table th{background:var(--surface-2);color:var(--muted);font-weight:700}
+.fl-table tr:last-child td{border-bottom:none}
+
+/* journey insight */
+.j-insight{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+.j-ins-box{padding:14px;border-radius:16px;background:var(--surface-2);border:1px solid var(--line)}
+.j-ins-box strong{display:block;margin-bottom:5px;font-size:14px}
+.j-ins-box p{margin:0;font-size:13px;color:var(--muted);line-height:1.6}
+
+/* ━━━ TERMS ━━━ */
+.terms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.term{background:var(--surface-2);border:1px solid var(--line);border-radius:16px;padding:14px}
+.term strong{display:block;margin-bottom:5px;font-size:14px}
+.term p{margin:0;font-size:13px;color:var(--muted);line-height:1.6}
+
+/* ━━━ FOOTER ━━━ */
+.footer{padding:18px 0 6px;font-size:12px;color:var(--muted2)}
+
+/* ━━━ RESPONSIVE ━━━ */
+@media(max-width:1100px){
+  .shell{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .mobile-bar{display:flex}
+  .hero,.summary-grid,.g4,.g3,.g2,.action-row,.vis-grid,.report-grid,.mo-charts,.decision-grid,.notes-grid,.mini-row,.overlap-grid,.time-grid,.j-insight,.terms-grid{grid-template-columns:1fr}
+  .bar-row{grid-template-columns:100px 1fr 70px}
+  .assist-row{grid-template-columns:90px 1fr 80px 80px}
+  .mbar-row{grid-template-columns:70px 1fr 80px}
+  .hero h2{font-size:26px}
+  .main{padding:16px}
 }
-/* MOBILE LARGE */
-@media (max-width:780px){
-.vis-row,.two,.dec-grid,.mch{grid-template-columns:1fr}
-.m4{grid-template-columns:repeat(2,1fr)}
-.kpi-row{grid-template-columns:repeat(2,1fr)}
-.h-facts{flex-direction:column}
-.h-fact{border-left:none;border-bottom:1px solid rgba(255,255,255,.05)}
-.tabs{width:100%;overflow-x:auto;white-space:nowrap;justify-content:flex-start}
-.tab{flex:0 0 auto}
-}
-/* MOBILE */
-@media (max-width:520px){
-.page{padding:10px 10px 40px;gap:12px}
-.bar-in{padding:0 12px;height:56px}
-.bar-end .pill{display:none}
-.brand-txt h1{font-size:14px}
-.h-story{padding:22px 18px}
-.h-big{font-size:30px;letter-spacing:-1.5px}
-.h-tag{font-size:9px}
-.h-desc{font-size:12px;line-height:1.85}
-.kpi-row{grid-template-columns:repeat(2,1fr);gap:8px}
-.kpi{padding:14px 14px 12px}
-.kpi-v{font-size:24px}
-.kpi-s{font-size:10px}
-.surface{padding:14px}
-.tabs{border-radius:14px}
-.tab{padding:7px 14px;font-size:11px}
-.m4{grid-template-columns:repeat(2,1fr);gap:6px}
-.mn{padding:10px}
-.mn-n{font-size:18px}
-.rg{gap:10px}
-.tbl th,.tbl td{padding:8px;font-size:11px}
-.s-title{font-size:15px}
-.s-note{font-size:10px}
-.ch-row{grid-template-columns:100px 1fr 44px}
-.ch-nm{font-size:11px}
-.ch-val{font-size:13px}
-.vcard{padding:14px}
-.donut{width:90px;height:90px;flex:0 0 90px}
-.donut::after{font-size:10px}
-.leg-r{font-size:10px}
-.dec{padding:14px 16px}
-.dec h4{font-size:12px}
-.dec p{font-size:11px}
-.note{padding:14px 16px}
-.note h4{font-size:12px}
-.note li{font-size:11px}
-.hf-v{font-size:12px}
-.h-fact{padding:14px 16px}
-.mch-card{padding:12px}
-.br-row{grid-template-columns:52px 1fr 78px;font-size:10px}
+@media(max-width:640px){
+  .main{padding:12px}
+  .hero{padding:18px}
+  .hero h2{font-size:22px}
+  .metric .v{font-size:24px}
+  .fl-table th,.fl-table td{padding:9px 8px;font-size:13px}
 }
 </style>
-
 </head>
 <body>
-<header class="bar">
-  <div class="bar-in">
+<div class="shell">
+
+  <!-- ━━━ SIDEBAR ━━━ -->
+  <aside class="sidebar">
     <div class="brand">
-      <div class="mark">
+      <div class="logo" aria-label="شعار معصرة الجنوب">
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M12 3c3 3 6 5.5 6 9a6 6 0 1 1-12 0c0-3.5 3-6 6-9Z" fill="currentColor"/>
-          <path d="M12 6c1.5 1.7 3.2 3.3 3.2 5.8A3.2 3.2 0 0 1 12 15a3.2 3.2 0 0 1-3.2-3.2C8.8 9.3 10.5 7.7 12 6Z" fill="rgba(255,255,255,.8)"/>
+          <path d="M12 6c1.5 1.7 3.2 3.3 3.2 5.8A3.2 3.2 0 0 1 12 15a3.2 3.2 0 0 1-3.2-3.2C8.8 9.3 10.5 7.7 12 6Z" fill="rgba(255,255,255,.85)"/>
         </svg>
       </div>
-      <div class="brand-txt"><h1>معصرة الجنوب</h1><p>تقرير أداء المتجر</p></div>
-    </div>
-    <div class="bar-end">
-      <span class="pill">10 أبريل 2026</span>
-      <button class="mode-btn" id="modeBtn">الوضع الليلي</button>
-    </div>
-  </div>
-</header>
-
-<main class="page">
-
-  <!-- HERO -->
-
-  <div class="blk">
-    <div class="hero">
-      <div class="h-story">
-        <div class="h-inner">
-          <div class="h-tag"><span class="h-pulse"></span>النتيجة الحالية</div>
-          <div class="h-lbl">أفضل قناة الآن</div>
-          <div class="h-big">Google Ads</div>
-          <p class="h-desc">رفع Google Search لمنتج 1 لتر، رفع إعادة الاستهداف، خفض سناب، وتأجيل التوسع في تيك توك حتى تتحسن صفحة الهبوط.</p>
-          <div class="h-rule"></div>
-        </div>
-      </div>
-      <div class="h-facts">
-        <div class="h-fact"><div class="hf-k">أفضل فرصة</div><div class="hf-v">منتج 1 لتر</div><div class="hf-bar"><span class="c-teal" style="width:86%"></span></div></div>
-        <div class="h-fact"><div class="hf-k">أكبر هدر</div><div class="hf-v">سناب العامة</div><div class="hf-bar"><span class="c-gold" style="width:38%"></span></div></div>
-        <div class="h-fact"><div class="hf-k">أهم تحسين</div><div class="hf-v">إتمام الدفع 61%</div><div class="hf-bar"><span class="c-muted" style="width:61%"></span></div></div>
+      <div class="brand-text">
+        <h1>معصرة الجنوب</h1>
+        <p>لوحة أداء المتجر</p>
       </div>
     </div>
-  </div>
 
-  <!-- KPI -->
-
-  <div class="blk">
-    <div class="s-label"><span class="s-title">المؤشرات الرئيسية</span><span class="s-note">الأسبوع الحالي vs الأسبوع السابق</span></div>
-    <div class="kpi-row">
-      <div class="kpi"><div class="kpi-k">الزوار</div><div class="kpi-v">12,480</div><div class="kpi-s">↑ +14.1% عن الأسبوع السابق</div></div>
-      <div class="kpi"><div class="kpi-k">الطلبات</div><div class="kpi-v">286</div><div class="kpi-s">↑ +18.7% — ينمو أسرع من الزيارات</div></div>
-      <div class="kpi"><div class="kpi-k">المبيعات</div><div class="kpi-v">18,940 ر.س</div><div class="kpi-s">↑ +17.6% عن الأسبوع السابق</div></div>
-      <div class="kpi"><div class="kpi-k">معدل التحويل</div><div class="kpi-v">2.29%</div><div class="kpi-s">↑ كان 2.20% الأسبوع الماضي</div></div>
+    <div class="side-section">
+      <div class="side-label">التنقل</div>
+      <nav class="nav">
+        <a href="#overview" class="active">الملخص</a>
+        <a href="#summary">الخلاصة التنفيذية</a>
+        <a href="#visuals">التحليل البصري</a>
+        <a href="#reports">التقارير</a>
+        <a href="#channels">أداء القنوات</a>
+        <a href="#decisions">القرارات</a>
+        <a href="#journey">رحلة العميل</a>
+        <a href="#terms">المصطلحات</a>
+      </nav>
     </div>
-  </div>
 
-  <!-- REPORTS -->
+    <div class="side-section">
+      <div class="side-label">قرارات فورية</div>
+      <ul class="side-list">
+        <li>↑ رفع Google Search +15%</li>
+        <li>↑ رفع إعادة الاستهداف +10%</li>
+        <li>↓ خفض سناب العام -20%</li>
+        <li>🧪 اختبار تيك توك قبل التوسع</li>
+      </ul>
+    </div>
 
-  <div class="blk">
-    <div class="s-label"><span class="s-title">التقارير</span><span class="s-note">فوري · يومي · أسبوعي · شهري</span></div>
-    <div class="surface">
-      <div class="tabs">
-        <button class="tab active" data-r="live">فوري</button>
-        <button class="tab" data-r="daily">يومي</button>
-        <button class="tab" data-r="weekly">أسبوعي</button>
-        <button class="tab" data-r="monthly">شهري</button>
-      </div>
+    <div style="margin-top:auto;padding-top:8px">
+      <button class="btn btn-ghost" id="themeToggle" style="width:100%;background:var(--surface-2);color:var(--text);border:1px solid var(--line);border-radius:14px;padding:10px;font-weight:700;font-size:13px">الوضع الليلي</button>
+    </div>
+  </aside>
 
-```
-  <div class="report active" id="live">
-    <div class="rng-row"><span class="rng">10 أبريل 2026 | 11:00 ص – 12:00 م</span><span class="rng">مقارنة: الساعة السابقة</span></div>
-    <div class="rg">
-      <div class="rg-l">
-        <div class="m4">
-          <div class="mn"><div class="mn-t">الزيارات</div><div class="mn-n">118</div><div class="mn-x">آخر 60 دقيقة</div></div>
-          <div class="mn"><div class="mn-t">السلات النشطة</div><div class="mn-n">23</div><div class="mn-x">19.5% من الزوار</div></div>
-          <div class="mn"><div class="mn-t">إتمام الدفع</div><div class="mn-n">61%</div><div class="mn-x">قابل للتحسين</div></div>
-          <div class="mn"><div class="mn-t">أقوى مصدر</div><div class="mn-n">Google</div><div class="mn-x">46% من الزيارات</div></div>
-        </div>
-        <div class="tbl-wrap"><table class="tbl">
-          <thead><tr><th>المؤشر</th><th>الحالي</th><th>الساعة السابقة</th><th>الفرق</th><th>القراءة</th></tr></thead>
-          <tbody>
-            <tr><td>الزيارات</td><td>118</td><td>102</td><td class="up">+15.7%</td><td>تحسن لحظي</td></tr>
-            <tr><td>السلات النشطة</td><td>23</td><td>19</td><td class="up">+21%</td><td>اهتمام أعلى</td></tr>
-            <tr><td>إتمام الدفع</td><td>61%</td><td>58%</td><td class="up">+3 نقاط</td><td>تحسن بسيط</td></tr>
-            <tr><td>أكبر مصدر</td><td>Google Ads</td><td>Google Ads</td><td class="flat">—</td><td>ثابت كأفضل قناة</td></tr>
-          </tbody>
-        </table></div>
-      </div>
-      <div class="rg-r">
-        <div class="d-stack">
-          <div class="d-box"><div class="d-k">القرار</div><div class="d-v">رفع حملة Google Search الآن — الأقوى لحظيًا.</div></div>
-          <div class="d-box"><div class="d-k">المتابعة</div><div class="d-v">مراقبة إتمام الدفع؛ ما زال أقل من المستهدف.</div></div>
-          <div class="d-box"><div class="d-k">التأجيل</div><div class="d-v">عدم التوسع في تيك توك قبل تحسين الصفحة.</div></div>
-        </div>
+  <!-- ━━━ MAIN ━━━ -->
+  <main class="main">
+
+    <!-- mobile top bar -->
+    <div class="mobile-bar">
+      <div style="font-weight:800;font-size:17px">معصرة الجنوب</div>
+      <div style="display:flex;gap:8px">
+        <span style="font-size:12px;color:var(--muted);align-self:center">10 أبريل 2026</span>
+        <button class="btn" id="themeToggleMobile" style="background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13px;font-weight:700">🌓</button>
       </div>
     </div>
-  </div>
 
-  <div class="report" id="daily">
-    <div class="rng-row"><span class="rng">10 أبريل 2026 | 12:00 ص – 11:59 م</span><span class="rng">مقارنة: 9 أبريل 2026</span></div>
-    <div class="rg">
-      <div class="rg-l">
-        <div class="m4">
-          <div class="mn"><div class="mn-t">المبيعات</div><div class="mn-n">3,920</div><div class="mn-x">ر.س اليوم</div></div>
-          <div class="mn"><div class="mn-t">الطلبات</div><div class="mn-n">47</div><div class="mn-x">طلب اليوم</div></div>
-          <div class="mn"><div class="mn-t">أفضل قناة</div><div class="mn-n">Google</div><div class="mn-x">الأعلى عائدًا</div></div>
-          <div class="mn"><div class="mn-t">أفضل منتج</div><div class="mn-n">1 لتر</div><div class="mn-x">الأكثر طلبًا</div></div>
-        </div>
-        <div class="tbl-wrap"><table class="tbl">
-          <thead><tr><th>المؤشر</th><th>اليوم</th><th>أمس</th><th>الفرق</th><th>القراءة</th></tr></thead>
-          <tbody>
-            <tr><td>المبيعات</td><td>3,920 ر.س</td><td>3,480 ر.س</td><td class="up">+12.6%</td><td>ارتفاع جيد</td></tr>
-            <tr><td>الطلبات</td><td>47</td><td>41</td><td class="up">+14.6%</td><td>استجابة صحية</td></tr>
-            <tr><td>معدل التحويل</td><td>2.34%</td><td>2.18%</td><td class="up">+0.16</td><td>أفضل من أمس</td></tr>
-            <tr><td>أفضل قناة</td><td>Google Ads</td><td>Google Ads</td><td class="flat">—</td><td>ثابتة كأفضل قناة</td></tr>
-          </tbody>
-        </table></div>
-      </div>
-      <div class="rg-r">
-        <div class="d-stack">
-          <div class="d-box"><div class="d-k">القرار</div><div class="d-v">زيادة صرف Google Search — العائد يبرر الرفع.</div></div>
-          <div class="d-box"><div class="d-k">الخفض</div><div class="d-v">تقليل سناب العام بنسبة 20%.</div></div>
-          <div class="d-box"><div class="d-k">الاختبار</div><div class="d-v">تحسين صفحة الهبوط لتيك توك قبل أي توسع.</div></div>
+    <!-- ━━━ HERO ━━━ -->
+    <section class="hero" id="overview">
+      <div>
+        <span class="hero-badge">📊 تقرير الأسبوع</span>
+        <h2>أداء المتجر هذا الأسبوع</h2>
+        <p>أفضل مصدر للشراء الآن هو إعلانات Google. أسرع قرار مفيد: رفع حملة البحث لمنتج 1 لتر مع خفض سناب، وتأجيل التوسع في تيك توك حتى تتحسن صفحة الهبوط.</p>
+        <div class="hero-btns">
+          <button class="btn btn-white" onclick="document.getElementById('summary').scrollIntoView({behavior:'smooth'})">الخلاصة</button>
+          <button class="btn btn-ghost" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">رحلة العميل</button>
         </div>
       </div>
-    </div>
-  </div>
+      <div class="hero-side">
+        <h3>القرار الأهم</h3>
+        <ul>
+          <li>رفع Google Search بنسبة 15%.</li>
+          <li>رفع إعادة الاستهداف في Meta بنسبة 10%.</li>
+          <li>خفض سناب بنسبة 20%.</li>
+          <li>اختبار تيك توك قبل أي توسع.</li>
+        </ul>
+      </div>
+    </section>
 
-  <div class="report" id="weekly">
-    <div class="rng-row"><span class="rng">4 – 10 أبريل 2026</span><span class="rng">مقارنة: 28 مارس – 3 أبريل 2026</span></div>
-    <div class="rg">
-      <div class="rg-l">
-        <div class="m4">
-          <div class="mn"><div class="mn-t">الزوار</div><div class="mn-n">12,480</div><div class="mn-x">↑ +14.1%</div></div>
-          <div class="mn"><div class="mn-t">الطلبات</div><div class="mn-n">286</div><div class="mn-x">↑ +18.7%</div></div>
-          <div class="mn"><div class="mn-t">المبيعات</div><div class="mn-n">18,940</div><div class="mn-x">ر.س ↑ +17.6%</div></div>
-          <div class="mn"><div class="mn-t">التحويل</div><div class="mn-n">2.29%</div><div class="mn-x">كان 2.20%</div></div>
+    <!-- ━━━ SUMMARY ━━━ -->
+    <section class="section" id="summary">
+      <div class="sec-head"><h3>الخلاصة التنفيذية</h3><p>أبرز ما في هذا الأسبوع</p></div>
+      <div class="summary-grid">
+        <div class="summary-card">
+          <h4>الموقف الحالي</h4>
+          <ul class="s-list">
+            <li><strong>أفضل قناة:</strong> إعلانات Google — أوضح عائد وأعلى نية شراء.</li>
+            <li><strong>أكبر فرصة:</strong> رفع حملة البحث لمنتج زيت السمسم 1 لتر.</li>
+            <li><strong>أكبر هدر:</strong> حملة سناب العامة — زيارات دون تحويل كافٍ.</li>
+            <li><strong>أهم تحسين داخلي:</strong> رفع نسبة إتمام الدفع.</li>
+            <li><strong>قرار التوسع:</strong> تيك توك يحتاج تحسين الصفحة قبل أي زيادة.</li>
+          </ul>
         </div>
-        <div class="tbl-wrap"><table class="tbl">
-          <thead><tr><th>المؤشر</th><th>هذا الأسبوع</th><th>الأسبوع السابق</th><th>الفرق</th></tr></thead>
-          <tbody>
-            <tr><td>الزوار</td><td>12,480</td><td>10,940</td><td class="up">+14.1%</td></tr>
-            <tr><td>الطلبات</td><td>286</td><td>241</td><td class="up">+18.7%</td></tr>
-            <tr><td>المبيعات</td><td>18,940 ر.س</td><td>16,110 ر.س</td><td class="up">+17.6%</td></tr>
-            <tr><td>معدل التحويل</td><td>2.29%</td><td>2.20%</td><td class="up">+0.09</td></tr>
-          </tbody>
-        </table></div>
-      </div>
-      <div class="rg-r">
-        <div class="d-stack">
-          <div class="d-box"><div class="d-k">القرار</div><div class="d-v">تعزيز Google وإعادة الاستهداف — أفضل عائد.</div></div>
-          <div class="d-box"><div class="d-k">المعنى</div><div class="d-v">الطلبات تنمو أسرع من الزيارات — تحويل يتحسن.</div></div>
-          <div class="d-box"><div class="d-k">الخفض</div><div class="d-v">استمرار تقليل القنوات الأضعف عائدًا.</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="report" id="monthly">
-    <div class="rng-row"><span class="rng">1 – 10 أبريل 2026</span><span class="rng">مقارنة: 1 – 10 مارس 2026</span></div>
-    <div class="rg">
-      <div class="rg-l">
-        <div class="m4">
-          <div class="mn"><div class="mn-t">الزوار</div><div class="mn-n">51,340</div><div class="mn-x">الشهر الحالي</div></div>
-          <div class="mn"><div class="mn-t">الطلبات</div><div class="mn-n">1,102</div><div class="mn-x">↑ +11.5%</div></div>
-          <div class="mn"><div class="mn-t">المبيعات</div><div class="mn-n">74,800</div><div class="mn-x">ر.س ↑ +9.7%</div></div>
-          <div class="mn"><div class="mn-t">عملاء متكررون</div><div class="mn-n">31%</div><div class="mn-x">كان 27%</div></div>
-        </div>
-        <div class="tbl-wrap"><table class="tbl">
-          <thead><tr><th>المؤشر</th><th>الفترة الحالية</th><th>الفترة السابقة</th><th>الفرق</th></tr></thead>
-          <tbody>
-            <tr><td>الزوار</td><td>51,340</td><td>47,900</td><td class="up">+7.2%</td></tr>
-            <tr><td>الطلبات</td><td>1,102</td><td>988</td><td class="up">+11.5%</td></tr>
-            <tr><td>المبيعات</td><td>74,800 ر.س</td><td>68,200 ر.س</td><td class="up">+9.7%</td></tr>
-            <tr><td>عملاء متكررون</td><td>31%</td><td>27%</td><td class="up">+4 نقاط</td></tr>
-          </tbody>
-        </table></div>
-      </div>
-      <div class="rg-r">
-        <div class="d-stack">
-          <div class="d-box"><div class="d-k">القرار</div><div class="d-v">رفع Google وتحسين صفحة الدفع — أثرهما مباشر.</div></div>
-          <div class="d-box"><div class="d-k">الأولوية</div><div class="d-v">زيادة الاستفادة من نفس حجم الزيارات الحالي.</div></div>
-          <div class="d-box"><div class="d-k">التوسع</div><div class="d-v">بعد ضبط معدل التحويل فقط — ليس قبله.</div></div>
-        </div>
-      </div>
-    </div>
-    <div class="mch">
-      <div class="mch-card">
-        <div class="mch-t">اتجاه المبيعات — 4 أشهر</div>
-        <svg viewBox="0 0 500 185" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block">
-          <defs><linearGradient id="ag" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="var(--g1)" stop-opacity=".16"/><stop offset="100%" stop-color="var(--g1)" stop-opacity=".01"/></linearGradient></defs>
-          <line x1="44" y1="16" x2="44" y2="148" stroke="var(--rule)" stroke-width="1"/>
-          <line x1="44" y1="148" x2="476" y2="148" stroke="var(--rule)" stroke-width="1"/>
-          <line x1="44" y1="46" x2="476" y2="46" stroke="var(--rule)" stroke-width=".6" stroke-dasharray="4 3"/>
-          <line x1="44" y1="97" x2="476" y2="97" stroke="var(--rule)" stroke-width=".6" stroke-dasharray="4 3"/>
-          <polygon fill="url(#ag)" points="84,128 204,110 330,74 456,34 456,148 84,148"/>
-          <polyline fill="none" stroke="var(--g1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="84,128 204,110 330,74 456,34"/>
-          <circle cx="84" cy="128" r="3.5" fill="var(--p0)" stroke="var(--g1)" stroke-width="2"/>
-          <circle cx="204" cy="110" r="3.5" fill="var(--p0)" stroke="var(--g1)" stroke-width="2"/>
-          <circle cx="330" cy="74" r="3.5" fill="var(--p0)" stroke="var(--g1)" stroke-width="2"/>
-          <circle cx="456" cy="34" r="4.5" fill="var(--g1)" stroke="var(--g1)" stroke-width="1.5"/>
-          <text x="84" y="165" text-anchor="middle" font-size="10" fill="var(--i3)" font-family="Tajawal">يناير</text>
-          <text x="204" y="165" text-anchor="middle" font-size="10" fill="var(--i3)" font-family="Tajawal">فبراير</text>
-          <text x="330" y="165" text-anchor="middle" font-size="10" fill="var(--i3)" font-family="Tajawal">مارس</text>
-          <text x="456" y="165" text-anchor="middle" font-size="10" fill="var(--i3)" font-family="Tajawal">أبريل</text>
-          <text x="84" y="116" text-anchor="middle" font-size="10" fill="var(--i2)" font-family="Tajawal" font-weight="700">58.4k</text>
-          <text x="204" y="98" text-anchor="middle" font-size="10" fill="var(--i2)" font-family="Tajawal" font-weight="700">61.9k</text>
-          <text x="330" y="62" text-anchor="middle" font-size="10" fill="var(--i2)" font-family="Tajawal" font-weight="700">68.2k</text>
-          <text x="456" y="22" text-anchor="middle" font-size="11" fill="var(--g1)" font-family="Tajawal" font-weight="900">74.8k</text>
-        </svg>
-        <div class="mch-note"><span>يناير – أبريل 2026</span><span style="color:var(--g1);font-weight:800">صاعد باستمرار ↑</span></div>
-      </div>
-      <div class="mch-card">
-        <div class="mch-t">مقارنة شهرية</div>
-        <div class="brs">
-          <div class="br-row"><div>يناير</div><div class="br-t"><span style="width:78%"></span></div><div>58,400 ر.س</div></div>
-          <div class="br-row"><div>فبراير</div><div class="br-t"><span style="width:83%"></span></div><div>61,900 ر.س</div></div>
-          <div class="br-row"><div>مارس</div><div class="br-t"><span style="width:91%;background:linear-gradient(90deg,var(--a1),var(--a2))"></span></div><div>68,200 ر.س</div></div>
-          <div class="br-row"><div>أبريل</div><div class="br-t"><span style="width:100%"></span></div><div>74,800 ر.س</div></div>
-        </div>
-        <div class="mch-leg">
-          <span><i class="dot" style="background:var(--g1)"></i>الأعلى: أبريل</span>
-          <span><i class="dot" style="background:var(--a1)"></i>المرجع: مارس</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-```
-
-  </div>
-
-  <!-- VISUALS -->
-
-  <div class="blk">
-    <div class="s-label"><span class="s-title">التحليل البصري</span><span class="s-note">توزيع الزيارات · مسار الشراء · الاتجاه الأسبوعي</span></div>
-    <div class="vis-row">
-      <div class="vcard">
-        <div class="vc-t">توزيع الزيارات</div>
-        <div class="donut-row">
-          <div class="donut" data-c="118&#10;زائر" style="background:conic-gradient(var(--g1) 0 46%,var(--a2) 46% 70%,#3a78c8 70% 100%)"></div>
-          <div class="leg">
-            <div class="leg-r"><i class="dot" style="background:var(--g1)"></i>Google Ads — 46%</div>
-            <div class="leg-r"><i class="dot" style="background:var(--a2)"></i>Meta — 24%</div>
-            <div class="leg-r"><i class="dot" style="background:#3a78c8"></i>مباشر + مجاني — 30%</div>
+        <div class="summary-card">
+          <h4>نفّذ اليوم</h4>
+          <div class="action-row">
+            <div class="action-pill"><strong>↑ ارفع</strong><span>Google Search +15%</span></div>
+            <div class="action-pill"><strong>↑ ارفع</strong><span>إعادة الاستهداف +10%</span></div>
+            <div class="action-pill"><strong>↓ خفّض</strong><span>سناب العام -20%</span></div>
           </div>
         </div>
       </div>
-      <div class="vcard">
-        <div class="vc-t">مسار الشراء</div>
-        <div class="funnel">
-          <div class="f-s f1"><span>زوار</span><span class="f-pct">100%</span></div>
-          <div class="f-s f2"><span>سلات نشطة</span><span class="f-pct">19.5%</span></div>
-          <div class="f-s f3"><span>بدؤوا الدفع</span><span class="f-pct">11%</span></div>
-          <div class="f-s f4"><span>أكملوا الدفع</span><span class="f-pct">61%</span></div>
+    </section>
+
+    <!-- ━━━ KPIs ━━━ -->
+    <section class="section">
+      <div class="sec-head"><h3>المؤشرات الرئيسية</h3><p>مقارنة بالأسبوع السابق</p></div>
+      <div class="grid g4">
+        <div class="metric"><div class="k">الزوار</div><div class="v">12,480</div><div class="s">+14.1%</div></div>
+        <div class="metric"><div class="k">الطلبات</div><div class="v">286</div><div class="s">+18.7%</div></div>
+        <div class="metric"><div class="k">المبيعات</div><div class="v">18,940 ر.س</div><div class="s">+17.6%</div></div>
+        <div class="metric"><div class="k">معدل التحويل</div><div class="v">2.29%</div><div class="s">أفضل من السابق</div></div>
+      </div>
+    </section>
+
+    <!-- ━━━ VISUALS ━━━ -->
+    <section class="section" id="visuals">
+      <div class="sec-head"><h3>التحليل البصري</h3><p>أرقام ورسومات فقط</p></div>
+      <div class="vis-grid">
+        <div class="vis-card">
+          <h4>توزيع الزيارات</h4>
+          <div class="donut-wrap">
+            <div class="donut" data-center="118&#10;زائر" style="background:conic-gradient(var(--brand) 0 46%, var(--gold) 46% 70%, var(--violet) 70% 100%)"></div>
+            <div class="legend">
+              <span><i class="dot" style="background:var(--brand)"></i> Google Ads — 46%</span>
+              <span><i class="dot" style="background:var(--gold)"></i> Meta — 24%</span>
+              <span><i class="dot" style="background:var(--violet)"></i> مباشر + مجاني — 30%</span>
+            </div>
+          </div>
+        </div>
+        <div class="vis-card">
+          <h4>مسار الشراء</h4>
+          <div class="funnel">
+            <div class="fstep f1">زوار — 100%</div>
+            <div class="fstep f2">سلات نشطة — 19.5%</div>
+            <div class="fstep f3">بدؤوا الدفع — 11%</div>
+            <div class="fstep f4">أكملوا الدفع — 61%</div>
+          </div>
+        </div>
+        <div class="vis-card">
+          <h4>اتجاه 7 أيام</h4>
+          <div class="spark">
+            <span style="height:48%"><em>س</em></span>
+            <span style="height:54%"><em>ح</em></span>
+            <span style="height:60%"><em>ن</em></span>
+            <span style="height:74%"><em>ث</em></span>
+            <span style="height:66%"><em>ر</em></span>
+            <span style="height:83%"><em>خ</em></span>
+            <span style="height:93%"><em>ج</em></span>
+          </div>
+          <p class="spark-note">الاتجاه العام صاعد.</p>
         </div>
       </div>
-      <div class="vcard">
-        <div class="vc-t">اتجاه 7 أيام</div>
-        <div class="spark">
-          <div class="sp" style="height:48%"><em>س</em></div>
-          <div class="sp" style="height:54%"><em>ح</em></div>
-          <div class="sp" style="height:58%"><em>ن</em></div>
-          <div class="sp" style="height:72%"><em>ث</em></div>
-          <div class="sp" style="height:66%"><em>ر</em></div>
-          <div class="sp" style="height:82%"><em>خ</em></div>
-          <div class="sp" style="height:92%"><em>ج</em></div>
+    </section>
+
+    <!-- ━━━ REPORTS ━━━ -->
+    <section class="section panel report-shell" id="reports">
+      <div class="sec-head"><h3>التقارير</h3><p>فوري · يومي · أسبوعي · شهري</p></div>
+      <div class="tabs">
+        <button class="tab active" data-report="live">فوري</button>
+        <button class="tab" data-report="daily">يومي</button>
+        <button class="tab" data-report="weekly">أسبوعي</button>
+        <button class="tab" data-report="monthly">شهري</button>
+      </div>
+
+      <!-- LIVE -->
+      <div class="report active" id="live">
+        <div class="r-meta">
+          <span class="r-chip">10 أبريل 2026 | 11:00 ص – 12:00 م</span>
+          <span class="r-chip">مقارنة: الساعة السابقة</span>
         </div>
-        <div class="sp-meta"><span>بداية الأسبوع</span><span style="color:var(--g1);font-weight:800">صاعد ↑</span></div>
+        <div class="report-grid">
+          <div class="r-panel">
+            <h4>المؤشرات الفورية</h4>
+            <div class="mini-row">
+              <div class="mini"><div class="t">الزيارات</div><div class="n">118</div><div class="x">آخر 60 دقيقة</div></div>
+              <div class="mini"><div class="t">السلات النشطة</div><div class="n">23</div><div class="x">19.5%</div></div>
+              <div class="mini"><div class="t">إتمام الدفع</div><div class="n">61%</div><div class="x">قابل للتحسين</div></div>
+              <div class="mini"><div class="t">أقوى مصدر</div><div class="n">Google</div><div class="x">46%</div></div>
+            </div>
+            <table class="tbl">
+              <thead><tr><th>المؤشر</th><th>الحالي</th><th>الساعة السابقة</th><th>القراءة</th></tr></thead>
+              <tbody>
+                <tr><td>الزيارات</td><td>118</td><td>102</td><td>تحسن لحظي</td></tr>
+                <tr><td>السلات النشطة</td><td>23</td><td>19</td><td>اهتمام أفضل</td></tr>
+                <tr><td>إتمام الدفع</td><td>61%</td><td>58%</td><td>تحسن بسيط</td></tr>
+                <tr><td>أكبر مصدر</td><td>Google Ads</td><td>Google Ads</td><td>ثابت كأفضل قناة</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="r-panel">
+            <h4>القرار الفوري</h4>
+            <div class="kbox"><strong>ما الذي يُرفع الآن؟</strong><p>حملة البحث في Google — الأقوى حاليًا.</p></div>
+            <div class="kbox"><strong>ما الذي يُراقَب؟</strong><p>إتمام الدفع — التسرب قبل الإكمال ما زال مرتفعًا.</p></div>
+            <div class="kbox"><strong>ما الذي لا يُتوسع فيه؟</strong><p>تيك توك قبل تحسين صفحة الهبوط.</p></div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <!-- CHANNELS + QUICK -->
-
-  <div class="blk two">
-    <div class="surface">
-      <div class="s-label"><span class="s-title">أداء القنوات</span><span class="s-note">عائد كل 1 ريال إعلاني</span></div>
-      <div class="ch-list">
-        <div class="ch-row"><div class="ch-nm">Google Ads</div><div class="ch-trk"><span style="width:86%;background:linear-gradient(90deg,var(--g1),var(--g2))"></span></div><div class="ch-val">2.84</div></div>
-        <div class="ch-row"><div class="ch-nm">Meta</div><div class="ch-trk"><span style="width:77%;background:linear-gradient(90deg,var(--a1),var(--a2))"></span></div><div class="ch-val">2.57</div></div>
-        <div class="ch-row"><div class="ch-nm">Snapchat</div><div class="ch-trk"><span style="width:42%;background:linear-gradient(90deg,#c06820,#e09040)"></span></div><div class="ch-val">1.41</div></div>
-        <div class="ch-row"><div class="ch-nm">TikTok</div><div class="ch-trk"><span style="width:33%;background:linear-gradient(90deg,var(--dn),#e04868)"></span></div><div class="ch-val">1.08</div></div>
+      <!-- DAILY -->
+      <div class="report" id="daily">
+        <div class="r-meta">
+          <span class="r-chip">10 أبريل 2026 | يوم كامل</span>
+          <span class="r-chip">مقارنة: 9 أبريل 2026</span>
+        </div>
+        <div class="report-grid">
+          <div class="r-panel">
+            <h4>مؤشرات اليوم</h4>
+            <div class="mini-row">
+              <div class="mini"><div class="t">المبيعات</div><div class="n">3,920</div><div class="x">ر.س</div></div>
+              <div class="mini"><div class="t">الطلبات</div><div class="n">47</div><div class="x">اليوم</div></div>
+              <div class="mini"><div class="t">أفضل قناة</div><div class="n">Google</div><div class="x">الأعلى عائدًا</div></div>
+              <div class="mini"><div class="t">أفضل منتج</div><div class="n">1 لتر</div><div class="x">الأكثر طلبًا</div></div>
+            </div>
+            <table class="tbl">
+              <thead><tr><th>المؤشر</th><th>اليوم</th><th>أمس</th><th>القراءة</th></tr></thead>
+              <tbody>
+                <tr><td>المبيعات</td><td>3,920 ر.س</td><td>3,480 ر.س</td><td>ارتفاع يومي جيد</td></tr>
+                <tr><td>الطلبات</td><td>47</td><td>41</td><td>استجابة صحية</td></tr>
+                <tr><td>معدل التحويل</td><td>2.34%</td><td>2.18%</td><td>أفضل من أمس</td></tr>
+                <tr><td>أفضل قناة</td><td>Google Ads</td><td>Google Ads</td><td>ثابتة كأفضل قناة</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="r-panel">
+            <h4>خلاصة اليوم</h4>
+            <div class="kbox"><strong>أولوية اليوم</strong><p>رفع حملة البحث لمنتج 1 لتر.</p></div>
+            <div class="kbox"><strong>خفض مباشر</strong><p>تقليل ميزانية سناب العامة.</p></div>
+            <div class="kbox"><strong>اختبار مطلوب</strong><p>صفحة هبوط جديدة لتيك توك.</p></div>
+          </div>
+        </div>
       </div>
-      <p class="ch-foot">المستهدف: عائد أعلى من 2.0 لكل ريال مصروف.</p>
-    </div>
-    <div class="surface">
-      <div class="s-label"><span class="s-title">تنفيذ مباشر</span><span class="s-note">قرارات جاهزة الآن</span></div>
-      <div class="d-stack">
-        <div class="d-box"><div class="d-k">ارفع</div><div class="d-v">Google Search بنسبة +15% — العائد يبرر ذلك.</div></div>
-        <div class="d-box"><div class="d-k">ارفع</div><div class="d-v">إعادة الاستهداف في Meta بنسبة +10%.</div></div>
-        <div class="d-box"><div class="d-k">خفّض</div><div class="d-v">سناب العام -20% وأعد توزيع الميزانية.</div></div>
+
+      <!-- WEEKLY -->
+      <div class="report" id="weekly">
+        <div class="r-meta">
+          <span class="r-chip">4 أبريل – 10 أبريل 2026</span>
+          <span class="r-chip">مقارنة: 28 مارس – 3 أبريل 2026</span>
+        </div>
+        <div class="report-grid">
+          <div class="r-panel">
+            <h4>مؤشرات الأسبوع</h4>
+            <div class="mini-row">
+              <div class="mini"><div class="t">الزوار</div><div class="n">12,480</div><div class="x">+14.1%</div></div>
+              <div class="mini"><div class="t">الطلبات</div><div class="n">286</div><div class="x">+18.7%</div></div>
+              <div class="mini"><div class="t">المبيعات</div><div class="n">18,940</div><div class="x">ر.س</div></div>
+              <div class="mini"><div class="t">التحويل</div><div class="n">2.29%</div><div class="x">أفضل من السابق</div></div>
+            </div>
+            <table class="tbl">
+              <thead><tr><th>المؤشر</th><th>هذا الأسبوع</th><th>الأسبوع السابق</th><th>الفرق</th></tr></thead>
+              <tbody>
+                <tr><td>الزوار</td><td>12,480</td><td>10,940</td><td>+14.1%</td></tr>
+                <tr><td>الطلبات</td><td>286</td><td>241</td><td>+18.7%</td></tr>
+                <tr><td>المبيعات</td><td>18,940 ر.س</td><td>16,110 ر.س</td><td>+17.6%</td></tr>
+                <tr><td>معدل التحويل</td><td>2.29%</td><td>2.20%</td><td>+0.09</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="r-panel">
+            <h4>خلاصة الأسبوع</h4>
+            <div class="kbox"><strong>أفضل نتيجة</strong><p>الطلبات تنمو أسرع من الزيارات — التحويل يتحسن.</p></div>
+            <div class="kbox"><strong>القرار</strong><p>تعزيز Google وإعادة الاستهداف، وخفض القنوات الأضعف.</p></div>
+            <div class="kbox"><strong>الفرصة</strong><p>إعادة توزيع الميزانية من سناب إلى Google أفضل من رفع الإجمالي.</p></div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <!-- DECISIONS -->
-
-  <div class="blk">
-    <div class="s-label"><span class="s-title">القرارات التنفيذية</span><span class="s-note">بناءً على الأداء الحالي</span></div>
-    <div class="surface">
-      <div class="dec-grid">
-        <div class="dec"><h4>Google Search — منتج 1 لتر</h4><p>أفضل عائد على الإنفاق وأوضح نية شراء من بين جميع القنوات.</p><span class="badge b-up">↑ رفع 15%</span></div>
-        <div class="dec"><h4>Meta — إعادة الاستهداف</h4><p>الجمهور المعاد استهدافه يكمل الطلب بنسبة أعلى من الزيارات الباردة.</p><span class="badge b-up">↑ رفع 10%</span></div>
-        <div class="dec"><h4>Snapchat — حملة عامة</h4><p>الزيارات موجودة لكن عائد الشراء أقل من الحد المقبول.</p><span class="badge b-dn">↓ خفض 20%</span></div>
-        <div class="dec"><h4>TikTok — حملة باردة</h4><p>التفاعل جيد لكن الشراء ضعيف — تحسين الصفحة أولًا.</p><span class="badge b-nt">اختبار فقط</span></div>
+      <!-- MONTHLY -->
+      <div class="report" id="monthly">
+        <div class="r-meta">
+          <span class="r-chip">1 أبريل – 10 أبريل 2026</span>
+          <span class="r-chip">مقارنة: 1 – 10 مارس 2026</span>
+        </div>
+        <div class="report-grid">
+          <div class="r-panel">
+            <h4>مؤشرات الشهر</h4>
+            <div class="mini-row">
+              <div class="mini"><div class="t">الزوار</div><div class="n">51,340</div><div class="x">الشهر الحالي</div></div>
+              <div class="mini"><div class="t">الطلبات</div><div class="n">1,102</div><div class="x">هذا الشهر</div></div>
+              <div class="mini"><div class="t">المبيعات</div><div class="n">74,800</div><div class="x">ر.س</div></div>
+              <div class="mini"><div class="t">العملاء المتكررون</div><div class="n">31%</div><div class="x">فرصة قوية</div></div>
+            </div>
+            <table class="tbl">
+              <thead><tr><th>المؤشر</th><th>الفترة الحالية</th><th>الفترة السابقة</th><th>القراءة</th></tr></thead>
+              <tbody>
+                <tr><td>الزوار</td><td>51,340</td><td>47,900</td><td>نمو شهري جيد</td></tr>
+                <tr><td>الطلبات</td><td>1,102</td><td>988</td><td>تحسن في الطلب</td></tr>
+                <tr><td>المبيعات</td><td>74,800 ر.س</td><td>68,200 ر.س</td><td>ارتفاع ملحوظ</td></tr>
+                <tr><td>العملاء المتكررون</td><td>31%</td><td>27%</td><td>تحسن في إعادة الشراء</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="r-panel">
+            <h4>خلاصة الشهر</h4>
+            <div class="kbox"><strong>أهم نقطة</strong><p>المبيعات جيدة لكن ما زالت قابلة للرفع من نفس الزيارات.</p></div>
+            <div class="kbox"><strong>أفضل فرصة</strong><p>زيادة الاعتماد على القنوات الأعلى عائدًا بدل التوسع العام.</p></div>
+            <div class="kbox"><strong>قرار الشهر القادم</strong><p>رفع Google وإعادة الاستهداف، وتحسين إتمام الدفع.</p></div>
+          </div>
+        </div>
+        <div class="mo-charts">
+          <div class="mo-card">
+            <h4>اتجاه المبيعات — 4 أشهر</h4>
+            <svg class="line-svg" viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg" aria-label="رسم بياني لاتجاه المبيعات">
+              <defs>
+                <linearGradient id="lg1" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#0a6860" stop-opacity=".25"/>
+                  <stop offset="100%" stop-color="#0a6860" stop-opacity=".02"/>
+                </linearGradient>
+              </defs>
+              <line x1="50" y1="170" x2="490" y2="170" stroke="var(--line)" stroke-width="1"/>
+              <line x1="50" y1="30" x2="50" y2="170" stroke="var(--line)" stroke-width="1"/>
+              <polyline fill="url(#lg1)" stroke="none" points="80,148 210,132 340,96 470,52 470,170 80,170"/>
+              <polyline fill="none" stroke="var(--brand)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" points="80,148 210,132 340,96 470,52"/>
+              <circle cx="80" cy="148" r="5" fill="var(--brand)"/>
+              <circle cx="210" cy="132" r="5" fill="var(--brand)"/>
+              <circle cx="340" cy="96" r="5" fill="var(--brand)"/>
+              <circle cx="470" cy="52" r="5" fill="var(--brand)"/>
+              <text x="80" y="192" text-anchor="middle" font-size="12" fill="var(--muted)" font-family="Tajawal,sans-serif">يناير</text>
+              <text x="210" y="192" text-anchor="middle" font-size="12" fill="var(--muted)" font-family="Tajawal,sans-serif">فبراير</text>
+              <text x="340" y="192" text-anchor="middle" font-size="12" fill="var(--muted)" font-family="Tajawal,sans-serif">مارس</text>
+              <text x="470" y="192" text-anchor="middle" font-size="12" fill="var(--muted)" font-family="Tajawal,sans-serif">أبريل</text>
+              <text x="80" y="136" text-anchor="middle" font-size="11" fill="var(--text)" font-family="Tajawal,sans-serif">58.4k</text>
+              <text x="210" y="120" text-anchor="middle" font-size="11" fill="var(--text)" font-family="Tajawal,sans-serif">61.9k</text>
+              <text x="340" y="84" text-anchor="middle" font-size="11" fill="var(--text)" font-family="Tajawal,sans-serif">68.2k</text>
+              <text x="470" y="40" text-anchor="middle" font-size="11" fill="var(--text)" font-family="Tajawal,sans-serif">74.8k</text>
+            </svg>
+            <div class="line-cap"><span>الاتجاه</span><span style="color:var(--brand);font-weight:700">صاعد</span></div>
+          </div>
+          <div class="mo-card">
+            <h4>مقارنة المبيعات الشهرية</h4>
+            <div class="mbar-list">
+              <div class="mbar-row"><div>يناير</div><div class="mtrack"><span style="width:78%"></span></div><div>58,400 ر.س</div></div>
+              <div class="mbar-row"><div>فبراير</div><div class="mtrack"><span style="width:83%"></span></div><div>61,900 ر.س</div></div>
+              <div class="mbar-row"><div>مارس</div><div class="mtrack"><span style="width:91%;background:linear-gradient(135deg,var(--gold),#d4a83e)"></span></div><div>68,200 ر.س</div></div>
+              <div class="mbar-row"><div>أبريل</div><div class="mtrack"><span style="width:100%"></span></div><div>74,800 ر.س</div></div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- FOOTER -->
+    <!-- ━━━ CHANNELS ━━━ -->
+    <section class="section grid g2" id="channels">
+      <div class="panel channels-panel">
+        <div class="sec-head"><h3>أداء القنوات</h3><p>عائد كل ريال إعلاني</p></div>
+        <div class="bar-list">
+          <div class="bar-row"><div>Google</div><div class="bar"><span style="width:86%;background:linear-gradient(135deg,var(--brand),var(--brand2))"></span></div><div>2.84</div></div>
+          <div class="bar-row"><div>Meta</div><div class="bar"><span style="width:77%;background:linear-gradient(135deg,var(--gold),#d4a33e)"></span></div><div>2.57</div></div>
+          <div class="bar-row"><div>سناب</div><div class="bar"><span style="width:42%;background:linear-gradient(135deg,var(--orange),#d07830)"></span></div><div>1.41</div></div>
+          <div class="bar-row"><div>تيك توك</div><div class="bar"><span style="width:33%;background:linear-gradient(135deg,var(--pink),#b03060)"></span></div><div>1.08</div></div>
+        </div>
+        <p class="bar-note">الرقم = ريالات مبيعات مقابل كل ريال إعلاني.</p>
+      </div>
+      <div class="panel channels-panel">
+        <div class="sec-head"><h3>قراءة سريعة</h3><p>ملخص القنوات</p></div>
+        <div style="display:grid;gap:10px">
+          <div class="kbox"><strong>الأفضل أداءً</strong><p>Google Ads — أوضح عائد وأعلى نية شراء.</p></div>
+          <div class="kbox"><strong>إعادة الاستهداف</strong><p>Meta — جمهور أقرب للإكمال وعائد جيد.</p></div>
+          <div class="kbox"><strong>الأضعف</strong><p>تيك توك البارد — تفاعل بدون شراء كافٍ.</p></div>
+        </div>
+      </div>
+    </section>
 
-  <div class="blk two">
-    <div class="note n-warn"><h4>فرصة التحسين</h4><ul><li>رفع إتمام الدفع يزيد المبيعات دون زيادة الميزانية.</li><li>منتج 1 لتر هو أفضل نقطة دفع للحملات الإعلانية.</li><li>إعادة توزيع الميزانية الحالية أجدى من زيادة الصرف الكلي.</li></ul></div>
-    <div class="note n-ok"><h4>القرار النهائي</h4><ul><li>ارفع Google Search.</li><li>ارفع إعادة الاستهداف في Meta.</li><li>خفّض سناب العام.</li><li>اختبر تيك توك قبل أي توسع.</li></ul></div>
-  </div>
+    <!-- ━━━ DECISIONS ━━━ -->
+    <section class="section panel" style="padding:20px" id="decisions">
+      <div class="sec-head"><h3>القرارات التنفيذية</h3><p>بناءً على الأداء الحالي</p></div>
+      <div class="decision-grid">
+        <div class="decision">
+          <h4>Google Search | منتج 1 لتر</h4>
+          <p>أفضل عائد وأوضح نية شراء في الوقت الحالي.</p>
+          <span class="badge b-up">↑ رفع 15%</span>
+          <ul class="dlist">
+            <li>رفع تدريجي خلال يومين.</li>
+            <li>مراقبة تكلفة الطلب بعد الرفع.</li>
+          </ul>
+        </div>
+        <div class="decision">
+          <h4>Meta Retargeting</h4>
+          <p>جمهور أقرب للشراء وإكمال الطلب أعلى من الزيارات الباردة.</p>
+          <span class="badge b-up">↑ رفع 10%</span>
+          <ul class="dlist">
+            <li>توسيع الميزانية فقط.</li>
+            <li>مقارنة 7 أيام و14 يومًا.</li>
+          </ul>
+        </div>
+        <div class="decision">
+          <h4>سناب — حملة عامة</h4>
+          <p>زيارات موجودة لكن العائد أقل من المطلوب مقارنة بالقنوات الأخرى.</p>
+          <span class="badge b-down">↓ خفض 20%</span>
+          <ul class="dlist">
+            <li>نقل جزء من الميزانية إلى Google.</li>
+            <li>متابعة النتيجة 3 أيام.</li>
+          </ul>
+        </div>
+        <div class="decision">
+          <h4>تيك توك — فيديو بارد</h4>
+          <p>التفاعل جيد لكن الشراء ضعيف — يحتاج تحسين الصفحة أولاً.</p>
+          <span class="badge b-test">🧪 اختبار فقط</span>
+          <ul class="dlist">
+            <li>تغيير صفحة الهبوط أو الرسالة.</li>
+            <li>لا توسع قبل تحسن العائد.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-</main>
+    <!-- ━━━ NOTES ━━━ -->
+    <section class="section notes-grid">
+      <div class="note note-warn">
+        <h4>فرصة التحسين</h4>
+        <ul>
+          <li>رفع إتمام الدفع يزيد المبيعات من نفس عدد الزوار.</li>
+          <li>منتج 1 لتر هو أفضل نقطة دفع للحملات.</li>
+          <li>إعادة توزيع الميزانية أفضل من رفع الإجمالي الآن.</li>
+        </ul>
+      </div>
+      <div class="note note-ok">
+        <h4>القرار النهائي</h4>
+        <ul>
+          <li>ارفع Google Search.</li>
+          <li>ارفع إعادة الاستهداف في Meta.</li>
+          <li>خفّض سناب العام.</li>
+          <li>اختبر تيك توك قبل التوسع.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+    <!-- ━━━ JOURNEY TRACKING (NEW) ━━━ -->
+    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+    <section class="section panel journey-shell" id="journey">
+      <div class="sec-head">
+        <div>
+          <h3>رحلة العميل قبل الشراء</h3>
+          <p>كيف وصل العميل للشراء؟ من أي قناة بدأ وأين أكمل؟</p>
+        </div>
+      </div>
+
+      <!-- Journey summary cards -->
+      <div class="grid g4" style="margin-bottom:18px">
+        <div class="metric"><div class="k">أكثر مسار تكراراً</div><div class="v" style="font-size:18px">تيك توك ← Google</div><div class="s">24% من الطلبات</div></div>
+        <div class="metric"><div class="k">رحلات متعددة المنصات</div><div class="v">40%</div><div class="s">من إجمالي المشترين</div></div>
+        <div class="metric"><div class="k">متوسط الرحلة</div><div class="v">3.2 س</div><div class="s">من أول نقرة للشراء</div></div>
+        <div class="metric"><div class="k">Google تُساعد في</div><div class="v">60%</div><div class="s">من جميع الطلبات</div></div>
+      </div>
+
+      <div class="journey-tabs">
+        <button class="jtab active" data-jr="paths">أكثر المسارات تكراراً</button>
+        <button class="jtab" data-jr="firstlast">أول منصة × آخر منصة</button>
+        <button class="jtab" data-jr="overlap">تداخل القنوات</button>
+        <button class="jtab" data-jr="assist">المنصات المساعدة</button>
+        <button class="jtab" data-jr="timing">الفروقات الزمنية</button>
+      </div>
+
+      <!-- ① PATHS -->
+      <div class="jreport active" id="jr-paths">
+        <p style="font-size:13px;color:var(--muted);margin:0 0 14px">التسلسل الذي مر به العميل عبر القنوات قبل إتمام الشراء. هذا أهم تقرير لفهم من يجلب ومن يُغلق البيع.</p>
+        <table class="path-table">
+          <thead>
+            <tr>
+              <th>المسار</th>
+              <th>عدد الطلبات</th>
+              <th>النسبة</th>
+              <th>التوزيع</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="path-chain"><span class="pnode tiktok">تيك توك</span><span class="parrow">→</span><span class="pnode google">Google</span></div></td>
+              <td><strong>120</strong></td>
+              <td>24%</td>
+              <td><div class="pbar-wrap"><div class="pbar-fill" style="width:100%"></div></div></td>
+            </tr>
+            <tr>
+              <td><div class="path-chain"><span class="pnode google">Google</span></div></td>
+              <td><strong>150</strong></td>
+              <td>30%</td>
+              <td><div class="pbar-wrap"><div class="pbar-fill" style="width:100%"></div></div></td>
+            </tr>
+            <tr>
+              <td><div class="path-chain"><span class="pnode snap">سناب</span><span class="parrow">→</span><span class="pnode direct">مباشر</span></div></td>
+              <td><strong>80</strong></td>
+              <td>16%</td>
+              <td><div class="pbar-wrap"><div class="pbar-fill" style="width:67%"></div></div></td>
+            </tr>
+            <tr>
+              <td><div class="path-chain"><span class="pnode tiktok">تيك توك</span><span class="parrow">→</span><span class="pnode snap">سناب</span><span class="parrow">→</span><span class="pnode google">Google</span></div></td>
+              <td><strong>50</strong></td>
+              <td>10%</td>
+              <td><div class="pbar-wrap"><div class="pbar-fill" style="width:42%"></div></div></td>
+            </tr>
+            <tr>
+              <td><div class="path-chain"><span class="pnode meta">Meta</span><span class="parrow">→</span><span class="pnode google">Google</span></div></td>
+              <td><strong>60</strong></td>
+              <td>12%</td>
+              <td><div class="pbar-wrap"><div class="pbar-fill" style="width:50%"></div></div></td>
+            </tr>
+            <tr>
+              <td><div class="path-chain"><span class="pnode direct">مباشر</span></div></td>
+              <td><strong>40</strong></td>
+              <td>8%</td>
+              <td><div class="pbar-wrap"><div class="pbar-fill" style="width:33%"></div></div></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="j-insight">
+          <div class="j-ins-box"><strong>ما تعنيه هذه الأرقام</strong><p>تيك توك يجلب العملاء لكنهم يُكملون الشراء من Google — تيك توك أداة جذب، وGoogle أداة إغلاق.</p></div>
+          <div class="j-ins-box"><strong>القرار المباشر</strong><p>لا تُقيّم تيك توك بمفرده. دوره في بداية الرحلة حقيقي ومهم رغم أن الشراء يتم لاحقًا من Google.</p></div>
+        </div>
+      </div>
+
+      <!-- ② FIRST × LAST -->
+      <div class="jreport" id="jr-firstlast">
+        <p style="font-size:13px;color:var(--muted);margin:0 0 14px">من يجلب العميل أولاً؟ ومن يُغلق البيع في النهاية؟</p>
+        <table class="fl-table">
+          <thead>
+            <tr>
+              <th>أول منصة (من جلب)</th>
+              <th>آخر منصة (من أغلق)</th>
+              <th>عدد الطلبات</th>
+              <th>النسبة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="pnode tiktok">تيك توك</span></td>
+              <td><span class="pnode google">Google</span></td>
+              <td>100</td>
+              <td>20%</td>
+            </tr>
+            <tr>
+              <td><span class="pnode google">Google</span></td>
+              <td><span class="pnode google">Google</span></td>
+              <td>150</td>
+              <td>30%</td>
+            </tr>
+            <tr>
+              <td><span class="pnode snap">سناب</span></td>
+              <td><span class="pnode direct">مباشر</span></td>
+              <td>80</td>
+              <td>16%</td>
+            </tr>
+            <tr>
+              <td><span class="pnode meta">Meta</span></td>
+              <td><span class="pnode google">Google</span></td>
+              <td>60</td>
+              <td>12%</td>
+            </tr>
+            <tr>
+              <td><span class="pnode tiktok">تيك توك</span></td>
+              <td><span class="pnode snap">سناب</span></td>
+              <td>40</td>
+              <td>8%</td>
+            </tr>
+            <tr>
+              <td><span class="pnode direct">مباشر</span></td>
+              <td><span class="pnode direct">مباشر</span></td>
+              <td>70</td>
+              <td>14%</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="j-insight">
+          <div class="j-ins-box"><strong>من يجلب أكثر؟</strong><p>تيك توك هو أكبر جالب للعملاء الجدد (28% من الرحلات تبدأ منه) لكنه نادرًا ما يُغلق البيع.</p></div>
+          <div class="j-ins-box"><strong>من يُغلق أكثر؟</strong><p>Google يُغلق 62% من الطلبات — سواء كان هو البداية أو جاء بعد منصة أخرى.</p></div>
+        </div>
+      </div>
+
+      <!-- ③ OVERLAP -->
+      <div class="jreport" id="jr-overlap">
+        <p style="font-size:13px;color:var(--muted);margin:0 0 14px">كم نسبة العملاء الذين مروا بأكثر من قناة قبل الشراء؟</p>
+        <div class="overlap-grid" style="margin-bottom:16px">
+          <div class="overlap-card">
+            <div class="oc-label">قناة واحدة فقط</div>
+            <div class="oc-num">300</div>
+            <div class="oc-pct">60%</div>
+            <div class="oc-bar"><span style="width:60%"></span></div>
+          </div>
+          <div class="overlap-card">
+            <div class="oc-label">قناتان</div>
+            <div class="oc-num">150</div>
+            <div class="oc-pct">30%</div>
+            <div class="oc-bar"><span style="width:30%"></span></div>
+          </div>
+          <div class="overlap-card">
+            <div class="oc-label">3 قنوات أو أكثر</div>
+            <div class="oc-num">50</div>
+            <div class="oc-pct">10%</div>
+            <div class="oc-bar"><span style="width:10%"></span></div>
+          </div>
+        </div>
+        <div class="j-insight">
+          <div class="j-ins-box"><strong>ما يعنيه هذا</strong><p>40% من المشترين تعرضوا لأكثر من قناة قبل الشراء — attribution بقناة واحدة يفقد جزءًا حقيقيًا من الصورة.</p></div>
+          <div class="j-ins-box"><strong>القرار</strong><p>لا تُوقف أي قناة اعتمادًا على Last-click فقط. تيك توك وسناب لهما دور حقيقي في الرحلة حتى لو لم يكونا آخر نقطة.</p></div>
+        </div>
+      </div>
+
+      <!-- ④ ASSIST -->
+      <div class="jreport" id="jr-assist">
+        <p style="font-size:13px;color:var(--muted);margin:0 0 14px">المنصات التي ساهمت في الرحلة حتى لو لم تكن آخر لمسة قبل الشراء.</p>
+        <div style="border:1px solid var(--line);border-radius:16px;overflow:hidden;padding:0 14px">
+          <div class="assist-row" style="border-bottom:2px solid var(--line)">
+            <div style="font-size:12px;color:var(--muted);font-weight:700">المنصة</div>
+            <div style="font-size:12px;color:var(--muted);font-weight:700">نسبة المساهمة</div>
+            <div style="font-size:12px;color:var(--muted);font-weight:700">عدد الطلبات</div>
+            <div style="font-size:12px;color:var(--muted);font-weight:700">الدور</div>
+          </div>
+          <div class="assist-row">
+            <div><span class="pnode google">Google</span></div>
+            <div class="assist-bar"><span style="width:60%"></span></div>
+            <div>300</div>
+            <div style="font-size:12px;color:var(--brand);font-weight:700">مُغلق + مساعد</div>
+          </div>
+          <div class="assist-row">
+            <div><span class="pnode tiktok">تيك توك</span></div>
+            <div class="assist-bar"><span style="width:40%"></span></div>
+            <div>200</div>
+            <div style="font-size:12px;color:var(--violet);font-weight:700">جالب رئيسي</div>
+          </div>
+          <div class="assist-row">
+            <div><span class="pnode snap">سناب</span></div>
+            <div class="assist-bar"><span style="width:30%"></span></div>
+            <div>150</div>
+            <div style="font-size:12px;color:var(--gold);font-weight:700">مساعد</div>
+          </div>
+          <div class="assist-row">
+            <div><span class="pnode meta">Meta</span></div>
+            <div class="assist-bar"><span style="width:24%"></span></div>
+            <div>120</div>
+            <div style="font-size:12px;color:var(--muted);font-weight:700">مساعد</div>
+          </div>
+          <div class="assist-row">
+            <div><span class="pnode direct">مباشر</span></div>
+            <div class="assist-bar"><span style="width:16%"></span></div>
+            <div>80</div>
+            <div style="font-size:12px;color:var(--muted);font-weight:700">مُغلق</div>
+          </div>
+        </div>
+        <div class="j-insight" style="margin-top:14px">
+          <div class="j-ins-box"><strong>تيك توك أكبر مما تظهره الأرقام</strong><p>40% من الطلبات مرّت عبر تيك توك في مرحلة ما — حتى لو أُتمّ الشراء من Google.</p></div>
+          <div class="j-ins-box"><strong>سناب ليس صفراً</strong><p>30% من الطلبات ساهم فيها سناب كقناة مساعدة — خفضه الكلي قد يُقلل من هذا الدور.</p></div>
+        </div>
+      </div>
+
+      <!-- ⑤ TIMING -->
+      <div class="jreport" id="jr-timing">
+        <p style="font-size:13px;color:var(--muted);margin:0 0 14px">كم وقتًا يستغرق العميل من أول نقرة حتى إتمام الشراء؟</p>
+        <div class="time-grid">
+          <div class="time-card">
+            <div class="tc-label">من أول نقرة لآخر نقرة</div>
+            <div class="tc-val">1.8 ساعة</div>
+            <div class="tc-sub">متوسط الرحلات المتعددة</div>
+          </div>
+          <div class="time-card">
+            <div class="tc-label">من أول نقرة للشراء</div>
+            <div class="tc-val">3.2 ساعة</div>
+            <div class="tc-sub">متوسط جميع الطلبات</div>
+          </div>
+          <div class="time-card">
+            <div class="tc-label">من آخر نقرة للشراء</div>
+            <div class="tc-val">8 دقائق</div>
+            <div class="tc-sub">القرار سريع عند الإغلاق</div>
+          </div>
+        </div>
+
+        <!-- Timeline visualization -->
+        <div style="margin-top:16px;margin-bottom:12px;font-size:13px;font-weight:700">مثال على رحلة نموذجية</div>
+        <div class="timeline">
+          <div class="tl-node">
+            <div class="tl-circle c1" style="font-size:10px">تيك<br>توك</div>
+            <div class="tl-label">أول نقرة</div>
+          </div>
+          <div class="tl-line"><span>1.8 ساعة</span></div>
+          <div class="tl-node">
+            <div class="tl-circle c2" style="font-size:10px">Google</div>
+            <div class="tl-label">آخر نقرة</div>
+          </div>
+          <div class="tl-line"><span>8 دقائق</span></div>
+          <div class="tl-node">
+            <div class="tl-circle c3" style="font-size:18px">✓</div>
+            <div class="tl-label">الشراء</div>
+          </div>
+        </div>
+
+        <div class="j-insight" style="margin-top:14px">
+          <div class="j-ins-box"><strong>العميل لا يشتري فوراً</strong><p>3.2 ساعة في المتوسط بين أول تعرض وإتمام الشراء — الإعلانات التي تبدو بلا أثر فوري قد تكون تزرع القرار.</p></div>
+          <div class="j-ins-box"><strong>القرار سريع عند الإغلاق</strong><p>8 دقائق فقط بين آخر نقرة والشراء — ما يعني أن صفحة المنتج والدفع هي نقطة الحسم الحقيقية.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ━━━ TERMS ━━━ -->
+    <section class="section" id="terms">
+      <div class="sec-head"><h3>المصطلحات</h3><p>شرح مبسط</p></div>
+      <div class="terms-grid">
+        <div class="term"><strong>معدل التحويل</strong><p>نسبة الزوار الذين أكملوا الشراء من إجمالي الزوار.</p></div>
+        <div class="term"><strong>عائد الإنفاق الإعلاني</strong><p>كم ريال مبيعات مقابل كل ريال إعلاني.</p></div>
+        <div class="term"><strong>تكلفة الطلب</strong><p>كم يكلف الإعلان حتى يصل لطلب واحد.</p></div>
+        <div class="term"><strong>القناة الجالبة</strong><p>أول قناة دخل منها العميل في رحلته.</p></div>
+        <div class="term"><strong>القناة المُغلِقة</strong><p>آخر قناة قبل إتمام الشراء.</p></div>
+        <div class="term"><strong>القناة المساعدة</strong><p>أي قناة ظهرت في الرحلة لكنها لم تكن آخر نقطة.</p></div>
+      </div>
+    </section>
+
+    <div class="footer">آخر تحديث: 10 أبريل 2026</div>
+
+  </main>
+</div>
 
 <script>
-document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.report').forEach(r=>r.classList.remove('active'));
-  b.classList.add('active');
-  document.getElementById(b.dataset.r).classList.add('active');
-}));
-const root=document.documentElement,btn=document.getElementById('modeBtn');
-btn.addEventListener('click',()=>{
-  const d=root.dataset.theme==='dark';
-  root.dataset.theme=d?'light':'dark';
-  btn.textContent=d?'الوضع الليلي':'الوضع النهاري';
-});
-</script>
+// theme toggle
+function toggleTheme(){
+  const r=document.documentElement;
+  r.setAttribute('data-theme',r.getAttribute('data-theme')==='dark'?'light':'dark');
+}
+document.getElementById('themeToggle').addEventListener('click',toggleTheme);
+const m=document.getElementById('themeToggleMobile');
+if(m) m.addEventListener('click',toggleTheme);
 
+// report tabs
+document.querySelectorAll('.tab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.report').forEach(r=>r.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.report).classList.add('active');
+  });
+});
+
+// journey tabs
+document.querySelectorAll('.jtab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.jtab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.jreport').forEach(r=>r.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('jr-'+btn.dataset.jr).classList.add('active');
+  });
+});
+
+// nav highlight on scroll
+const sections=document.querySelectorAll('section[id],div[id]');
+const navLinks=document.querySelectorAll('.nav a');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id);
+      });
+    }
+  });
+},{threshold:.3});
+sections.forEach(s=>obs.observe(s));
+</script>
 </body>
 </html>
